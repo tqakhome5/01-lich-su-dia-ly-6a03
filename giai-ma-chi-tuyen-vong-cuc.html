@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giải mã Trực quan: Chí tuyến (23°27') &amp; Vòng cực (66°33') — Địa lí 6</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .season-btn { transition: all 0.2s ease; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased">
+
+  <!-- HERO HEADER -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-900 to-sky-800 text-white shadow-xl">
+    <div class="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-amber-400/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-cyan-400/20 blur-3xl"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <a href="ban-do-dia-li-lop-6.html"
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs sm:text-sm font-bold transition">
+          ← Quay về Bản đồ Địa lí 6
+        </a>
+        <div class="flex items-center gap-2">
+          <button onclick="speakFullPage()" data-tts-id="full" type="button"
+            class="tts-btn inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs sm:text-sm font-bold shadow cursor-pointer transition">
+            🔊 Nghe giảng toàn bộ bài
+          </button>
+          <button id="themeToggle" type="button"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs font-bold cursor-pointer transition">
+            <span id="themeIcon">🌙</span> <span id="themeLabel">Tối</span>
+          </button>
+        </div>
+      </div>
+
+      <span class="inline-block px-3 py-1 rounded-full bg-amber-400/25 border border-amber-300/40 text-amber-200 text-xs font-extrabold mb-2">
+        🌟 BÀI GIẢNG TRỰC QUAN CHO BỐ &amp; CON (ĐỊA LÍ LỚP 6)
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+        Nhìn là hiểu ngay: Chí tuyến (23°27') &amp; Vòng cực (66°33')
+      </h1>
+      <p class="mt-2 text-sm sm:text-base text-sky-100 max-w-3xl leading-relaxed">
+        Tại sao tia nắng Mặt Trời chỉ chiếu vuông góc trong khoảng <strong>23°27'B ↔ 23°27'N</strong> tạo ra <strong>Đới nóng</strong>?
+        Và tại sao từ <strong>66°33'</strong> lên Cực lại có <strong>ngày dài 24 giờ (Mặt Trời không lặn)</strong> hay <strong>đêm dài 24 giờ</strong> tạo ra <strong>2 Đới lạnh</strong>?
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-7 space-y-8">
+
+    <!-- ==================== HÌNH 1: MÔ PHỎNG ĐỘNG 24 GIỜ ==================== -->
+    <section class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-indigo-200 dark:border-indigo-800/70 shadow-xl overflow-hidden">
+      <div class="p-5 sm:p-6 border-b border-slate-200 dark:border-slate-800 bg-gradient-to-r from-indigo-50/90 to-sky-50/90 dark:from-indigo-950/50 dark:to-sky-950/40">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-indigo-600 text-white text-[11px] font-extrabold mb-1.5">
+              HÌNH 1 • MÔ PHỎNG TRÁI ĐẤT TỰ QUAY 24 GIỜ
+            </span>
+            <h2 class="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+              Quan sát 3 người đứng trên Trái Đất quay 1 vòng (24 giờ)
+            </h2>
+          </div>
+          <button onclick="speakSim1()" data-tts-id="sim1" type="button"
+            class="tts-btn px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow cursor-pointer transition">
+            🔊 Nghe giải thích Hình 1
+          </button>
+        </div>
+
+        <!-- 3 Season Date Buttons -->
+        <div class="mt-4 flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-slate-600 dark:text-slate-300 mr-1">Chọn ngày trong năm:</span>
+          <button onclick="setSeason('june')" id="btn-june" type="button"
+            class="season-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer">
+            ☀️ Ngày 22/6 (Hạ chí)
+          </button>
+          <button onclick="setSeason('equinox')" id="btn-equinox" type="button"
+            class="season-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer">
+            🌸 Ngày 21/3 &amp; 23/9 (Xuân / Thu phân)
+          </button>
+          <button onclick="setSeason('dec')" id="btn-dec" type="button"
+            class="season-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer">
+            ❄️ Ngày 22/12 (Đông chí)
+          </button>
+          <button onclick="toggleSpin()" id="spinBtn" type="button"
+            class="ml-auto px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold cursor-pointer transition">
+            ⏸ Tạm dừng quay 24h
+          </button>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <!-- BIG CRISP SVG DIAGRAM -->
+        <div class="lg:col-span-8 rounded-2xl bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 p-3 sm:p-4 border border-indigo-500/30 shadow-inner">
+          <svg id="mainSvg" viewBox="0 0 800 450" class="w-full h-auto select-none">
+            <defs>
+              <radialGradient id="sunBig" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fef08a" />
+                <stop offset="50%" stop-color="#f59e0b" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+              </radialGradient>
+              <clipPath id="globeClip">
+                <circle cx="460" cy="225" r="155" />
+              </clipPath>
+              <marker id="rayArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#facc15" />
+              </marker>
+              <marker id="rayArrowRed" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <polygon points="0 0, 9 4.5, 0 9" fill="#fb923c" />
+              </marker>
+            </defs>
+
+            <!-- Background Day / Night Labels -->
+            <rect x="260" y="14" width="195" height="28" rx="14" fill="rgba(250, 204, 21, 0.16)" stroke="rgba(250, 204, 21, 0.45)" />
+            <text x="357" y="33" text-anchor="middle" fill="#fde047" font-size="13" font-weight="800">☀️ NỬA BAN NGÀY (SÁNG)</text>
+
+            <rect x="466" y="14" width="195" height="28" rx="14" fill="rgba(148, 163, 184, 0.14)" stroke="rgba(148, 163, 184, 0.4)" />
+            <text x="563" y="33" text-anchor="middle" fill="#cbd5e1" font-size="13" font-weight="800">🌙 NỬA BAN ĐÊM (TỐI)</text>
+
+            <!-- Sun on the left -->
+            <circle cx="52" cy="225" r="68" fill="url(#sunBig)" />
+            <circle cx="52" cy="225" r="32" fill="#fde047" />
+            <text x="52" y="290" text-anchor="middle" fill="#fde047" font-size="13" font-weight="800">MẶT TRỜI</text>
+            <text x="52" y="307" text-anchor="middle" fill="#fef08a" font-size="10">(Chiếu tia song song)</text>
+
+            <!-- Parallel Sun Rays -->
+            <g stroke="#fde047" stroke-width="2" stroke-dasharray="6 4" opacity="0.72" marker-end="url(#rayArrow)">
+              <line x1="100" y1="88" x2="345" y2="88" />
+              <line x1="100" y1="138" x2="310" y2="138" />
+              <line x1="100" y1="182" x2="296" y2="182" />
+              <line x1="100" y1="268" x2="296" y2="268" />
+              <line x1="100" y1="312" x2="310" y2="312" />
+              <line x1="100" y1="362" x2="345" y2="362" />
+            </g>
+
+            <!-- HIGHLIGHTED PERPENDICULAR 90° RAY (hits exact center y=225!) -->
+            <line x1="95" y1="225" x2="298" y2="225" stroke="#fb923c" stroke-width="4" marker-end="url(#rayArrowRed)" />
+            <rect x="116" y="198" width="168" height="22" rx="8" fill="#ea580c" />
+            <text x="200" y="213" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="800">Tia chiếu VUÔNG GÓC 90°</text>
+
+            <!-- Earth Sphere Base -->
+            <g clip-path="url(#globeClip)">
+              <!-- Bright Day Side -->
+              <circle cx="460" cy="225" r="155" fill="#0ea5e9" />
+              <!-- Subtle warm daylight glow on left -->
+              <rect x="305" y="70" width="155" height="310" fill="rgba(254, 240, 138, 0.14)" />
+              <!-- Stylized continents -->
+              <path d="M365 130 Q415 110 445 160 Q435 220 380 215 Q340 185 365 130 Z" fill="#22c55e" opacity="0.55" />
+              <path d="M475 165 Q540 145 570 215 Q555 280 490 265 Q455 225 475 165 Z" fill="#22c55e" opacity="0.45" />
+              <path d="M385 270 Q435 260 445 320 Q405 350 370 310 Z" fill="#16a34a" opacity="0.5" />
+
+              <!-- TILTED LATITUDE BANDS INSIDE GLOBE (rotates with season!) -->
+              <g id="earthBandsGroup" transform="rotate(-23.45 460 225)">
+                <!-- North Cold Zone (66°33'B -> 90°B): y from 70 to 225 - 155*sin(66.55) = 82.8 -> wait, let's compute exact y!
+                     r = 155. sin(66.55°) = 0.9174 -> 155*0.9174 = 142.2 -> y = 225 - 142.2 = 82.8!
+                     sin(23.45°) = 0.3979 -> 155*0.3979 = 61.7 -> y = 225 - 61.7 = 163.3 and 225 + 61.7 = 286.7! -->
+                <!-- North Cold Zone fill -->
+                <rect x="280" y="60" width="360" height="23" fill="rgba(103, 232, 249, 0.45)" />
+                <!-- South Cold Zone fill -->
+                <rect x="280" y="367" width="360" height="23" fill="rgba(103, 232, 249, 0.45)" />
+                <!-- Hot Zone fill (between Tropics) -->
+                <rect x="280" y="163.3" width="360" height="123.4" fill="rgba(251, 146, 60, 0.22)" />
+
+                <!-- Polar Circle North (66°33'B) -->
+                <line x1="300" y1="82.8" x2="620" y2="82.8" stroke="#22d3ee" stroke-width="2.6" stroke-dasharray="6 3" />
+                <!-- Tropic of Cancer (23°27'B) -->
+                <line x1="300" y1="163.3" x2="620" y2="163.3" stroke="#fb923c" stroke-width="2.6" stroke-dasharray="7 3" />
+                <!-- Equator (0°) -->
+                <line x1="300" y1="225" x2="620" y2="225" stroke="#facc15" stroke-width="2.2" />
+                <!-- Tropic of Capricorn (23°27'N) -->
+                <line x1="300" y1="286.7" x2="620" y2="286.7" stroke="#fb923c" stroke-width="2.6" stroke-dasharray="7 3" />
+                <!-- Polar Circle South (66°33'N) -->
+                <line x1="300" y1="367.2" x2="620" y2="367.2" stroke="#22d3ee" stroke-width="2.6" stroke-dasharray="6 3" />
+              </g>
+
+              <!-- DARK NIGHT SHADOW (ALWAYS RIGHT HALF x >= 460 because Sun is on the left!) -->
+              <rect x="460" y="65" width="165" height="320" fill="#020617" opacity="0.68" />
+            </g>
+
+            <!-- Terminator Line (Sáng - Tối) -->
+            <line x1="460" y1="48" x2="460" y2="412" stroke="#f8fafc" stroke-width="2.4" stroke-dasharray="6 4" opacity="0.85" />
+            <text x="460" y="432" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="700">Đường phân chia Sáng – Tối</text>
+
+            <!-- Earth Outline -->
+            <circle cx="460" cy="225" r="155" fill="none" stroke="#7dd3fc" stroke-width="2.5" />
+
+            <!-- Tilted Axis + Pole Labels + Animated People Dots -->
+            <g id="earthAxisGroup" transform="rotate(-23.45 460 225)">
+              <!-- Axis Line -->
+              <line x1="460" y1="46" x2="460" y2="404" stroke="#f43f5e" stroke-width="3.2" />
+              <circle cx="460" cy="70" r="5" fill="#f43f5e" stroke="#fff" stroke-width="1.5" />
+              <circle cx="460" cy="380" r="5" fill="#f43f5e" stroke="#fff" stroke-width="1.5" />
+              <text x="460" y="38" text-anchor="middle" fill="#fda4af" font-size="12" font-weight="800">Cực Bắc (90°B)</text>
+              <text x="460" y="420" text-anchor="middle" fill="#fda4af" font-size="12" font-weight="800">Cực Nam (90°N)</text>
+
+              <!-- Latitude labels on the right rim -->
+              <text x="530" y="80" fill="#67e8f9" font-size="11" font-weight="800">66°33'B (Vòng cực Bắc)</text>
+              <text x="615" y="160" fill="#fdba74" font-size="11" font-weight="800">23°27'B (Chí tuyến Bắc)</text>
+              <text x="622" y="229" fill="#fde047" font-size="11" font-weight="800">0° (Xích đạo)</text>
+              <text x="615" y="294" fill="#fdba74" font-size="11" font-weight="800">23°27'N (Chí tuyến Nam)</text>
+              <text x="530" y="376" fill="#67e8f9" font-size="11" font-weight="800">66°33'N (Vòng cực Nam)</text>
+
+              <!-- 3 ANIMATED PEOPLE MOVING ALONG THEIR LATITUDE CIRCLES AS EARTH SPINS -->
+              <!-- Person A: 75°B (inside North Polar Circle!) -> y = 225 - 155*sin(75°) = 75.3, half-width = 155*cos(75°) = 40.1 -->
+              <line x1="420" y1="75.3" x2="500" y2="75.3" stroke="#f43f5e" stroke-width="1.5" opacity="0.6" />
+              <circle id="personA" cx="460" cy="75.3" r="7.5" fill="#ef4444" stroke="#ffffff" stroke-width="2" />
+
+              <!-- Person B: 23°27'B (Tropic of Cancer!) -> y = 163.3, half-width = 155*cos(23.45°) = 142.2 -->
+              <circle id="personB" cx="460" cy="163.3" r="7.5" fill="#f59e0b" stroke="#ffffff" stroke-width="2" />
+
+              <!-- Person C: 75°N (inside South Polar Circle!) -> y = 225 + 149.7 = 374.7, half-width = 40.1 -->
+              <line x1="420" y1="374.7" x2="500" y2="374.7" stroke="#38bdf8" stroke-width="1.5" opacity="0.6" />
+              <circle id="personC" cx="460" cy="374.7" r="7.5" fill="#38bdf8" stroke="#ffffff" stroke-width="2" />
+            </g>
+
+            <!-- 90° Right-Angle Marker right at the subsolar point (305, 225) -->
+            <g id="subsolarBadge">
+              <circle cx="305" cy="225" r="7" fill="#fb923c" stroke="#ffffff" stroke-width="2" />
+              <rect x="291" y="211" width="14" height="14" fill="none" stroke="#fde047" stroke-width="2" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- LIVE OBSERVATION PANEL FOR THE 3 PEOPLE -->
+        <div class="lg:col-span-4 space-y-3">
+          <div id="seasonHeadline" class="p-3.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800 text-xs sm:text-sm font-bold text-indigo-900 dark:text-indigo-200 leading-relaxed">
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/35 border border-rose-200 dark:border-rose-800/60">
+            <div class="flex items-center gap-2 font-extrabold text-xs sm:text-sm text-rose-700 dark:text-rose-300">
+              <span class="w-3.5 h-3.5 rounded-full bg-red-500 border-2 border-white shadow"></span>
+              Người A (Vùng Cực Bắc, trên 66°33'B)
+            </div>
+            <p id="obsA" class="mt-1 text-xs text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/35 border border-amber-200 dark:border-amber-800/60">
+            <div class="flex items-center gap-2 font-extrabold text-xs sm:text-sm text-amber-800 dark:text-amber-300">
+              <span class="w-3.5 h-3.5 rounded-full bg-amber-500 border-2 border-white shadow"></span>
+              Người B (Chí tuyến Bắc, 23°27'B)
+            </div>
+            <p id="obsB" class="mt-1 text-xs text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-sky-50 dark:bg-sky-950/35 border border-sky-200 dark:border-sky-800/60">
+            <div class="flex items-center gap-2 font-extrabold text-xs sm:text-sm text-sky-800 dark:text-sky-300">
+              <span class="w-3.5 h-3.5 rounded-full bg-sky-500 border-2 border-white shadow"></span>
+              Người C (Vùng Cực Nam, dưới 66°33'N)
+            </div>
+            <p id="obsC" class="mt-1 text-xs text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== HÌNH 2: TÁCH RIÊNG 2 KHÁI NIỆM ==================== -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- CARD TRÁI: CHÍ TUYẾN 23°27' -> ĐỚI NÓNG -->
+      <article class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-orange-200 dark:border-orange-800/60 shadow-lg overflow-hidden flex flex-col">
+        <div class="bg-gradient-to-r from-orange-600 to-amber-500 p-5 text-white flex items-start justify-between gap-2">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-white/20 text-[11px] font-extrabold mb-1">HÌNH 2A • VÌ SAO CÓ ĐỚI NÓNG?</span>
+            <h3 class="text-lg sm:text-xl font-extrabold">Chí tuyến (23°27'B &amp; 23°27'N)</h3>
+          </div>
+          <button onclick="speakTropics()" data-tts-id="tropics" type="button"
+            class="tts-btn px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white/35 border border-white/30 text-xs font-bold text-white cursor-pointer transition flex-shrink-0">
+            🔊 Nghe
+          </button>
+        </div>
+
+        <div class="p-5 space-y-4 flex-1">
+          <!-- Visual SVG: Direct 90° Ray vs Slanted Ray (Flashlight Analogy!) -->
+          <div class="rounded-2xl bg-slate-900 p-3.5 border border-orange-500/30">
+            <svg viewBox="0 0 460 205" class="w-full h-auto">
+              <!-- Ground line -->
+              <line x1="20" y1="175" x2="440" y2="175" stroke="#94a3b8" stroke-width="2" />
+
+              <!-- LEFT: Direct 90° light beam (Hot!) -->
+              <polygon points="80,25 140,25 140,175 80,175" fill="rgba(251, 146, 60, 0.35)" stroke="#fb923c" stroke-width="1.5" />
+              <rect x="80" y="170" width="60" height="8" rx="4" fill="#ef4444" />
+              <line x1="110" y1="15" x2="110" y2="165" stroke="#fde047" stroke-width="2.5" stroke-dasharray="4 3" />
+              <rect x="110" y="161" width="12" height="12" fill="none" stroke="#fde047" stroke-width="1.5" />
+              <text x="110" y="195" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="800">Vùng nhỏ → GOM NHIỆT (RẤT NÓNG!)</text>
+              <text x="110" y="45" text-anchor="middle" fill="#fde047" font-size="11" font-weight="800">Chiếu vuông góc 90°</text>
+              <text x="110" y="61" text-anchor="middle" fill="#fed7aa" font-size="10">(Trong 23°27'B ↔ 23°27'N)</text>
+
+              <!-- RIGHT: Slanted light beam (Cold!) -->
+              <polygon points="270,25 330,25 425,175 295,175" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="1.5" />
+              <rect x="295" y="170" width="130" height="8" rx="4" fill="#38bdf8" />
+              <text x="360" y="195" text-anchor="middle" fill="#7dd3fc" font-size="11" font-weight="800">Trải rộng → LOÃNG NHIỆT (LẠNH)</text>
+              <text x="345" y="45" text-anchor="middle" fill="#bae6fd" font-size="11" font-weight="800">Chiếu xiên góc nhỏ</text>
+              <text x="345" y="61" text-anchor="middle" fill="#cbd5e1" font-size="10">(Gần 2 Vòng cực 66°33')</text>
+            </svg>
+          </div>
+
+          <div class="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <p>
+              <strong>1. Thí nghiệm đèn pin 5 giây:</strong> Bố chiếu đèn pin <strong>thẳng đứng 90°</strong> xuống bàn → vòng sáng nhỏ nhưng <strong>sáng chói &amp; rất nóng</strong>. Bố nghiêng đèn pin <strong>chiếu xiên</strong> → vòng sáng trải rộng ra nên ánh sáng bị loãng và yếu đi hẳn!
+            </p>
+            <p>
+              <strong>2. Tại sao dừng đúng ở 23°27'?</strong> Vì Trái Đất chỉ nghiêng đúng <strong>23°27'</strong>, nên trong suốt 1 năm, điểm có ánh nắng chiếu thẳng đứng 90° chỉ chạy qua chạy lại từ <strong>23°27'B (ngày 22/6)</strong> xuống <strong>23°27'N (ngày 22/12)</strong> rồi quay lại — <em>không bao giờ vượt quá 23°27'</em>.
+            </p>
+            <div class="p-3 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 font-semibold text-orange-900 dark:text-orange-200">
+              🔥 Kết luận: Dải đất nằm giữa 2 đường Chí tuyến (23°27'B ↔ 23°27'N) nhận ánh sáng thẳng góc quanh năm → tạo thành <strong>Đới nóng (Nhiệt đới)</strong>! (Việt Nam mình nằm trọn trong đới này).
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD PHẢI: VÒNG CỰC 66°33' -> 2 ĐỚI LẠNH -->
+      <article class="rounded-3xl bg-white dark:bg-slate-900 border-2 border-cyan-200 dark:border-cyan-800/60 shadow-lg overflow-hidden flex flex-col">
+        <div class="bg-gradient-to-r from-cyan-600 to-sky-600 p-5 text-white flex items-start justify-between gap-2">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-white/20 text-[11px] font-extrabold mb-1">HÌNH 2B • VÌ SAO CÓ NGÀY 24 GIỜ &amp; ĐỚI LẠNH?</span>
+            <h3 class="text-lg sm:text-xl font-extrabold">Vòng cực (66°33'B &amp; 66°33'N)</h3>
+          </div>
+          <button onclick="speakPolar()" data-tts-id="polar" type="button"
+            class="tts-btn px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white/35 border border-white/30 text-xs font-bold text-white cursor-pointer transition flex-shrink-0">
+            🔊 Nghe
+          </button>
+        </div>
+
+        <div class="p-5 space-y-4 flex-1">
+          <!-- Visual SVG: Zoom-in on the North Pole Cap (22/6) -->
+          <div class="rounded-2xl bg-slate-900 p-3.5 border border-cyan-500/30">
+            <svg viewBox="0 0 460 205" class="w-full h-auto">
+              <!-- Zoomed top of Earth arc -->
+              <path d="M 80 195 A 175 175 0 0 1 380 195" fill="#0ea5e9" opacity="0.28" stroke="#7dd3fc" stroke-width="2" />
+              <!-- Night half right of x=230 -->
+              <path d="M 230 20 A 175 175 0 0 1 380 195 L 230 195 Z" fill="#020617" opacity="0.72" />
+              <!-- Terminator line -->
+              <line x1="230" y1="10" x2="230" y2="195" stroke="#ffffff" stroke-width="2" stroke-dasharray="5 3" />
+              <text x="155" y="24" text-anchor="middle" fill="#fde047" font-size="11" font-weight="800">☀️ Vùng SÁNG</text>
+              <text x="315" y="24" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="800">🌙 Vùng TỐI</text>
+
+              <!-- Tilted Pole Axis at 23.45° leaning LEFT -->
+              <line x1="160" y1="36" x2="230" y2="195" stroke="#f43f5e" stroke-width="3" />
+              <circle cx="160" cy="36" r="5" fill="#f43f5e" stroke="#fff" stroke-width="1.5" />
+              <text x="128" y="34" text-anchor="end" fill="#fda4af" font-size="11" font-weight="800">Cực Bắc (90°B)</text>
+
+              <!-- Polar circle 66°33'B chord touching terminator at (230, 56) -->
+              <line x1="94" y1="88" x2="230" y2="34" stroke="#22d3ee" stroke-width="3" />
+              <circle cx="230" cy="34" r="5" fill="#22d3ee" stroke="#fff" stroke-width="1.5" />
+
+              <!-- Highlighted Polar Cap (all in the bright left side!) -->
+              <text x="158" y="96" text-anchor="middle" fill="#67e8f9" font-size="11" font-weight="800">Chỏm 66°33'B → 90°B</text>
+              <text x="158" y="112" text-anchor="middle" fill="#fde047" font-size="11" font-weight="800">Nằm TRỌN bên vùng SÁNG!</text>
+
+              <!-- Right-side annotation pointing to 230, 34 -->
+              <line x1="238" y1="34" x2="288" y2="54" stroke="#22d3ee" stroke-width="1.5" />
+              <text x="292" y="54" fill="#67e8f9" font-size="11" font-weight="800">Đúng mép 66°33'B</text>
+              <text x="292" y="69" fill="#cbd5e1" font-size="10">(= 90° − 23°27')</text>
+
+              <!-- Sun ray skimming the top -->
+              <line x1="25" y1="34" x2="220" y2="34" stroke="#fde047" stroke-width="2" stroke-dasharray="5 3" />
+              <text x="25" y="50" fill="#fef08a" font-size="10" font-weight="700">Nắng chiếu tràn qua Cực!</text>
+            </svg>
+          </div>
+
+          <div class="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <p>
+              <strong>1. Tại sao lại có ngày dài 24 giờ (Mặt Trời không lặn)?</strong> Ngày 22/6, Cực Bắc ngả hẳn về phía Mặt Trời một góc <strong>23°27'</strong>, nên cả cái "chỏm mũ" từ <strong>66°33'B lên tới 90°B</strong> nằm trọn bên nửa Sáng. Dù Trái Đất quay đủ 1 vòng 24 tiếng, người đứng ở đó <em>chẳng bao giờ xoay sang nửa Tối</em>!
+            </p>
+            <p>
+              <strong>2. Ngược lại ở Cực Nam (66°33'N → 90°N):</strong> Cả cái "chỏm mũ" phía dưới lại nằm trọn bên nửa Tối → xoay đủ 24 tiếng vẫn tối đen (<strong>Đêm dài 24 giờ</strong>). Sang ngày 22/12 thì hai cực đổi vai cho nhau!
+            </p>
+            <div class="p-3 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800 font-semibold text-cyan-900 dark:text-cyan-200">
+              ❄️ Kết luận: Dù có ngày 24h nhưng nắng ở cực chỉ chiếu <strong>rất xiên</strong> (là là sát mặt đất), còn mùa đông lại tối đen nhiều tháng → băng tuyết quanh năm → tạo nên <strong>2 Đới lạnh (Hàn đới)</strong>!
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ==================== HÌNH 3: TỔNG HỢP 5 ĐỚI KHÍ HẬU ==================== -->
+    <section class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-7 shadow-lg">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+        <div>
+          <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[11px] font-extrabold mb-1">HÌNH 3 • TỔNG KẾT CẮT LỚP</span>
+          <h2 class="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+            4 đường vĩ tuyến đặc biệt chia Trái Đất thành 5 Đới khí hậu
+          </h2>
+        </div>
+        <button onclick="speak5Zones()" data-tts-id="zones5" type="button"
+          class="tts-btn px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow cursor-pointer transition">
+          🔊 Nghe tổng kết 5 Đới khí hậu
+        </button>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-3 rounded-2xl bg-sky-100 dark:bg-sky-950/60 border border-sky-300 dark:border-sky-800">
+          <div class="font-extrabold text-sky-900 dark:text-sky-200 text-sm">❄️ ĐỚI LẠNH BẮC (Hàn đới)</div>
+          <div class="text-xs font-bold text-sky-800 dark:text-sky-300">Từ 66°33'B → 90°B (Cực Bắc)</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300">Có ngày/đêm 24h • Băng tuyết quanh năm (&lt; 10°C)</div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-3 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800">
+          <div class="font-extrabold text-emerald-900 dark:text-emerald-200 text-sm">🍂 ĐỚI ÔN HOÀ BẮC (Ôn đới)</div>
+          <div class="text-xs font-bold text-emerald-800 dark:text-emerald-300">Từ 23°27'B → 66°33'B</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300">Nằm giữa Chí tuyến &amp; Vòng cực • 4 mùa Xuân–Hạ–Thu–Đông rõ rệt</div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md">
+          <div class="font-extrabold text-sm sm:text-base">☀️ ĐỚI NÓNG (Nhiệt đới) — Có Xích đạo 0° ở giữa</div>
+          <div class="text-xs font-extrabold bg-white/20 px-2.5 py-1 rounded-full">Từ 23°27'B ↔ 23°27'N</div>
+          <div class="text-xs font-medium text-amber-50">Nắng chiếu vuông góc quanh năm • Nóng (&gt; 20°C), mưa nhiều</div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-3 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800">
+          <div class="font-extrabold text-emerald-900 dark:text-emerald-200 text-sm">🍂 ĐỚI ÔN HOÀ NAM (Ôn đới)</div>
+          <div class="text-xs font-bold text-emerald-800 dark:text-emerald-300">Từ 23°27'N → 66°33'N</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300">Đối xứng phía Nam • 4 mùa ngược với Bắc bán cầu</div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-3 rounded-2xl bg-sky-100 dark:bg-sky-950/60 border border-sky-300 dark:border-sky-800">
+          <div class="font-extrabold text-sky-900 dark:text-sky-200 text-sm">❄️ ĐỚI LẠNH NAM (Hàn đới)</div>
+          <div class="text-xs font-bold text-sky-800 dark:text-sky-300">Từ 66°33'N → 90°N (Cực Nam)</div>
+          <div class="text-xs text-slate-700 dark:text-slate-300">Châu Nam Cực • Có ngày/đêm 24h • Lạnh nhất Trái Đất</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FLOATING TTS PLAYER BAR -->
+  <div id="ttsBar" class="hidden fixed bottom-4 right-4 left-4 sm:left-auto sm:w-96 z-40 rounded-2xl bg-slate-900/95 text-white border border-emerald-400/40 shadow-2xl p-3.5 backdrop-blur-md">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
+        <div id="ttsTitle" class="text-xs font-extrabold truncate">Đang đọc...</div>
+      </div>
+      <button onclick="stopTTS()" type="button" class="px-2.5 py-1 rounded-lg bg-rose-500 hover:bg-rose-600 text-[11px] font-bold cursor-pointer">⏹ Dừng</button>
+    </div>
+    <div class="flex items-center justify-between gap-2 pt-2 border-t border-white/10">
+      <button id="ttsPauseBtn" onclick="togglePauseTTS()" type="button" class="px-3 py-1 rounded-lg bg-white/15 hover:bg-white/25 text-xs font-bold cursor-pointer">⏸ Tạm dừng</button>
+      <div class="flex items-center gap-1 text-[11px]">
+        <span class="text-slate-300 mr-1">Tốc độ:</span>
+        <button onclick="setTTSRate(0.85)" data-rate="0.85" class="tts-rate px-2 py-0.5 rounded bg-white/10 font-bold cursor-pointer">0.85x</button>
+        <button onclick="setTTSRate(1.0)" data-rate="1.0" class="tts-rate px-2 py-0.5 rounded bg-emerald-500 text-white font-bold cursor-pointer">1.0x</button>
+        <button onclick="setTTSRate(1.15)" data-rate="1.15" class="tts-rate px-2 py-0.5 rounded bg-white/10 font-bold cursor-pointer">1.15x</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== ANIMATED 24-HOUR SPIN SIMULATION ====================
+    let currentSeason = 'june';
+    let isSpinning = true;
+    let phase = 0;
+
+    const SEASONS = {
+      june: {
+        tilt: -23.45,
+        headline: "☀️ NGÀY 22/6 (HẠ CHÍ): Bắc bán cầu ngả tối đa về phía Mặt Trời!",
+        obsA: "Nhìn chấm ĐỎ đang quay: nó đi trọn 1 vòng 24 giờ mà KHÔNG BAO GIỜ chạm vào nửa tối → Ngày dài suốt 24 giờ (Mặt Trời không lặn)!",
+        obsB: "Đúng 12h trưa, tia sáng Mặt Trời chiếu VUÔNG GÓC 90° ngay đỉnh đầu tại 23°27'B (đứng bóng). Quãng đường sáng dài hơn quãng đường tối → Ngày dài hơn đêm.",
+        obsC: "Nhìn chấm XANH ở cực Nam: nó quay đủ 1 vòng 24 giờ mà vẫn nằm lì trong nửa tối → Đêm dài suốt 24 giờ!"
+      },
+      equinox: {
+        tilt: 0,
+        headline: "🌸 NGÀY 21/3 & 23/9 (XUÂN PHÂN / THU PHÂN): Hai bán cầu nhận ánh sáng ngang nhau!",
+        obsA: "Chấm ĐỎ đi đúng một nửa vòng bên sáng và một nửa vòng bên tối → 12 giờ ngày, 12 giờ đêm.",
+        obsB: "Tia sáng vuông góc 90° chiếu thẳng vào Xích đạo (0°). Mọi nơi trên Trái Đất đều có ngày và đêm dài bằng nhau 12 tiếng.",
+        obsC: "Chấm XANH ở cực Nam cũng chia đều 12 giờ sáng, 12 giờ tối."
+      },
+      dec: {
+        tilt: 23.45,
+        headline: "❄️ NGÀY 22/12 (ĐÔNG CHÍ): Nam bán cầu ngả tối đa về phía Mặt Trời!",
+        obsA: "Đổi vai! Chấm ĐỎ ở Vòng cực Bắc giờ nằm trọn bên nửa tối suốt 24 giờ → Đêm dài suốt 24 giờ (mùa đông băng giá).",
+        obsB: "Tia sáng vuông góc 90° chiếu thẳng xuống Chí tuyến Nam (23°27'N). Ở Chí tuyến Bắc lúc này trời lạnh (mùa đông), đêm dài hơn ngày.",
+        obsC: "Chấm XANH ở Vòng cực Nam giờ nằm trọn bên nửa sáng suốt 24 giờ → Ngày dài suốt 24 giờ (Mặt Trời không lặn)!"
+      }
+    };
+
+    function setSeason(key) {
+      currentSeason = key;
+      const s = SEASONS[key];
+      document.getElementById('earthBandsGroup').setAttribute('transform', `rotate(${s.tilt} 460 225)`);
+      document.getElementById('earthAxisGroup').setAttribute('transform', `rotate(${s.tilt} 460 225)`);
+      document.getElementById('seasonHeadline').textContent = s.headline;
+      document.getElementById('obsA').textContent = s.obsA;
+      document.getElementById('obsB').textContent = s.obsB;
+      document.getElementById('obsC').textContent = s.obsC;
+
+      ['june', 'equinox', 'dec'].forEach(k => {
+        const btn = document.getElementById(`btn-${k}`);
+        if (k === key) {
+          btn.className = 'season-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer bg-indigo-600 text-white shadow-md';
+        } else {
+          btn.className = 'season-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-100';
+        }
+      });
+    }
+
+    function toggleSpin() {
+      isSpinning = !isSpinning;
+      document.getElementById('spinBtn').textContent = isSpinning ? '⏸ Tạm dừng quay 24h' : '▶️ Tiếp tục quay 24h';
+    }
+
+    function animate() {
+      if (isSpinning) {
+        phase += 0.025;
+        const c = Math.cos(phase);
+        const s = Math.sin(phase);
+        // Move each person horizontally along their latitude track (simulating 3D globe rotation!)
+        // When sin(phase) < 0, person is on the "back side" of Earth -> slightly smaller & fainter
+        const backScale = s < 0 ? 0.72 : 1.0;
+        const backOpacity = s < 0 ? 0.48 : 1.0;
+
+        const pA = document.getElementById('personA');
+        pA.setAttribute('cx', (460 + 40.1 * c).toFixed(1));
+        pA.setAttribute('r', (7.5 * backScale).toFixed(1));
+        pA.setAttribute('opacity', backOpacity);
+
+        const pB = document.getElementById('personB');
+        pB.setAttribute('cx', (460 + 142.2 * c).toFixed(1));
+        pB.setAttribute('r', (7.5 * backScale).toFixed(1));
+        pB.setAttribute('opacity', backOpacity);
+
+        const pC = document.getElementById('personC');
+        pC.setAttribute('cx', (460 + 40.1 * c).toFixed(1));
+        pC.setAttribute('r', (7.5 * backScale).toFixed(1));
+        pC.setAttribute('opacity', backOpacity);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    // ==================== VIETNAMESE TTS ====================
+    let ttsId = null, ttsRate = 1.0, ttsPaused = false, ttsChunks = [], ttsIdx = 0;
+
+    function getViVoice() {
+      if (!('speechSynthesis' in window)) return null;
+      const voices = window.speechSynthesis.getVoices() || [];
+      const vi = voices.filter(v => (v.lang || '').toLowerCase().startsWith('vi'));
+      if (!vi.length) return null;
+      for (const kw of ['hoaimy', 'namminh', 'google', 'natural', 'online']) {
+        const f = vi.find(v => v.name.toLowerCase().includes(kw));
+        if (f) return f;
+      }
+      return vi[0];
+    }
+
+    function updateTTSUI() {
+      document.querySelectorAll('.tts-btn').forEach(b => {
+        if (!b.dataset.orig) b.dataset.orig = b.textContent.trim();
+        b.textContent = (ttsId && b.getAttribute('data-tts-id') === ttsId) ? '⏹ Dừng đọc' : b.dataset.orig;
+      });
+    }
+
+    function speakNext() {
+      if (!ttsId || ttsIdx >= ttsChunks.length) { stopTTS(); return; }
+      const u = new SpeechSynthesisUtterance(ttsChunks[ttsIdx]);
+      u.lang = 'vi-VN';
+      u.rate = ttsRate;
+      const v = getViVoice();
+      if (v) u.voice = v;
+      u.onend = () => { if (ttsId) { ttsIdx++; speakNext(); } };
+      u.onerror = () => stopTTS();
+      window.speechSynthesis.speak(u);
+    }
+
+    function startTTS(id, title, text) {
+      if (!('speechSynthesis' in window)) return alert('Trình duyệt chưa hỗ trợ đọc giọng nói.');
+      if (ttsId === id) { stopTTS(); return; }
+      window.speechSynthesis.cancel();
+      ttsId = id; ttsPaused = false; ttsIdx = 0;
+      const parts = text.match(/[^.!?;\n]+[.!?;\n]?/g) || [text];
+      ttsChunks = [];
+      let buf = '';
+      for (const p of parts) {
+        if ((buf + ' ' + p).length > 170 && buf) { ttsChunks.push(buf.trim()); buf = p; }
+        else buf = (buf + ' ' + p).trim();
+      }
+      if (buf) ttsChunks.push(buf.trim());
+      document.getElementById('ttsTitle').textContent = title;
+      document.getElementById('ttsPauseBtn').textContent = '⏸ Tạm dừng';
+      document.getElementById('ttsBar').classList.remove('hidden');
+      updateTTSUI();
+      speakNext();
+    }
+
+    function stopTTS() {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      ttsId = null; ttsPaused = false; ttsChunks = []; ttsIdx = 0;
+      document.getElementById('ttsBar').classList.add('hidden');
+      updateTTSUI();
+    }
+
+    function togglePauseTTS() {
+      if (!ttsId) return;
+      if (!ttsPaused) { window.speechSynthesis.pause(); ttsPaused = true; document.getElementById('ttsPauseBtn').textContent = '▶️ Tiếp tục'; }
+      else { window.speechSynthesis.resume(); ttsPaused = false; document.getElementById('ttsPauseBtn').textContent = '⏸ Tạm dừng'; }
+    }
+
+    function setTTSRate(r) {
+      ttsRate = r;
+      document.querySelectorAll('.tts-rate').forEach(b => {
+        b.className = Math.abs(parseFloat(b.dataset.rate) - r) < 0.01
+          ? 'tts-rate px-2 py-0.5 rounded bg-emerald-500 text-white font-bold cursor-pointer'
+          : 'tts-rate px-2 py-0.5 rounded bg-white/10 font-bold cursor-pointer';
+      });
+      if (ttsId) { window.speechSynthesis.cancel(); ttsPaused = false; document.getElementById('ttsPauseBtn').textContent = '⏸ Tạm dừng'; speakNext(); }
+    }
+
+    function speakSim1() {
+      const s = SEASONS[currentSeason];
+      startTTS('sim1', '🔊 Giải thích Hình 1 (Quay 24h)', `${s.headline} ${s.obsA} ${s.obsB} ${s.obsC}`);
+    }
+    function speakTropics() {
+      startTTS('tropics', "🔊 Chí tuyến 23°27' & Đới nóng", "Giải thích Chí tuyến 23 độ 27 phút tạo nên Đới nóng. Khi chiếu đèn pin thẳng đứng 90 độ xuống bàn, ánh sáng gom vào một vùng nhỏ nên rất sáng và rất nóng. Vì Trái Đất nghiêng đúng 23 độ 27 phút nên trong cả năm, tia Mặt Trời chiếu vuông góc chỉ di chuyển qua lại giữa Chí tuyến Bắc 23 độ 27 phút Bắc và Chí tuyến Nam 23 độ 27 phút Nam, không bao giờ vượt ra ngoài. Do đó dải đất nằm giữa hai đường Chí tuyến nhận lượng nhiệt lớn nhất quanh năm, tạo thành Đới nóng.");
+    }
+    function speakPolar() {
+      startTTS('polar', "🔊 Vòng cực 66°33' & Đới lạnh", "Giải thích Vòng cực 66 độ 33 phút tạo nên 2 Đới lạnh. Vào ngày 22 tháng 6, Cực Bắc ngả hẳn về phía Mặt Trời một góc 23 độ 27 phút, nên cả vùng chỏm từ 66 độ 33 phút Bắc lên tới Cực Bắc nằm trọn bên nửa sáng. Khi Trái Đất quay đủ một vòng 24 tiếng, người đứng ở đó không bao giờ đi vào vùng tối, tạo ra ngày dài 24 giờ, Mặt Trời không lặn. Ngược lại ở Cực Nam lại nằm trọn trong bóng tối suốt 24 giờ. Vì ánh nắng chiếu ở cực luôn rất xiên và có mùa đông tối đen kéo dài, nên từ 66 độ 33 phút lên cực hình thành 2 Đới lạnh băng tuyết quanh năm.");
+    }
+    function speak5Zones() {
+      startTTS('zones5', '🔊 Tổng kết 5 Đới khí hậu', "4 đường vĩ tuyến đặc biệt chia Trái Đất thành 5 Đới khí hậu. Chính giữa từ 23 độ 27 phút Bắc đến 23 độ 27 phút Nam là 1 Đới nóng. Hai bên từ 23 độ 27 phút đến 66 độ 33 phút ở cả hai bán cầu là 2 Đới ôn hoà có 4 mùa rõ rệt. Và từ 66 độ 33 phút lên tới hai cực là 2 Đới lạnh có băng tuyết quanh năm.");
+    }
+    function speakFullPage() {
+      startTTS('full', '🔊 Bài giảng đầy đủ Chí tuyến & Vòng cực', "Chào hai bố con! Hôm nay chúng ta cùng giải mã hai cặp số quan trọng nhất Địa lí lớp 6: Chí tuyến 23 độ 27 phút và Vòng cực 66 độ 33 phút. Thứ nhất, vì Trái Đất nghiêng 23 độ 27 phút nên tia sáng Mặt Trời chỉ chiếu vuông góc 90 độ xa nhất lên tới 23 độ 27 phút Bắc vào ngày 22 tháng 6, và xuống tới 23 độ 27 phút Nam vào ngày 22 tháng 12. Ánh sáng chiếu thẳng góc gom nhiệt rất mạnh, tạo nên Đới nóng ở chính giữa Trái Đất. Thứ hai, cũng vì độ nghiêng đó, vào ngày 22 tháng 6, cả vùng từ 66 độ 33 phút Bắc lên tới Cực Bắc nằm trọn trong nửa sáng, nên dù Trái Đất quay đủ 24 tiếng vẫn không có ban đêm, gọi là ngày dài 24 giờ. Còn từ 66 độ 33 phút Nam xuống Cực Nam nằm trọn trong nửa tối, tạo nên đêm dài 24 giờ. Do góc chiếu quá xiên nên hai vùng cực quanh năm băng tuyết, tạo thành 2 Đới lạnh.");
+    }
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    function applyTheme(d) {
+      document.documentElement.classList.toggle('dark', d);
+      document.getElementById('themeIcon').textContent = d ? '☀️' : '🌙';
+      document.getElementById('themeLabel').textContent = d ? 'Sáng' : 'Tối';
+    }
+    if (localStorage.getItem('dialy6_theme') === 'dark') applyTheme(true);
+    themeToggle.addEventListener('click', () => {
+      const next = !document.documentElement.classList.contains('dark');
+      applyTheme(next);
+      localStorage.setItem('dialy6_theme', next ? 'dark' : 'light');
+    });
+
+    window.addEventListener('beforeunload', () => { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); });
+
+    setSeason('june');
+    animate();
+  </script>
+</body>
+</html>

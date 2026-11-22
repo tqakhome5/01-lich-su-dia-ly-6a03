@@ -1,0 +1,15 @@
+# Không đẩy file PDF gốc và ảnh chụp nguyên trang SGK lên kho Public
+06-sgk-lich-su-va-dia-li-6.pdf
+pages/
+
+# Không đẩy nội dung văn bản gốc trích xuất từ SGK lên kho Public
+00-mo-dau/
+01-lich-su/
+02-dia-ly/
+03-phu-luc/
+
+# File tạm của hệ điều hành / công cụ
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
