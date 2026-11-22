@@ -25,10 +25,10 @@ Sử dụng tài liệu này để tạo mới hoặc mở rộng các trang HTM
 4. **Thanh điều hướng Header (Cross-Navigation):**
    - Luôn có nút quay về Trang chủ `<a href="index.html">🏠 Trang chủ</a>` và Bản đồ chính `<a href="ban-do-dia-li-lop-6.html">← Bản đồ Địa lí 6</a>`.
    - Có nút `🔊 Nghe giảng toàn bộ bài` (`onclick="speakFullPage()" data-tts-id="full" class="tts-btn ..."`) và nút `#themeToggle`.
-5. **Phương pháp Sư phạm ("Bố & Con — Nhìn là hiểu ngay"):**
-   - Luôn bắt đầu bằng **"Bẫy trực giác / Hiểu lầm phổ biến"** hoặc **"Câu hỏi cốt lõi"**.
-   - Minh họa bằng **Mô phỏng tương tác SVG / Canvas** (có nút bấm chuyển trạng thái hoặc thanh trượt).
-   - Kết thúc mỗi mục bằng hộp **"Mẹo nhớ nhanh 10 giây"** hoặc **Quiz trắc nghiệm nhỏ**.
+5. **Phương pháp Sư phạm ("Dành riêng cho Học sinh Lớp 6 — Nhìn là hiểu ngay!"):**
+   - **Đúng lứa tuổi 11–12:** Xưng hô thân thiện với các bạn học sinh (*"mình / các bạn / em"*), không dùng giọng văn "nhà bác học" hay "cẩm nang phụ huynh".
+   - **Câu ngắn, ví dụ đời thường:** Giải thích mọi khái niệm bằng đồ vật/hiện tượng quen thuộc (đèn pin, quả cam, đi xe đạp, mùa đông Việt Nam…). Mọi thuật ngữ SGK phải có chú thích dễ hiểu ngay bên cạnh.
+   - **Chống tường chữ:** Mỗi ý tối đa 2–3 dòng; luôn bắt đầu bằng **"Câu hỏi tò mò / Chỗ hay nhầm nhất"**, minh họa bằng **Mô phỏng SVG tương tác**, và kết thúc bằng **"Mẹo nhớ nhanh 10 giây"** hoặc **Quiz vui**.
 
 ---
 

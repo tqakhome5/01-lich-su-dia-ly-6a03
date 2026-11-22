@@ -19,7 +19,13 @@ Tài liệu này được nạp tự động cho mọi Model. Mọi yêu cầu t
 
 ---
 
-## 2. Năm Quy Tắc Tối Ưu Tốc Độ (Fast-Path Rules — Bắt buộc)
+## 2. Quy Tắc Cốt Lõi (Sư phạm Lớp 6 & Tối ưu Tốc độ — Bắt buộc)
+
+### Quy tắc 0: ĐỐI TƯỢNG DUY NHẤT LÀ HỌC SINH LỚP 6 (11–12 TUỔI) — CẤM VIẾT GIỌNG "NHÀ BÁC HỌC"
+- Mọi bài giảng, bản đồ môn học, bài ôn tập, câu hỏi và giọng đọc TTS tạo ra đều dành cho **học sinh lớp 6 (11–12 tuổi)** tự mở học và chia sẻ cho bạn bè cùng lớp 6A03 (KHÔNG viết cho chuyên gia, nhà khoa học hay theo giọng "cẩm nang phụ huynh").
+- **Ngôn ngữ siêu dễ hiểu, gần gũi:** Xưng hô tự nhiên với học sinh (*"mình / các bạn / em"*). Câu văn ngắn gọn (ưu tiên ≤ 20–25 từ/câu). Tránh từ hàn lâm, quản trị hoặc kỹ thuật nặng (như *"nút thắt"*, *"tư duy hệ thống"*, *"phân tích chuyên sâu"*).
+- **Giải nghĩa mọi thuật ngữ SGK bằng ví dụ đời thường:** Khi buộc phải dùng thuật ngữ SGK (như *elip, chí tuyến, vòng cực, mảng kiến tạo, khí áp*), phải giải thích ngay trong 1 câu ngắn bằng hình ảnh quen thuộc quanh các bạn (quả cam, đèn pin, đi xe đạp, sân trường, thời tiết Hà Nội/Việt Nam…).
+- **Chống "tường chữ" (Anti-Wall-of-Text):** Chia nhỏ mỗi ý tối đa 2–3 dòng, tách khối màu/biểu tượng rõ ràng; ưu tiên mô phỏng SVG tương tác, nút bấm thử nghiệm, mẹo nhớ 10 giây và câu đố vui thay vì đoạn văn dài.
 
 ### Quy tắc 1: CẤM quét thư mục mù & CẤM đọc file PDF gốc
 - **KHÔNG** chạy `Get-ChildItem -Recurse` toàn thư mục hoặc quét danh sách 203 ảnh trong `pages/`.

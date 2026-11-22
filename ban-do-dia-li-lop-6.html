@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bản đồ Trực quan Địa lí Lớp 6 — Cẩm nang Phụ huynh</title>
+  <title>Bản đồ Tự học Địa lí Lớp 6 — Lớp 6A03</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -114,8 +114,8 @@
             Bản đồ Trực quan Chương trình Địa lí Lớp 6
           </h1>
           <p class="mt-2.5 text-sm sm:text-base text-blue-50/95 max-w-2xl leading-relaxed">
-            Cẩm nang tương tác dành cho phụ huynh: nhìn trọn mạch liên kết nhân – quả giữa <strong>7 chương</strong>,
-            bắt đúng <strong>3 nút thắt khiến con hay rối</strong> và bỏ túi <strong>mẹo kèm con nhẹ nhàng tại nhà</strong> với ảnh minh hoạ cắt trực tiếp từ SGK.
+            Bản đồ tương tác dành riêng cho học sinh lớp 6: nhìn trọn mạch liên kết giữa <strong>7 chương</strong>,
+            nắm chắc <strong>3 điểm dễ nhầm nhất</strong> và bỏ túi <strong>mẹo tự học cực dễ nhớ</strong> kèm hình minh hoạ trực quan từ SGK.
           </p>
         </div>
 
@@ -131,7 +131,7 @@
           </div>
           <div class="rounded-2xl bg-amber-400/25 backdrop-blur-md border border-amber-200/40 p-3 text-center">
             <div class="text-2xl sm:text-3xl font-extrabold text-amber-200">3</div>
-            <div class="text-[11px] sm:text-xs font-medium text-amber-100 mt-0.5">Nút thắt khó</div>
+            <div class="text-[11px] sm:text-xs font-medium text-amber-100 mt-0.5">Điểm dễ nhầm</div>
           </div>
         </div>
       </div>
@@ -161,7 +161,7 @@
         <button id="tabBtn-2" onclick="switchTab(2)"
           class="tab-btn flex-shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold cursor-pointer">
           <span>📊</span>
-          <span>2. Độ khó &amp; 3 Nút thắt</span>
+          <span>2. Độ khó &amp; 3 Điểm dễ nhầm</span>
         </button>
         <button id="tabBtn-3" onclick="switchTab(3)"
           class="tab-btn flex-shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold cursor-pointer">
@@ -405,7 +405,7 @@
             </button>
             <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300">1–2: Nhẹ nhàng</span>
             <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">3: Trung bình</span>
-            <span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300">4–5: Nút thắt khó</span>
+            <span class="px-2.5 py-1 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300">4–5: Hay nhầm / Khó</span>
           </div>
         </div>
         <div id="difficultyChart" class="space-y-4"></div>
@@ -415,10 +415,10 @@
       <div>
         <div class="mb-4">
           <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
-            🔥 Phân tích sâu 3 "Nút thắt" khiến học sinh lớp 6 dễ vướng nhất
+            🔥 3 điểm khiến các bạn lớp 6 dễ nhầm nhất (và cách gỡ siêu nhanh!)
           </h2>
           <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Chỉ cần bố dành 15–20 phút gỡ đúng 3 chỗ này, con sẽ thấy Địa lí 6 nhẹ tênh và rất thú vị!
+            Chỉ cần dành 15 phút xem kĩ đúng 3 chỗ này, cả năm Địa lí 6 sẽ trở nên nhẹ tênh và cực thú vị!
           </p>
         </div>
         <div id="bottlenecksGrid" class="grid grid-cols-1 lg:grid-cols-3 gap-6"></div>
@@ -599,10 +599,10 @@
         <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-white/15 border border-white/25 text-xs font-bold mb-2">
-              ✨ PHƯƠNG PHÁP ĐỒNG HÀNH TẠI NHÀ
+              ✨ BÍ KÍP TỰ HỌC ĐỊA LÍ 6
             </span>
             <h2 class="text-xl sm:text-2xl font-extrabold">
-              Công thức 3 bước để bố kèm con nhẹ nhàng mà hiệu quả
+              Công thức 3 bước tự học nhẹ nhàng mà nhớ lâu
             </h2>
           </div>
           <button onclick="speakFormula3Steps()" data-tts-id="formula3" type="button"
@@ -696,7 +696,7 @@
                 <th class="py-3 px-4 font-bold">Tên bài học</th>
                 <th class="py-3 px-4 font-bold whitespace-nowrap text-center">Trang SGK</th>
                 <th class="py-3 px-4 font-bold whitespace-nowrap">Mức độ &amp; Thẻ</th>
-                <th class="py-3 px-4 font-bold">Lưu ý ngắn cho phụ huynh</th>
+                <th class="py-3 px-4 font-bold">Mẹo nhớ nhanh</th>
               </tr>
             </thead>
             <tbody id="lessonsTableBody" class="divide-y divide-slate-200/80 dark:divide-slate-800 text-sm"></tbody>
@@ -2056,7 +2056,7 @@
                 </div>
               </div>
               <span class="w-28 text-right text-xs font-bold ${isHard ? 'text-rose-600 dark:text-rose-400' : 'text-slate-500 dark:text-slate-400'}">
-                ${isHard ? '🔥 Nút thắt' : ch.difficultyLabel}
+                ${isHard ? '🔥 Hay nhầm' : ch.difficultyLabel}
               </span>
             </div>
           </div>
@@ -2426,12 +2426,12 @@
     }
 
     function speakHeroIntro() {
-      const text = `Bản đồ Trực quan Chương trình Địa lí Lớp 6, sách Kết nối tri thức với cuộc sống. Chương trình gồm 7 chương màu, 31 bài học và 3 nút thắt khó nhất cần phụ huynh lưu ý: Chương 1 về Bản đồ, Chương 2 về Trái Đất trong Vũ trụ, và Chương 4 về Khí hậu. Bố hãy bấm vào từng chương để xem ảnh sách giáo khoa, điểm con hay vướng và mẹo hướng dẫn con tại nhà.`;
+      const text = `Chào các bạn lớp 6! Đây là Bản đồ Trực quan Chương trình Địa lí Lớp 6, sách Kết nối tri thức với cuộc sống. Chương trình gồm 7 chương màu, 31 bài học và 3 điểm dễ nhầm nhất cần chú ý: Chương 1 về Bản đồ, Chương 2 về Trái Đất trong Vũ trụ, và Chương 4 về Khí hậu. Các bạn hãy bấm vào từng chương để xem hình sách giáo khoa, chỗ hay nhầm và mẹo nhớ siêu nhanh nhé.`;
       startTTS('hero', '🔊 Giới thiệu tổng quan Địa lí 6', text);
     }
 
     function speakGuide() {
-      const text = `Hướng dẫn sử dụng bản đồ Địa lí lớp 6. Khi bấm vào một chương ở Tab 1, thẻ viền đậm là chương đang xem. Các thẻ viền xanh ngọc là Nền tảng cần biết trước, tức là kiến thức học trước đó con cần vững. Các thẻ viền cam là Chịu ảnh hưởng, tức là các chương về sau phụ thuộc vào chương này; nếu con hổng chỗ này sẽ dễ mất gốc dây chuyền. Các bài học có gắn thẻ Khó, Kĩ năng và Thực hành để bố dễ ưu tiên kèm con.`;
+      const text = `Hướng dẫn sử dụng bản đồ Địa lí lớp 6. Khi bấm vào một chương ở Tab 1, thẻ viền đậm là chương đang xem. Các thẻ viền xanh ngọc là Kiến thức cần biết trước. Các thẻ viền cam là Các chương liên quan phía sau. Các bài học có gắn thẻ Khó, Kĩ năng và Thực hành để các bạn dễ chọn bài ôn trước.`;
       startTTS('guide', '🔊 Hướng dẫn sử dụng bản đồ', text);
     }
 
@@ -2439,54 +2439,54 @@
       const ch = getChapter(id);
       if (!ch) return;
       if (part === 'summary') {
-        startTTS(`ch-${id}-summary`, `🔊 Tóm tắt ${ch.shortTitle}`, `${ch.shortTitle}. ${ch.summary} Mối liên kết nhân quả: ${ch.causalText}`);
+        startTTS(`ch-${id}-summary`, `🔊 Tóm tắt ${ch.shortTitle}`, `${ch.shortTitle}. ${ch.summary} Liên kết với các chương khác: ${ch.causalText}`);
       } else if (part === 'pitfalls') {
-        startTTS(`ch-${id}-pitfalls`, `🔊 Điểm hay vướng — ${ch.shortTitle}`, `Những điểm con hay vướng ở ${ch.shortTitle}: ${ch.pitfalls.join(' ')}`);
+        startTTS(`ch-${id}-pitfalls`, `🔊 Chỗ hay nhầm — ${ch.shortTitle}`, `Những chỗ các bạn hay nhầm ở ${ch.shortTitle}: ${ch.pitfalls.join(' ')}`);
       } else if (part === 'tips') {
-        startTTS(`ch-${id}-tips`, `🔊 Mẹo bố kèm con — ${ch.shortTitle}`, `Gợi ý cách bố hướng dẫn con tại nhà cho ${ch.shortTitle}: ${ch.parentTips.join(' ')}`);
+        startTTS(`ch-${id}-tips`, `🔊 Mẹo tự học — ${ch.shortTitle}`, `Mẹo học nhanh và dễ nhớ cho ${ch.shortTitle}: ${ch.parentTips.join(' ')}`);
       }
     }
 
     function speakDifficultyOverview() {
-      const text = `Phân tích độ khó cả 7 chương Địa lí lớp 6 theo thang 5. Ba chương khó nhất, gọi là 3 nút thắt cả năm gồm: Chương 2 Trái Đất và Vũ trụ độ khó 5 trên 5; Chương 4 Khí hậu và biến đổi khí hậu độ khó 5 trên 5; và Chương 1 Bản đồ độ khó 4 trên 5. Chương 3 Đá và Địa hình ở mức trung bình 3 trên 5. Ba chương còn lại là Chương 5 Nước, Chương 6 Đất và Sinh vật, và Chương 7 Con người và Thiên nhiên đều nhẹ nhàng, độ khó 2 trên 5.`;
+      const text = `Độ khó cả 7 chương Địa lí lớp 6 theo thang 5. Ba chương dễ nhầm nhất cả năm gồm: Chương 2 Trái Đất và Vũ trụ độ khó 5 trên 5; Chương 4 Khí hậu và biến đổi khí hậu độ khó 5 trên 5; và Chương 1 Bản đồ độ khó 4 trên 5. Chương 3 Đá và Địa hình ở mức trung bình 3 trên 5. Ba chương còn lại là Chương 5 Nước, Chương 6 Đất và Sinh vật, và Chương 7 Con người và Thiên nhiên đều nhẹ nhàng, độ khó 2 trên 5.`;
       startTTS('diff-overview', '🔊 Biểu đồ độ khó 7 chương', text);
     }
 
     function speakDadScript30s() {
-      const text = `Cách bố giảng cho con trong 30 giây: Con đặt cây bút thẳng đứng trên mặt bàn là góc 90 độ. Bây giờ con nghiêng cây bút đi một góc 23 độ 27 phút, vì Trái Đất bị nghiêng như thế từ lúc mới hình thành, thì góc giữa cây bút với mặt bàn tự động còn lại đúng 66 độ 33 phút. Giống như 1 giờ có 60 phút thì 1 độ cũng có 60 phút: 23 độ 27 phút cộng 66 độ 33 phút bằng 89 độ 60 phút, tức là đúng 90 độ!`;
-      startTTS('angle-script', "🔊 Kịch bản 30 giây giải thích 66°33'", text);
+      const text = `Mẹo hiểu nhanh trong 30 giây: Bạn đặt cây bút thẳng đứng trên mặt bàn là góc 90 độ. Bây giờ nghiêng cây bút đi một góc 23 độ 27 phút, vì Trái Đất bị nghiêng như thế từ lúc mới hình thành, thì góc giữa cây bút với mặt bàn tự động còn lại đúng 66 độ 33 phút. Giống như 1 giờ có 60 phút thì 1 độ cũng có 60 phút: 23 độ 27 phút cộng 66 độ 33 phút bằng 89 độ 60 phút, tức là đúng 90 độ!`;
+      startTTS('angle-script', "🔊 Mẹo 30 giây hiểu góc 66°33'", text);
     }
 
     function speakLesson(idx) {
       const l = LESSONS[idx];
       if (!l) return;
       const chLabel = l.ch === 0 ? 'Phần Mở đầu' : `Chương ${l.ch}`;
-      const text = `${chLabel}, ${l.code}: ${l.name}. Sách giáo khoa trang ${l.pages}. Mức độ: ${l.level}. Lưu ý cho phụ huynh: ${l.note}`;
+      const text = `${chLabel}, ${l.code}: ${l.name}. Sách giáo khoa trang ${l.pages}. Mức độ: ${l.level}. Mẹo nhớ nhanh: ${l.note}`;
       startTTS(`lesson-${idx}`, `🔊 ${l.code}: ${l.name}`, text);
     }
 
     function speakChapter(id) {
       const ch = getChapter(id);
       if (!ch) return;
-      const text = `${ch.title}. Độ khó ${ch.difficulty} trên 5. Tóm tắt nội dung: ${ch.summary} Mối liên kết: ${ch.causalText} Điểm con hay vướng: ${ch.pitfalls.join(' ')} Gợi ý cách bố hướng dẫn con tại nhà: ${ch.parentTips.join(' ')}`;
+      const text = `${ch.title}. Độ khó ${ch.difficulty} trên 5. Tóm tắt nội dung: ${ch.summary} Liên kết với chương khác: ${ch.causalText} Chỗ hay nhầm: ${ch.pitfalls.join(' ')} Mẹo tự học dễ nhớ: ${ch.parentTips.join(' ')}`;
       startTTS(`ch-${id}`, `🔊 ${ch.shortTitle}`, text);
     }
 
     function speakBottleneck(idx) {
       const b = BOTTLENECKS[idx];
       if (!b) return;
-      const text = `${b.badge}: ${b.title}. Vì sao con dễ bị rối? ${b.whyHard} Mẹo nhớ siêu dễ cho bố và con: ${b.trick}`;
+      const text = `${b.badge}: ${b.title}. Vì sao dễ bị rối? ${b.whyHard} Mẹo nhớ siêu dễ: ${b.trick}`;
       startTTS(`bn-${idx}`, `🔊 ${b.badge}`, text);
     }
 
     function speakAngleExplainer() {
-      const text = `Giải thích vì sao có con số 66 độ 33 phút và 23 độ 27 phút. Trước hết, 66 độ 33 phút giống như đồng hồ, 1 độ bằng 60 phút, không phải 66 phẩy 33 độ thập phân. Con hãy tưởng tượng đặt một cây bút thẳng đứng trên mặt bàn, tạo thành góc vuông 90 độ, tức là 89 độ 60 phút. Trái Đất trong tự nhiên không đứng thẳng mà bị nghiêng đi một góc đúng 23 độ 27 phút so với đường thẳng đứng. Vì vậy góc còn lại giữa trục Trái Đất và mặt phẳng quỹ đạo đúng bằng 90 độ trừ 23 độ 27 phút, bằng 66 độ 33 phút. Nhờ độ nghiêng này mà ta có hai đường Chí tuyến ở 23 độ 27 phút giới hạn Đới nóng, và hai Vòng cực ở 66 độ 33 phút giới hạn hai Đới lạnh, đồng thời tạo ra bốn mùa Xuân, Hạ, Thu, Đông trên Trái Đất.`;
+      const text = `Giải thích vì sao có con số 66 độ 33 phút và 23 độ 27 phút. Trước hết, 66 độ 33 phút giống như đồng hồ, 1 độ bằng 60 phút, không phải 66 phẩy 33 độ thập phân. Bạn hãy tưởng tượng đặt một cây bút thẳng đứng trên mặt bàn, tạo thành góc vuông 90 độ, tức là 89 độ 60 phút. Trái Đất trong tự nhiên không đứng thẳng mà bị nghiêng đi một góc đúng 23 độ 27 phút so với đường thẳng đứng. Vì vậy góc còn lại giữa trục Trái Đất và mặt phẳng quỹ đạo đúng bằng 90 độ trừ 23 độ 27 phút, bằng 66 độ 33 phút. Nhờ độ nghiêng này mà ta có hai đường Chí tuyến ở 23 độ 27 phút giới hạn Đới nóng, và hai Vòng cực ở 66 độ 33 phút giới hạn hai Đới lạnh, đồng thời tạo ra bốn mùa Xuân, Hạ, Thu, Đông trên Trái Đất.`;
       startTTS('angle', "🔊 Giải thích góc 66°33' & 23°27'", text);
     }
 
     function speakFormula3Steps() {
-      const text = `Công thức 3 bước để bố kèm con học Địa lí lớp 6 nhẹ nhàng mà hiệu quả. Bước 1: Xem hình trước, đọc chữ sau. Mở đúng bản đồ, sơ đồ trong sách giáo khoa và hỏi con quan sát thấy gì. Bước 2: Thí nghiệm 2 phút và gắn với đời sống thật, như dùng quả cam và đèn pin để hiểu 4 mùa, mở Google Maps xem tỉ lệ, xem bản tin thời tiết VTV. Bước 3: Đổi vai để con làm thầy giảng lại cho bố nghe trong 2 phút bằng 3 câu hỏi: Cái này là gì, vì sao nó xảy ra, và nó liên quan gì đến cuộc sống.`;
-      startTTS('formula3', '🔊 Công thức 3 bước kèm con', text);
+      const text = `Công thức 3 bước tự học Địa lí lớp 6 nhẹ nhàng mà nhớ lâu. Bước 1: Xem hình trước, đọc chữ sau. Mở đúng bản đồ, sơ đồ trong sách giáo khoa và tự quan sát xem hình vẽ nói gì. Bước 2: Thí nghiệm 2 phút và gắn với đời sống thật, như dùng quả cam và đèn pin để hiểu 4 mùa, mở Google Maps xem tỉ lệ, xem bản tin thời tiết VTV. Bước 3: Tự giảng lại trong 2 phút cho bạn bè hoặc bố mẹ nghe bằng 3 câu hỏi: Cái này là gì, vì sao nó xảy ra, và nó liên quan gì đến cuộc sống hằng ngày.`;
+      startTTS('formula3', '🔊 Công thức 3 bước tự học', text);
     }
 
     window.addEventListener('beforeunload', () => {
