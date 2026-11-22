@@ -41,9 +41,11 @@ Tài liệu này được nạp tự động cho mọi Model. Mọi yêu cầu t
   - **KHÔNG** gọi `read_file` đọc nối tiếp từ dòng 1 đến hết file.
   - **BẮT BUỘC** xem bảng **Code Map** trong [INDEX.md](INDEX.md) hoặc chạy `Select-String` theo từ khóa mốc (`id="tabBtn-`, `id="tabPanel-`, `const CHAPTERS`, `function switchTab`, v.v.) để lấy số dòng chính xác, sau đó chỉ gọi `read_file` với `StartLine` và `EndLine` khoanh đúng vùng cần đọc/sửa.
 
-### Quy tắc 5: Dùng Skill khung chuẩn & Tự động cập nhật Sổ cái (`INDEX.md`)
-- Khi được yêu cầu **tạo trang HTML bài giảng trực quan mới** hoặc **thêm Tab chuyên đề mới** vào bản đồ tổng hợp:
-  - Đọc ngay Skill `bai-giang-truc-quan` tại [.agents/skills/bai-giang-truc-quan/SKILL.md](.agents/skills/bai-giang-truc-quan/SKILL.md) để lấy khung giao diện chuẩn (Tailwind CSS, font `Be Vietnam Pro`, Dark Mode `dialy6_theme`, bộ đọc giọng nói `TTS` tiếng Việt phân đoạn, cấu trúc tích hợp Tab) mà **không cần đọc lại các file `.html` cũ để học mẫu**.
+### Quy tắc 5: Dùng Skill khung siêu gọn (`assets/common.js`), CẤM Base64 & Tự động cập nhật Sổ cái
+- Khi được yêu cầu **tạo trang HTML bài giảng trực quan mới**:
+  - Đọc ngay Skill `bai-giang-truc-quan` tại [.agents/skills/bai-giang-truc-quan/SKILL.md](.agents/skills/bai-giang-truc-quan/SKILL.md).
+  - **BẮT BUỘC nhúng `<script src="assets/common.js"></script>`** để tái sử dụng Dark Mode (`dialy6_theme`), bộ đọc giọng nói Tiếng Việt (`startTTS`/`#ttsBar`) và `copyShareLink()` — **KHÔNG** viết lặp lại 200 dòng code TTS/Dark Mode trong mỗi file HTML mới.
+  - **CẤM nhúng ảnh Base64 (`data:image/...`)** vào file HTML mới; ưu tiên vẽ SVG tương tác gọn nhẹ để tiết kiệm token và thời gian sinh code.
 - Sau khi tạo xong bất kỳ file kết quả mới nào (hoặc thêm Tab mới vào file tổng hợp), **BẮT BUỘC cập nhật ngay** vào bảng **Danh mục Sản phẩm Đầu ra & Code Map** trong [INDEX.md](INDEX.md) và thêm thẻ liên kết vào trang chủ [index.html](index.html).
 
 ### Quy tắc 6: Xuất bản GitHub Pages & Quản lý nhiệm vụ bằng GitHub Issues

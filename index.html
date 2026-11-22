@@ -189,41 +189,6 @@
     Dự án học tập lớp 6A03 • Lịch sử &amp; Địa lí 6 (Kết nối tri thức với cuộc sống)
   </footer>
 
-  <script>
-    // Dark Mode đồng bộ dialy6_theme
-    const htmlEl = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
-
-    function applyTheme(theme) {
-      if (theme === 'dark') {
-        htmlEl.classList.add('dark');
-        themeIcon.textContent = '☀️';
-        themeLabel.textContent = 'Sáng';
-      } else {
-        htmlEl.classList.remove('dark');
-        themeIcon.textContent = '🌙';
-        themeLabel.textContent = 'Tối';
-      }
-      localStorage.setItem('dialy6_theme', theme);
-    }
-
-    applyTheme(localStorage.getItem('dialy6_theme') || 'light');
-    themeToggle.addEventListener('click', () => {
-      applyTheme(htmlEl.classList.contains('dark') ? 'light' : 'dark');
-    });
-
-    function copyShareLink() {
-      const btn = document.getElementById('copyLinkBtn');
-      const url = window.location.href;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(() => {
-          btn.textContent = '✅ Đã sao chép link!';
-          setTimeout(() => { btn.textContent = '🔗 Sao chép link chia sẻ'; }, 2000);
-        });
-      }
-    }
-  </script>
+  <script src="assets/common.js"></script>
 </body>
 </html>
