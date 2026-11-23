@@ -610,10 +610,10 @@
         fact: 'Hokkaido nằm tít phía Bắc nước Nhật (43°B) nên mùa đông tuyết rơi dày! Vì ở phía Đông (141°Đ) nên bạn Minh đón bình minh sớm hơn Hà Nội 2 tiếng.'
       },
       {
-        id: 'singapore', flag: '🇸🇬', shortName: 'Anh Bi (Singapore)',
+        id: 'singapore', flag: '🇸🇬', shortName: 'Anh Bi (Singapore +8)',
         person: 'Anh Minh (Anh Bi) — Singapore',
         lat: 1.35, lon: 103.82, gmt: 8, color: '#fbbf24',
-        fact: 'Singapore nằm sát rạt đường Xích đạo (chỉ cách 1,35°B)! Nên ở chỗ anh Bi nóng ẩm quanh năm, không có mùa đông lạnh như Hà Nội.'
+        fact: 'Singapore nằm sát rạt Xích đạo (1,35°B) nên nóng ẩm quanh năm! 📌 Bí mật siêu hay (Bài 7 SGK): Theo kinh độ (103,8°Đ), Singapore nằm thẳng hàng với Việt Nam (105,8°Đ), nhưng nước này chọn dùng múi giờ hành chính GMT+8 (sớm hơn VN 1 tiếng) để tiện giao dịch với Trung Quốc & Hồng Kông — nên đường múi giờ thực tế uốn lượn ôm lấy Singapore sang dải +8!'
       },
       {
         id: 'sydney', flag: '🇦🇺', shortName: 'Jack (Sydney, Úc)',
@@ -1301,8 +1301,17 @@
         drawBand3D(ctx, -90, 90, -180, 0, 'rgba(245, 158, 11, 0.25)', rotLat, rotLon, R, cx, cy);
       } else if (overlayMode === 'tz') {
         for (let tz = -12; tz <= 11; tz++) {
-          const col = tz === 7 ? 'rgba(244, 63, 94, 0.35)' : (tz === 0 ? 'rgba(250, 204, 21, 0.35)' : (tz % 2 === 0 ? 'rgba(99, 102, 241, 0.20)' : 'rgba(14, 165, 233, 0.12)'));
-          drawLonStrip3D(ctx, tz * 15 - 7.5, tz * 15 + 7.5, col, rotLat, rotLon, R, cx, cy);
+          const col = tz === 7 ? 'rgba(244, 63, 94, 0.35)' : (tz === 0 ? 'rgba(250, 204, 21, 0.35)' : (tz === 8 ? 'rgba(14, 165, 233, 0.30)' : (tz % 2 === 0 ? 'rgba(99, 102, 241, 0.20)' : 'rgba(14, 165, 233, 0.12)')));
+          if (tz === 7) {
+            // Vẽ dải GMT+7 (Việt Nam) chừa vùng Singapore/Malaysia (lat -3°..7°B, lon 100°..112.5°Đ) cho dải GMT+8 thực tế
+            drawBand3D(ctx, 7, 90, 97.5, 112.5, col, rotLat, rotLon, R, cx, cy);
+            drawBand3D(ctx, -90, -3, 97.5, 112.5, col, rotLat, rotLon, R, cx, cy);
+            drawBand3D(ctx, -3, 7, 97.5, 100, col, rotLat, rotLon, R, cx, cy);
+            // Vùng uốn lượn hành chính GMT+8 ôm trọn Singapore & Malaysia (đúng bản đồ múi giờ SGK Bài 7!)
+            drawBand3D(ctx, -3, 7, 100, 112.5, 'rgba(14, 165, 233, 0.42)', rotLat, rotLon, R, cx, cy);
+          } else {
+            drawLonStrip3D(ctx, tz * 15 - 7.5, tz * 15 + 7.5, col, rotLat, rotLon, R, cx, cy);
+          }
         }
       }
 
@@ -1336,6 +1345,8 @@
           const gmtStr = tz === 0 ? '0' : (tz > 0 ? `+${tz}` : `−${Math.abs(tz)}`);
           drawText3D(ctx, `${degStr} (${gmtStr})`, (tz % 2 === 0 ? 6 : -8), lon, rotLat, rotLon, R, cx, cy, tz === 7 ? '#fecdd3' : '#fef08a', 9.5, true);
         }
+        // Nhãn vùng uốn lượn GMT+8 của Singapore & Malaysia
+        drawText3D(ctx, 'Vùng +8 (Singapore)', -5, 106, rotLat, rotLon, R, cx, cy, '#7dd3fc', 8.5, true);
       }
 
       ctx.restore();
