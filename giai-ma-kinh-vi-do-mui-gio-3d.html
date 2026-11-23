@@ -90,14 +90,20 @@
       <div class="grid grid-cols-1 lg:grid-cols-12">
         <!-- LEFT: CONCEPT 3D CANVAS -->
         <div class="lg:col-span-7 p-4 sm:p-6 bg-slate-950 text-white flex flex-col justify-between">
-          <!-- 5 Step Mode Buttons -->
-          <div class="flex flex-wrap items-center gap-1.5 mb-3">
-            <button type="button" id="cBtn-ns" onclick="setConceptMode('ns')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">1. Bắc / Nam &amp; Xích đạo</button>
+          <!-- 6 Step Mode Buttons -->
+          <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+            <button type="button" id="cBtn-ns" onclick="setConceptMode('ns')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">1. Bắc / Nam</button>
             <button type="button" id="cBtn-lat5" onclick="setConceptMode('lat5')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">2. 5 Vĩ tuyến đặc biệt</button>
-            <button type="button" id="cBtn-ew" onclick="setConceptMode('ew')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">3. Đông / Tây &amp; Gốc 0°</button>
-            <button type="button" id="cBtn-tz" onclick="setConceptMode('tz')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">4. Kinh độ = Múi giờ (0, +, −)</button>
-            <button type="button" id="cBtn-all" onclick="setConceptMode('all')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">5. Xem tổng hợp</button>
+            <button type="button" id="cBtn-ew" onclick="setConceptMode('ew')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">3. Đông / Tây (Gốc 0°)</button>
+            <button type="button" id="cBtn-tz" onclick="setConceptMode('tz')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">4. Kinh độ = Múi (+ / −)</button>
+            <button type="button" id="cBtn-date180" onclick="setConceptMode('date180')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">5. Mốc +12 &amp; −12 (180°)</button>
+            <button type="button" id="cBtn-all" onclick="setConceptMode('all')" class="c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition">6. Tổng hợp</button>
             <button type="button" id="cBtnSpin" onclick="toggleConceptSpin()" class="px-2.5 py-1.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-200 cursor-pointer transition">🔄 Tự xoay: TẮT</button>
+          </div>
+
+          <!-- Live Hemisphere Compass Indicator -->
+          <div id="conceptLiveCompass" class="mb-2 px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 text-xs font-extrabold text-center transition">
+            ➡️ Bạn đang nhìn: BÁN CẦU ĐÔNG • Kinh độ Đông (Đ) • Múi giờ DƯƠNG (+1 → +12)
           </div>
 
           <!-- Canvas 1 -->
@@ -205,7 +211,7 @@
               <h3 class="text-xs sm:text-sm font-extrabold uppercase tracking-wide text-slate-700 dark:text-slate-200">
                 📍 Bấm chọn để bay tới trên quả cầu 3D:
               </h3>
-              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400">12 địa điểm (đủ −10 → +10)</span>
+              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400">17 địa điểm (đủ 4 góc Trái Đất)</span>
             </div>
             <div id="friendsGrid" class="grid grid-cols-2 gap-1.5 max-h-[300px] overflow-y-auto pr-1 no-scrollbar"></div>
           </div>
@@ -237,22 +243,38 @@
           </button>
         </div>
 
-        <!-- Formula Strip -->
+        <!-- Golden Rule 3-Column Box: TÂY (-) vs GỐC 0 vs ĐÔNG (+) & +12 / -12 -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
-          <div class="p-3.5 rounded-2xl bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800">
-            <div class="font-extrabold text-sky-700 dark:text-sky-300 mb-1">1. Mốc số 0 (0° = GMT 0)</div>
-            <p class="text-slate-600 dark:text-slate-300">Kinh tuyến 0° ở <strong>Luân Đôn (Anh)</strong> làm giờ gốc quốc tế gọi là <strong>GMT</strong>.</p>
+          <div class="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-300 dark:border-amber-700 space-y-1.5">
+            <div class="font-extrabold text-amber-800 dark:text-amber-300 text-sm">⬅️ BÁN CẦU TÂY = MÚI GIỜ ÂM (−)</div>
+            <p class="text-slate-700 dark:text-slate-300">• Nằm <strong>bên trái</strong> đường 0° (kinh độ ghi chữ <strong>T</strong>).</p>
+            <p class="text-slate-700 dark:text-slate-300">• Gồm các múi: <strong>GMT−1 → GMT−12</strong> (Mặt Trời mọc muộn hơn → TRỪ giờ).</p>
+            <div class="px-2.5 py-1.5 rounded-xl bg-amber-200/70 dark:bg-amber-900/60 text-amber-950 dark:text-amber-100 font-extrabold text-xs">
+              ⬇️ Múi ÂM nhỏ nhất: <strong>GMT−12</strong> (tại đường 180° — đón ngày mới muộn nhất!)
+            </div>
           </div>
-          <div class="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800">
-            <div class="font-extrabold text-emerald-700 dark:text-emerald-300 mb-1">2. Phía Đông (+), Phía Tây (−)</div>
-            <p class="text-slate-600 dark:text-slate-300">Trái Đất quay từ <strong>Tây sang Đông</strong> nên phía Đông đón bình minh sớm hơn (cộng <strong>+</strong>), phía Tây đón muộn hơn (trừ <strong>−</strong>).</p>
+
+          <div class="p-4 rounded-2xl bg-sky-50 dark:bg-sky-950/50 border-2 border-sky-300 dark:border-sky-700 space-y-1.5">
+            <div class="font-extrabold text-sky-800 dark:text-sky-300 text-sm">⭐ RANH GIỚI GỐC: KINH TUYẾN 0°</div>
+            <p class="text-slate-700 dark:text-slate-300">• Đi qua <strong>Greenwich (Luân Đôn, Anh)</strong> — gọi là <strong>GMT 0</strong>.</p>
+            <p class="text-slate-700 dark:text-slate-300">• Không dương, không âm — là vạch chia đôi Đông và Tây!</p>
+            <div class="px-2.5 py-1.5 rounded-xl bg-sky-200/70 dark:bg-sky-900/60 text-sky-950 dark:text-sky-100 font-extrabold text-xs">
+              🧮 Đổi từ Hà Nội (GMT+7): <strong>Giờ nơi đó = Giờ VN + (GMT − 7)</strong>
+            </div>
           </div>
-          <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800">
-            <div class="font-extrabold text-amber-700 dark:text-amber-300 mb-1">3. Công thức tính từ Hà Nội (GMT+7)</div>
-            <p class="text-slate-600 dark:text-slate-300 font-bold">Giờ nơi đó = Giờ VN + (GMT nơi đó − 7)</p>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">VD: Hollywood (GMT−8) → −8 − 7 = <strong>−15 giờ</strong>!</p>
+
+          <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-300 dark:border-emerald-700 space-y-1.5">
+            <div class="font-extrabold text-emerald-800 dark:text-emerald-300 text-sm">➡️ BÁN CẦU ĐÔNG = MÚI GIỜ DƯƠNG (+)</div>
+            <p class="text-slate-700 dark:text-slate-300">• Nằm <strong>bên phải</strong> đường 0° (kinh độ ghi chữ <strong>Đ</strong>).</p>
+            <p class="text-slate-700 dark:text-slate-300">• Gồm các múi: <strong>GMT+1 → GMT+12</strong> (Mặt Trời mọc sớm hơn → CỘNG giờ).</p>
+            <div class="px-2.5 py-1.5 rounded-xl bg-emerald-200/70 dark:bg-emerald-900/60 text-emerald-950 dark:text-emerald-100 font-extrabold text-xs">
+              ⬆️ Múi DƯƠNG lớn nhất: <strong>GMT+12</strong> (New Zealand, Fiji — đón năm mới sớm nhất!)
+            </div>
           </div>
         </div>
+        <p class="text-[11.5px] text-slate-500 dark:text-slate-400">
+          ✨ <strong>Mở rộng cho bạn tò mò:</strong> Trong chuẩn 24 múi giờ SGK Địa lí 6, múi nhỏ nhất là <strong>GMT−12</strong> và lớn nhất là <strong>GMT+12</strong> (chạm lưng nhau tại kinh tuyến 180°, chênh nhau đúng 24 giờ = 1 ngày). Ngoài đời thật, vài đảo nhỏ giữa Thái Bình Dương như Kiribati còn đẩy đường đổi ngày lệch sang để có thêm GMT+13, GMT+14 cho tiện dùng chung ngày với Úc &amp; New Zealand.
+        </p>
 
         <!-- Interactive 25-zone Ribbon (-12 to +12) -->
         <div>
@@ -276,7 +298,7 @@
       <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
         <div class="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800">
           <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
-            📋 Bảng Tra Cứu Đầy Đủ 12 Địa Điểm: Tọa Độ, Bán Cầu, Múi Giờ &amp; Đang Làm Gì Lúc Này
+            📋 Bảng Tra Cứu Đầy Đủ 17 Địa Điểm: Tọa Độ, Bán Cầu, Múi Giờ &amp; Đang Làm Gì Lúc Này
           </h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Bấm <strong>"Xem 3D"</strong> để bay thẳng tới điểm đó trên Quả Địa Cầu #2, hoặc bấm <strong>"Maps ↗"</strong> để mở Google Maps thật!
@@ -546,15 +568,15 @@
         <div>
           <span class="text-xs font-extrabold uppercase tracking-wider text-rose-600 dark:text-rose-400">Phần 5 • Tự kiểm tra &amp; Thực hành</span>
           <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
-            🎯 Thử thách 15 Câu Hỏi Thực Tế (Đủ 4 Bán cầu, 5 Vĩ tuyến, Múi giờ &amp; Google Maps)
+            🎯 Thử thách 17 Câu Hỏi Thực Tế (Đủ Đông/Tây, +12/−12, 5 Vĩ tuyến, Múi giờ &amp; Google Maps)
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Làm thử xem mình được bao nhiêu trên 15 điểm nhé! Bấm đáp án là có giải thích ngay lập tức.
+            Làm thử xem mình được bao nhiêu trên 17 điểm nhé! Bấm đáp án là có giải thích ngay lập tức.
           </p>
         </div>
         <div class="flex items-center gap-2">
           <span id="quizScoreBadge" class="px-3.5 py-1.5 rounded-full bg-rose-100 dark:bg-rose-900/50 text-rose-800 dark:text-rose-200 text-xs sm:text-sm font-extrabold">
-            Điểm: 0 / 15
+            Điểm: 0 / 17
           </span>
           <button type="button" onclick="resetQuiz()" class="px-3 py-1.5 rounded-full bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold cursor-pointer transition">
             🔄 Làm lại
@@ -646,6 +668,36 @@
         person: 'Honolulu, Quần đảo Hawaii (Mỹ)',
         lat: 21.31, lon: -157.86, gmt: -10, color: '#f59e0b',
         fact: 'Múi giờ GMT−10 (chậm hơn VN tận 17 tiếng)! Điểm thú vị: Hawaii có vĩ độ 21,3°B — gần bằng hệt vĩ độ Hà Nội (21°B) nhưng nằm giữa Thái Bình Dương nên quanh năm nắng ấm!'
+      },
+      {
+        id: 'moscow', flag: '🇷🇺', shortName: 'Moskva (Nga)',
+        person: 'Moskva — Thủ đô nước Nga',
+        lat: 55.76, lon: 37.62, gmt: 3, color: '#60a5fa',
+        fact: 'Thủ đô nước Nga nằm ở Bắc bán cầu (55,8°B — mùa đông cực lạnh nhiều tuyết!) và Đông bán cầu (37,6°Đ). Dùng GMT+3, muộn hơn Hà Nội 4 tiếng — xuất hiện ngay trong Bài 7 SGK Địa lí 6!'
+      },
+      {
+        id: 'iran', flag: '🇮🇷', shortName: 'Tehran (Iran)',
+        person: 'Tehran — Thủ đô Iran',
+        lat: 35.69, lon: 51.39, gmt: 3.5, color: '#4ade80',
+        fact: 'Điểm siêu độc đáo: Iran thuộc Bắc bán cầu & Đông bán cầu, nhưng dùng múi giờ LẺ NỬA TIẾNG GMT+3:30 (muộn hơn Hà Nội 3 tiếng 30 phút — giống Ấn Độ GMT+5:30) để khớp sát hơn với Mặt Trời mọc ở giữa nước!'
+      },
+      {
+        id: 'israel', flag: '🇮🇱', shortName: 'Israel (GMT+2)',
+        person: 'Jerusalem / Tel Aviv — Israel',
+        lat: 31.77, lon: 35.21, gmt: 2, color: '#38bdf8',
+        fact: 'Nằm ở vùng Trung Đông sát bờ Địa Trung Hải (Bắc bán cầu & Đông bán cầu). Dùng múi giờ chuẩn GMT+2 (mùa hè +3), muộn hơn Hà Nội 5 tiếng — chung múi giờ với Nam Phi & Ai Cập!'
+      },
+      {
+        id: 'southafrica', flag: '🇿🇦', shortName: 'Nam Phi (GMT+2)',
+        person: 'Pretoria — Thủ đô Nam Phi',
+        lat: -25.75, lon: 28.23, gmt: 2, color: '#facc15',
+        fact: 'Đại diện châu Phi nằm ở NAM BÁN CẦU (25,75°N — dưới Xích đạo, nên ngược mùa với Việt Nam!) & Đông bán cầu (28,2°Đ). Dùng GMT+2, muộn hơn Hà Nội 5 tiếng.'
+      },
+      {
+        id: 'brazil', flag: '🇧🇷', shortName: 'Brazil (GMT−3)',
+        person: 'Brasília — Thủ đô Brazil',
+        lat: -15.79, lon: -47.88, gmt: -3, color: '#a3e635',
+        fact: 'Điểm ĐẶC BIỆT DUY NHẤT vừa ở NAM BÁN CẦU (15,8°N) vừa ở TÂY BÁN CẦU (47,9°T)! Dùng GMT−3, muộn hơn Hà Nội 10 tiếng — xuất hiện ngay trong bài tập gọi điện thoại Bài 7 SGK Địa lí 6!'
       }
     ];
 
@@ -681,11 +733,19 @@
     }
     function fmtGMT(g) {
       if (g === 0) return 'GMT 0';
-      return g > 0 ? `GMT+${g}` : `GMT−${Math.abs(g)}`;
+      const sign = g > 0 ? '+' : '−';
+      const abs = Math.abs(g);
+      const h = Math.floor(abs);
+      const m = Math.round((abs - h) * 60);
+      return m > 0 ? `GMT${sign}${h}:${String(m).padStart(2, '0')}` : `GMT${sign}${h}`;
     }
     function fmtDiffVN(diff) {
       if (diff === 0) return 'Giờ giống VN';
-      return diff > 0 ? `Sớm hơn VN +${diff} giờ` : `Muộn hơn VN ${diff} giờ`;
+      const abs = Math.abs(diff);
+      const h = Math.floor(abs);
+      const m = Math.round((abs - h) * 60);
+      const txt = m > 0 ? `${h}g ${m}p` : `${h} giờ`;
+      return diff > 0 ? `Sớm hơn VN +${txt}` : `Muộn hơn VN −${txt}`;
     }
 
     // Tổng số phút trong ngày tại Hà Nội (0..1439)
@@ -857,6 +917,32 @@
       return { cx, cy, R };
     }
 
+    // Vẽ La bàn 4 hướng BẮC - NAM - ĐÔNG - TÂY cố định 4 cạnh Canvas 3D
+    function drawCompassOverlay(c, W, H) {
+      c.save();
+      c.font = '800 11px "Be Vietnam Pro", sans-serif';
+      c.textAlign = 'center';
+      c.textBaseline = 'middle';
+      const items = [
+        { txt: '⬆️ BẮC', x: W / 2, y: 15, bg: 'rgba(244, 63, 94, 0.25)', bd: 'rgba(251, 113, 133, 0.7)', fg: '#fecdd3' },
+        { txt: '⬇️ NAM', x: W / 2, y: H - 46, bg: 'rgba(56, 189, 248, 0.25)', bd: 'rgba(125, 211, 252, 0.7)', fg: '#bae6fd' },
+        { txt: '⬅️ TÂY (−)', x: 48, y: H / 2, bg: 'rgba(245, 158, 11, 0.25)', bd: 'rgba(251, 191, 36, 0.7)', fg: '#fde68a' },
+        { txt: 'ĐÔNG (+) ➡️', x: W - 52, y: H / 2, bg: 'rgba(16, 185, 129, 0.25)', bd: 'rgba(52, 211, 153, 0.7)', fg: '#a7f3d0' }
+      ];
+      items.forEach(it => {
+        const tw = c.measureText(it.txt).width;
+        const pw = tw + 12, ph = 20;
+        c.fillStyle = it.bg;
+        c.strokeStyle = it.bd;
+        c.lineWidth = 1.2;
+        roundRect(c, it.x - pw / 2, it.y - ph / 2, pw, ph, 7);
+        c.fill(); c.stroke();
+        c.fillStyle = it.fg;
+        c.fillText(it.txt, it.x, it.y);
+      });
+      c.restore();
+    }
+
     // ==================== 4. QUẢ ĐỊA CẦU 3D #1 — KHÁI NIỆM SẠCH SẼ ====================
     const cCanvas = document.getElementById('conceptCanvas');
     const cCtx = cCanvas.getContext('2d');
@@ -930,8 +1016,24 @@
         ],
         view: { lon: 15, lat: 10 }
       },
+      date180: {
+        title: '5. Múi DƯƠNG Lớn Nhất (+12) & Múi ÂM Nhỏ Nhất (−12) gặp nhau ở đâu?',
+        badge: 'ĐƯỜNG ĐỔI NGÀY QUỐC TẾ (KINH TUYẾN 180°)',
+        bullets: [
+          'Đi về phía Đông từ 0° đến tận cùng mặt sau Trái Đất (`180°`) ta gặp <strong>Múi DƯƠNG lớn nhất: GMT+12</strong> (New Zealand, Fiji — đón năm mới sớm nhất!).',
+          'Đi về phía Tây từ 0° đến tận cùng mặt sau Trái Đất (`180°`) ta gặp <strong>Múi ÂM nhỏ nhất: GMT−12</strong> (đảo Baker — đón ngày mới muộn nhất!).',
+          'Hai múi này <strong>chạm lưng vào nhau ngay tại vạch tím 180°</strong> và chênh nhau đúng <strong>24 giờ = 1 ngày trọn vẹn</strong> (`+12 − (−12) = 24 giờ`), nên bước qua vạch 180° là đổi ngày!'
+        ],
+        tip: 'Nhớ nhanh 3 mốc: Gốc giữa = GMT 0 • Lớn nhất (Đông) = GMT+12 • Nhỏ nhất (Tây) = GMT−12!',
+        tts: [
+          'Mục 5: Múi dương lớn nhất là G M T cộng 12 và múi âm nhỏ nhất là G M T trừ 12!',
+          'Múi dương cộng 12 nằm ở tận cùng Bán cầu Đông như New Zealand và Fiji, là nơi đón năm mới sớm nhất Trái Đất.',
+          'Múi âm trừ 12 nằm ở tận cùng Bán cầu Tây. Hai múi cộng 12 và trừ 12 chạm lưng nhau ngay tại kinh tuyến 180 độ giữa Thái Bình Dương, chênh nhau đúng 24 giờ bằng 1 ngày trọn vẹn nên gọi là Đường đổi ngày quốc tế!'
+        ],
+        view: { lon: 180, lat: 6 }
+      },
       all: {
-        title: '5. Xem tổng hợp tất cả các đường trên Trái Đất',
+        title: '6. Xem tổng hợp tất cả các đường trên Trái Đất',
         badge: 'ÔN NHANH TOÀN BỘ KHÁI NIỆM TRONG 1 HÌNH',
         bullets: [
           '<strong>5 đường ngang:</strong> Vòng cực Bắc (66°33\'B), Chí tuyến Bắc (23°27\'B), Xích đạo (0°), Chí tuyến Nam (23°27\'N), Vòng cực Nam (66°33\'N).',
@@ -949,9 +1051,9 @@
 
     function setConceptMode(mode) {
       cMode = mode;
-      ['ns', 'lat5', 'ew', 'tz', 'all'].forEach(m => {
+      ['ns', 'lat5', 'ew', 'tz', 'date180', 'all'].forEach(m => {
         const b = document.getElementById('cBtn-' + m);
-        b.className = 'c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition ' +
+        if (b) b.className = 'c-mode-btn px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition ' +
           (m === mode ? 'bg-cyan-500 text-slate-950 shadow' : 'bg-white/10 hover:bg-white/20 text-slate-200');
       });
       const info = CONCEPT_INFO[mode];
@@ -1006,6 +1108,12 @@
       } else if (cMode === 'ew') {
         drawBand3D(cCtx, -90, 90, 0, 180, 'rgba(16, 185, 129, 0.30)', cRotLat, cRotLon, R, cx, cy);
         drawBand3D(cCtx, -90, 90, -180, 0, 'rgba(245, 158, 11, 0.30)', cRotLat, cRotLon, R, cx, cy);
+      } else if (cMode === 'date180') {
+        // Tô nổi bật vùng GMT+12 (Đông 165°Đ..180°) và GMT-12 (Tây -180°..-165°T)
+        drawBand3D(cCtx, -90, 90, 0, 180, 'rgba(16, 185, 129, 0.24)', cRotLat, cRotLon, R, cx, cy);
+        drawBand3D(cCtx, -90, 90, -180, 0, 'rgba(245, 158, 11, 0.24)', cRotLat, cRotLon, R, cx, cy);
+        drawLonStrip3D(cCtx, 165, 180, 'rgba(16, 185, 129, 0.55)', cRotLat, cRotLon, R, cx, cy);
+        drawLonStrip3D(cCtx, -180, -165, 'rgba(245, 158, 11, 0.55)', cRotLat, cRotLon, R, cx, cy);
       } else if (cMode === 'tz') {
         for (let tz = -12; tz <= 11; tz++) {
           const lon1 = tz * 15 - 7.5, lon2 = tz * 15 + 7.5;
@@ -1075,6 +1183,13 @@
         drawText3D(cCtx, 'BÁN CẦU TÂY (−)', 18, -125, cRotLat, cRotLon, R, cx, cy, '#fef3c7', 12, true);
         drawText3D(cCtx, '0° Greenwich', -14, 0, cRotLat, cRotLon, R, cx, cy, '#fde047', 11, true);
         drawText3D(cCtx, '180° Đổi ngày', -14, 180, cRotLat, cRotLon, R, cx, cy, '#e9d5ff', 10.5, true);
+      } else if (cMode === 'date180') {
+        drawText3D(cCtx, '⬆️ LỚN NHẤT: GMT+12', 16, 155, cRotLat, cRotLon, R, cx, cy, '#a7f3d0', 11.5, true);
+        drawText3D(cCtx, '(Bán cầu Đông • 180°Đ)', 2, 155, cRotLat, cRotLon, R, cx, cy, '#d1fae5', 9.5, true);
+        drawText3D(cCtx, '⬇️ NHỎ NHẤT: GMT−12', -18, -155, cRotLat, cRotLon, R, cx, cy, '#fde68a', 11.5, true);
+        drawText3D(cCtx, '(Bán cầu Tây • 180°T)', -32, -155, cRotLat, cRotLon, R, cx, cy, '#fef3c7', 9.5, true);
+        drawText3D(cCtx, '✨ ĐƯỜNG ĐỔI NGÀY 180°', 36, 180, cRotLat, cRotLon, R, cx, cy, '#e9d5ff', 11, true);
+        drawText3D(cCtx, '(Chênh nhau đúng 24 giờ!)', -4, 180, cRotLat, cRotLon, R, cx, cy, '#f3e8ff', 9.5, true);
       } else if (cMode === 'tz' || cMode === 'all') {
         // Gắn nhãn kép KINH ĐỘ + MÚI GIỜ trực tiếp lên các kinh tuyến!
         for (let tz = -11; tz <= 12; tz++) {
@@ -1113,6 +1228,38 @@
       cCtx.restore();
       cCtx.beginPath(); cCtx.arc(cx, cy, R, 0, Math.PI * 2);
       cCtx.strokeStyle = 'rgba(103, 232, 249, 0.65)'; cCtx.lineWidth = 2; cCtx.stroke();
+      drawCompassOverlay(cCtx, W, H);
+      updateConceptLiveBadge();
+    }
+
+    let lastCompassKey = '';
+    function updateConceptLiveBadge() {
+      const el = document.getElementById('conceptLiveCompass');
+      if (!el) return;
+      const lon = ((cRotLon + 540) % 360) - 180; // -180..180
+      let key = '', txt = '', cls = '';
+      if (Math.abs(lon) <= 10) {
+        key = 'zero';
+        txt = '⭐ Đang nhìn: KINH TUYẾN GỐC 0° (GMT 0) — Bên phải là ĐÔNG (+), Bên trái là TÂY (−)';
+        cls = 'mb-2 px-3 py-1.5 rounded-xl bg-amber-400/25 border border-amber-300/60 text-amber-100 text-xs font-extrabold text-center transition';
+      } else if (Math.abs(lon) >= 165) {
+        key = '180';
+        txt = '✨ Đang nhìn: ĐƯỜNG ĐỔI NGÀY 180° — Nơi Múi Lớn Nhất (+12) chạm lưng Múi Nhỏ Nhất (−12)';
+        cls = 'mb-2 px-3 py-1.5 rounded-xl bg-purple-500/25 border border-purple-400/60 text-purple-100 text-xs font-extrabold text-center transition';
+      } else if (lon > 0) {
+        key = 'east';
+        txt = `➡️ Đang nhìn: BÁN CẦU ĐÔNG (~${Math.round(lon)}°Đ) • Kinh độ Đông (Đ) • Múi giờ DƯƠNG (+1 → +12)`;
+        cls = 'mb-2 px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/50 text-emerald-200 text-xs font-extrabold text-center transition';
+      } else {
+        key = 'west';
+        txt = `⬅️ Đang nhìn: BÁN CẦU TÂY (~${Math.round(Math.abs(lon))}°T) • Kinh độ Tây (T) • Múi giờ ÂM (−1 → −12)`;
+        cls = 'mb-2 px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-200 text-xs font-extrabold text-center transition';
+      }
+      if (key !== lastCompassKey || key === 'east' || key === 'west') {
+        lastCompassKey = key;
+        el.textContent = txt;
+        el.className = cls;
+      }
     }
 
     // Drag events cho Canvas #1
@@ -1222,6 +1369,7 @@
         ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         ctx.fillText(label, p.x, by + 9);
       });
+      drawCompassOverlay(ctx, W, H);
     }
 
     canvas.addEventListener('pointerdown', (e) => {
@@ -1360,7 +1508,7 @@
       targetLon = f.lon; targetLat = f.lat; isFlying = true;
       autoSpin = false;
       document.getElementById('btnSpinToggle').textContent = '🔄 Tự xoay: TẮT';
-      selectedTZ = f.gmt;
+      selectedTZ = Math.floor(f.gmt);
       renderFriendsGrid();
       renderSelectedFriendCard();
       renderTZRibbon();
@@ -1461,7 +1609,7 @@
 
     // ==================== 7. THƯỚC 24 MÚI GIỜ GMT (-12 → +12) ====================
     const TZ_PLACES = {
-      '-12': 'Đảo Baker (Thái Bình Dương — Đường đổi ngày)',
+      '-12': '⬇️ NHỎ NHẤT — Đảo Baker (Thái Bình Dương — Đường đổi ngày 180°)',
       '-11': 'Đảo Samoa (Thái Bình Dương)',
       '-10': '🌺 Hawaii (Honolulu, Mỹ — 150°T)',
       '-9': '🐻‍❄️ Alaska (Anchorage, Mỹ — 135°T)',
@@ -1470,13 +1618,13 @@
       '-6': 'Chicago (Mỹ), Mexico City (90°T)',
       '-5': '🇺🇸 Bạn ở New York (Mỹ), Toronto (75°T)',
       '-4': 'Santiago (Chile), Caracas (60°T)',
-      '-3': 'São Paulo (Brazil), Buenos Aires (45°T)',
+      '-3': '🇧🇷 Brasília & São Paulo (Brazil), Buenos Aires (45°T)',
       '-2': 'Giữa Đại Tây Dương (30°T)',
       '-1': 'Quần đảo Azores (15°T)',
-      '0': '🇬🇧 Luân Đôn — Đài thiên văn Greenwich (Mốc 0°)',
+      '0': '🇬🇧 GỐC 0° — Luân Đôn (Đài thiên văn Greenwich)',
       '1': '🇫🇷 Anh Lì (Pháp) • 🇩🇪 Anh Minh (Đức) (15°Đ)',
-      '2': 'Cairo (Ai Cập), Athens (Hy Lạp) (30°Đ)',
-      '3': 'Moskva (Nga), Ả Rập Xê Út (45°Đ)',
+      '2': '🇮🇱 Israel (Jerusalem/Tel Aviv) • 🇿🇦 Nam Phi (Pretoria) • Ai Cập (30°Đ)',
+      '3': '🇷🇺 Moskva (Nga) • (Gần đó: 🇮🇷 Tehran, Iran dùng múi lẻ GMT+3:30!)',
       '4': 'Dubai (UAE) (60°Đ)',
       '5': 'Pakistan, Maldives (75°Đ)',
       '6': 'Bangladesh, Kazakhstan (90°Đ)',
@@ -1485,7 +1633,7 @@
       '9': '🇯🇵 Bạn Minh (Hokkaido, Nhật Bản), Seoul (135°Đ)',
       '10': '🇦🇺 Bạn Jack (Sydney, Úc) (150°Đ)',
       '11': 'Quần đảo Solomon (165°Đ)',
-      '12': 'New Zealand, Fiji (180° — Đón năm mới sớm nhất!)'
+      '12': '⬆️ LỚN NHẤT — New Zealand, Fiji (180° — Đón năm mới sớm nhất!)'
     };
 
     function renderTZRibbon() {
@@ -1493,18 +1641,24 @@
       for (let g = -12; g <= 12; g++) {
         const t = calcLocalTime(g);
         const isSel = g === selectedTZ;
-        const isVN = g === 7, isZero = g === 0;
-        const hasPlace = [-10, -9, -8, -7, -5, 0, 1, 7, 8, 9, 10].includes(g);
+        const isVN = g === 7, isZero = g === 0, isMin = g === -12, isMax = g === 12;
+        const hasPlace = [-10, -9, -8, -7, -5, -3, 0, 1, 2, 3, 7, 8, 9, 10].includes(g);
         const label = g === 0 ? '0' : (g > 0 ? `+${g}` : `−${Math.abs(g)}`);
         const deg = g === 0 ? '0°' : (Math.abs(g) === 12 ? '180°' : `${Math.abs(g * 15)}°${g > 0 ? 'Đ' : 'T'}`);
         let cls = 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200';
         if (isVN) cls = 'bg-rose-100 dark:bg-rose-900/50 border-rose-400 text-rose-800 dark:text-rose-200';
         else if (isZero) cls = 'bg-amber-100 dark:bg-amber-900/50 border-amber-400 text-amber-800 dark:text-amber-200';
+        else if (isMin || isMax) cls = 'bg-purple-100 dark:bg-purple-900/50 border-purple-400 text-purple-900 dark:text-purple-100';
         else if (hasPlace) cls = 'bg-sky-50 dark:bg-sky-900/40 border-sky-300 dark:border-sky-700 text-sky-900 dark:text-sky-200';
+
+        const specialTag = isMin ? '<div class="text-[8.5px] font-extrabold text-purple-700 dark:text-purple-200">NHỎ NHẤT</div>'
+                         : (isMax ? '<div class="text-[8.5px] font-extrabold text-purple-700 dark:text-purple-200">LỚN NHẤT</div>'
+                         : (isZero ? '<div class="text-[8.5px] font-extrabold text-amber-700 dark:text-amber-200">GỐC 0°</div>' : ''));
 
         html += `
           <button type="button" onclick="selectTZ(${g})"
-            class="tz-cell shrink-0 w-[68px] py-2 px-1 rounded-xl border text-center cursor-pointer ${cls} ${isSel ? 'ring-2 ring-indigo-500 scale-105 shadow-md' : ''}">
+            class="tz-cell shrink-0 w-[72px] py-2 px-1 rounded-xl border text-center cursor-pointer ${cls} ${isSel ? 'ring-2 ring-indigo-500 scale-105 shadow-md' : ''}">
+            ${specialTag}
             <div class="text-[10.5px] font-extrabold">GMT${label}</div>
             <div class="text-[9.5px] opacity-75 font-semibold">${deg}</div>
             <div class="text-xs font-extrabold mt-0.5">${t.text}</div>
@@ -1582,7 +1736,9 @@
       { q: '12. Lúc 20 giờ tối ở Hà Nội (GMT+7), ở Alaska (GMT−9) và Hawaii (GMT−10) đang là mấy giờ?', opts: ['Alaska 22h, Hawaii 23h', 'Alaska 4h sáng, Hawaii 3h sáng (đêm khuya!)', 'Alaska 12h trưa, Hawaii 11h trưa', 'Cả hai đều 8h sáng'], ans: 1, exp: 'Alaska (−9) muộn hơn VN 16 tiếng → 20 − 16 = 4h sáng. Hawaii (−10) muộn hơn VN 17 tiếng → 20 − 17 = 3h sáng!' },
       { q: '13. Lúc 19 giờ tối ở Hà Nội (GMT+7), ở chỗ anh Lì (Pháp) & anh Minh (Đức) (đều GMT+1) là mấy giờ?', opts: ['13 giờ trưa (1 giờ chiều)', '15 giờ chiều', '20 giờ tối', '1 giờ sáng'], ans: 0, exp: 'Pháp và Đức cùng GMT+1, muộn hơn VN 6 tiếng (1 − 7 = −6) → 19 − 6 = 13 giờ trưa!' },
       { q: '14. Trên Google Maps, công viên (màu xanh lá) và hồ nước (màu xanh dương) là loại kí hiệu nào?', opts: ['Kí hiệu điểm', 'Kí hiệu đường', 'Kí hiệu diện tích (vùng)', 'Tỉ lệ thước'], ans: 2, exp: 'Các mảng màu phủ kín bề mặt như công viên, hồ, biển là Kí hiệu diện tích (vùng) trong Bài 4 Chương 1.' },
-      { q: '15. Khi bấm dấu (+) phóng to trên Google Maps từ tỉ lệ 1 : 500.000 lên 1 : 10.000 thì sao?', opts: ['Tỉ lệ nhỏ đi và thấy ít chi tiết hơn', 'Tỉ lệ LỚN lên và thấy rõ từng con phố, tòa nhà, quán ăn', 'Tỉ lệ không đổi', 'Các con đường biến mất'], ans: 1, exp: 'Theo Bài 3 SGK: Mẫu số càng nhỏ (10.000 < 500.000) thì tỉ lệ bản đồ càng LỚN và thể hiện càng nhiều chi tiết!' }
+      { q: '15. Khi bấm dấu (+) phóng to trên Google Maps từ tỉ lệ 1 : 500.000 lên 1 : 10.000 thì sao?', opts: ['Tỉ lệ nhỏ đi và thấy ít chi tiết hơn', 'Tỉ lệ LỚN lên và thấy rõ từng con phố, tòa nhà, quán ăn', 'Tỉ lệ không đổi', 'Các con đường biến mất'], ans: 1, exp: 'Theo Bài 3 SGK: Mẫu số càng nhỏ (10.000 < 500.000) thì tỉ lệ bản đồ càng LỚN và thể hiện càng nhiều chi tiết!' },
+      { q: '16. Múi giờ mang dấu DƯƠNG (+) thuộc Bán cầu nào, còn múi giờ mang dấu ÂM (−) thuộc Bán cầu nào?', opts: ['Dấu (+) là Bán cầu Tây, dấu (−) là Bán cầu Đông', 'Dấu (+) là Bán cầu Đông, dấu (−) là Bán cầu Tây', 'Cả hai đều ở Bán cầu Bắc', 'Cả hai đều ở Bán cầu Nam'], ans: 1, exp: 'Bên phải đường 0° là Bán cầu Đông (đón Mặt Trời sớm hơn → dấu +); bên trái đường 0° là Bán cầu Tây (đón Mặt Trời muộn hơn → dấu −)!' },
+      { q: '17. Trong chuẩn 24 múi giờ trên Trái Đất, múi DƯƠNG lớn nhất và múi ÂM nhỏ nhất là bao nhiêu, chúng gặp nhau ở đâu?', opts: ['Lớn nhất +10, nhỏ nhất −10 tại Xích đạo', 'Lớn nhất +24, nhỏ nhất −24 tại Greenwich 0°', 'Lớn nhất GMT+12, nhỏ nhất GMT−12 và chạm lưng nhau tại Đường đổi ngày 180°', 'Lớn nhất +7, nhỏ nhất −7 tại Việt Nam'], ans: 2, exp: 'Múi dương lớn nhất là GMT+12 (Đông), múi âm nhỏ nhất là GMT−12 (Tây) — gặp nhau tại kinh tuyến 180° (chênh nhau đúng 24 giờ = 1 ngày)!' }
     ];
 
     let quizAnswers = {};
