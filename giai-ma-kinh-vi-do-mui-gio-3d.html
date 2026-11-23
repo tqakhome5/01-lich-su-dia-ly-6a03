@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quả Địa Cầu 3D: Kinh độ, Vĩ độ, 24 Múi giờ GMT &amp; Google Maps — Địa lí 6</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Be Vietnam Pro', system-ui, sans-serif; }
+    #globeCanvas { touch-action: none; cursor: grab; }
+    #globeCanvas:active { cursor: grabbing; }
+    .tz-cell { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .tz-cell:hover { transform: translateY(-2px); }
+    .friend-card.active { ring-width: 2px; }
+    .no-scrollbar::-webkit-scrollbar { height: 6px; }
+    .no-scrollbar::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.45); border-radius: 999px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased">
+
+  <!-- HERO HEADER -->
+  <header class="bg-gradient-to-br from-slate-900 via-indigo-950 to-sky-900 text-white shadow-xl">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs sm:text-sm font-bold transition">🏠 Trang chủ</a>
+          <a href="ban-do-dia-li-lop-6.html" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs sm:text-sm font-bold transition">← Bản đồ Địa lí 6</a>
+          <a href="on-tap-chuong-1-ban-do.html" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs sm:text-sm font-bold transition">🧭 Ôn tập Chương 1</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="speakFullPage()" data-tts-id="full" type="button" class="tts-btn px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs sm:text-sm font-bold shadow cursor-pointer transition">🔊 Nghe giảng toàn bộ</button>
+          <button id="themeToggle" type="button" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs font-bold cursor-pointer transition"><span id="themeIcon">🌙</span> <span id="themeLabel">Tối</span></button>
+        </div>
+      </div>
+
+      <span class="inline-block px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs font-extrabold mb-2">
+        🌍 MÔ PHỎNG 3D TRỰC QUAN • ĐỊA LÍ 6 (CHƯƠNG 1 &amp; MÚI GIỜ)
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+        Quả Địa Cầu 3D: Kinh độ, Vĩ độ, 4 Bán cầu, 24 Múi giờ GMT &amp; Bí mật Google Maps
+      </h1>
+      <p class="mt-2.5 text-sm sm:text-base text-sky-100 max-w-3xl leading-relaxed">
+        Xoay quả Địa Cầu 3D ngay trên màn hình để tìm xem bạn bè, anh em mình ở Nhật Bản, Singapore, Úc, Pháp, Đức, Mỹ đang ở đâu, mấy giờ rồi, và khám phá xem Google Maps dùng kiến thức Địa lí lớp 6 đỉnh cỡ nào nhé!
+      </p>
+
+      <!-- QUICK JUMP PILLS -->
+      <div class="mt-5 flex flex-wrap gap-2 text-xs font-bold">
+        <a href="#sec-3d" class="px-3 py-1.5 rounded-xl bg-sky-500/30 hover:bg-sky-500/50 border border-sky-300/30 transition">1. Quả Địa Cầu 3D &amp; Bạn bè</a>
+        <a href="#sec-concept" class="px-3 py-1.5 rounded-xl bg-indigo-500/30 hover:bg-indigo-500/50 border border-indigo-300/30 transition">2. Kinh/Vĩ độ &amp; 4 Bán cầu</a>
+        <a href="#sec-gmt" class="px-3 py-1.5 rounded-xl bg-amber-500/30 hover:bg-amber-500/50 border border-amber-300/30 transition">3. 24 Múi giờ GMT (-12 → +12)</a>
+        <a href="#sec-gmaps" class="px-3 py-1.5 rounded-xl bg-emerald-500/30 hover:bg-emerald-500/50 border border-emerald-300/30 transition">4. Google Maps &amp; Chương 1</a>
+        <a href="#sec-quiz" class="px-3 py-1.5 rounded-xl bg-rose-500/30 hover:bg-rose-500/50 border border-rose-300/30 transition">5. Kiểm tra 12 câu</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-10">
+
+    <!-- ==================== PHẦN 1: QUẢ ĐỊA CẦU 3D TƯƠNG TÁC ==================== -->
+    <section id="sec-3d" class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
+      <div class="p-5 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600 dark:text-sky-400">Phần 1 • Trải nghiệm trực quan 3D</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+            🌐 Quả Địa Cầu 3D &amp; Mạng lưới Bạn bè khắp Thế giới
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Dùng chuột (hoặc ngón tay) kéo để xoay Trái Đất 360°. Bấm vào tên từng người bên cạnh để quả cầu tự bay tới đúng chỗ họ đang sống!
+          </p>
+        </div>
+        <button onclick="speakSection(1)" data-tts-id="sec1" type="button" class="tts-btn px-3 py-1.5 rounded-full bg-sky-100 hover:bg-sky-200 dark:bg-sky-900/50 dark:hover:bg-sky-900 text-sky-800 dark:text-sky-200 text-xs font-bold cursor-pointer transition">
+          🔊 Nghe hướng dẫn 3D
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <!-- LEFT: 3D CANVAS & CONTROLS -->
+        <div class="lg:col-span-7 p-4 sm:p-6 bg-slate-950 text-white flex flex-col justify-between relative">
+          <!-- Layer toggles -->
+          <div class="flex flex-wrap items-center gap-1.5 mb-3 z-10">
+            <button type="button" id="btnModeNormal" onclick="setGlobeOverlay('none')" class="overlay-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-500 text-white cursor-pointer transition">🌍 Bình thường</button>
+            <button type="button" id="btnModeNS" onclick="setGlobeOverlay('ns')" class="overlay-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-200 cursor-pointer transition">⬆️⬇️ Nửa cầu Bắc / Nam</button>
+            <button type="button" id="btnModeEW" onclick="setGlobeOverlay('ew')" class="overlay-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-200 cursor-pointer transition">⬅️➡️ Bán cầu Đông / Tây</button>
+            <button type="button" id="btnModeTZ" onclick="setGlobeOverlay('tz')" class="overlay-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-200 cursor-pointer transition">🕒 24 Múi giờ GMT</button>
+            <button type="button" id="btnNightToggle" onclick="toggleNightLayer()" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/25 border border-amber-400/50 text-amber-200 cursor-pointer transition">☀️🌙 Ngày/Đêm: BẬT</button>
+            <button type="button" id="btnSpinToggle" onclick="toggleAutoSpin()" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-200 cursor-pointer transition">🔄 Tự xoay: TẮT</button>
+          </div>
+
+          <!-- Canvas wrapper -->
+          <div class="relative flex items-center justify-center my-1">
+            <canvas id="globeCanvas" width="560" height="460" class="w-full max-w-[540px] h-auto rounded-2xl"></canvas>
+            <!-- Legend overlay -->
+            <div id="globeLegend" class="absolute bottom-2 left-2 right-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] bg-slate-900/80 backdrop-blur-sm border border-white/10 rounded-xl px-3 py-1.5 text-slate-200 pointer-events-none">
+              <span class="inline-flex items-center gap-1"><span class="w-3 h-0.5 bg-rose-500 inline-block"></span> Xích đạo 0° (chia Bắc–Nam)</span>
+              <span class="inline-flex items-center gap-1"><span class="w-3 h-0.5 bg-amber-400 inline-block"></span> Kinh tuyến gốc 0° (chia Đông–Tây)</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span> Bạn bè &amp; Địa điểm</span>
+            </div>
+          </div>
+
+          <!-- Vietnam Time Slider -->
+          <div class="mt-3 p-3.5 rounded-2xl bg-slate-900/90 border border-white/10 space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="font-bold text-sky-300">🕒 Chỉnh giờ ở Hà Nội (Việt Nam • GMT+7):</span>
+              <div class="flex items-center gap-2">
+                <span id="vnTimeDisplay" class="px-2.5 py-0.5 rounded-lg bg-sky-500/25 border border-sky-400/40 font-extrabold text-sm text-white">12:00 trưa</span>
+                <button type="button" onclick="setNowVNTime()" class="px-2 py-0.5 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-bold cursor-pointer">Giờ thật lúc này</button>
+              </div>
+            </div>
+            <input id="vnHourSlider" type="range" min="0" max="23" step="1" value="12" oninput="onVNTimeChange(this.value)"
+              class="w-full accent-sky-400 cursor-pointer" />
+            <div class="flex justify-between text-[10px] text-slate-400 font-semibold">
+              <span>00:00 (Nửa đêm)</span>
+              <span>06:00 (Sáng)</span>
+              <span>12:00 (Trưa)</span>
+              <span>18:00 (Chiều tối)</span>
+              <span>23:00 (Khuya)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: FRIEND SELECTOR & LIVE DETAIL CARD -->
+        <div class="lg:col-span-5 p-4 sm:p-6 flex flex-col justify-between gap-4 bg-slate-50/70 dark:bg-slate-900/60">
+          <div>
+            <div class="flex items-center justify-between mb-2.5">
+              <h3 class="text-sm font-extrabold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                📍 Bấm chọn để bay tới trên quả cầu 3D:
+              </h3>
+              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400">8 địa điểm</span>
+            </div>
+            <div id="friendsGrid" class="grid grid-cols-2 gap-2"></div>
+          </div>
+
+          <!-- Selected Friend Detail Card -->
+          <div id="selectedFriendCard" class="rounded-2xl bg-white dark:bg-slate-800/90 border-2 border-sky-400/70 dark:border-sky-500/60 p-4 shadow-md space-y-3">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN 2: KINH ĐỘ, VĨ ĐỘ & 4 BÁN CẦU ==================== -->
+    <section id="sec-concept" class="space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Phần 2 • Mẹo nhớ nhanh 10 giây</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+            🧭 Kinh độ, Vĩ độ &amp; 4 Bán cầu — Nhìn 1 lần nhớ suốt đời!
+          </h2>
+        </div>
+        <button onclick="speakSection(2)" data-tts-id="sec2" type="button" class="tts-btn px-3 py-1.5 rounded-full bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-200 text-xs font-bold cursor-pointer transition">
+          🔊 Nghe mẹo nhớ
+        </button>
+      </div>
+
+      <!-- 2x2 Easy Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Vĩ tuyến / Vĩ độ / Bắc Nam -->
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-rose-200 dark:border-rose-900/60 p-5 shadow-sm space-y-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/50 flex items-center justify-center text-xl">🍊</span>
+            <div>
+              <h3 class="font-extrabold text-base sm:text-lg text-rose-700 dark:text-rose-300">Vĩ tuyến &amp; Vĩ độ → Chia BẮC / NAM</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Đường vòng tròn nằm NGANG (tưởng tượng như chiếc thắt lưng)</p>
+            </div>
+          </div>
+          <ul class="text-sm space-y-2 text-slate-700 dark:text-slate-300 leading-relaxed">
+            <li>• <strong>Vĩ tuyến gốc = Xích đạo (0°):</strong> Đường vòng tròn to nhất ở chính giữa Trái Đất.</li>
+            <li>• <strong>Nửa cầu Bắc (Bắc bán cầu):</strong> Nằm <em>phía trên</em> Xích đạo (ghi chữ <strong>B</strong>, Google Maps ghi dấu <strong>+</strong>). Ví dụ: Hà Nội <code>21°B</code>, Hokkaido <code>43°B</code>, New York <code>40,7°B</code>.</li>
+            <li>• <strong>Nửa cầu Nam (Nam bán cầu):</strong> Nằm <em>phía dưới</em> Xích đạo (ghi chữ <strong>N</strong>, Google Maps ghi dấu <strong>−</strong>). Ví dụ: Bạn Jack ở Sydney <code>33,9°N</code> (Google Maps là <code>-33.87</code>)!</li>
+          </ul>
+          <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200/80 dark:border-rose-800/60 text-xs font-bold text-rose-800 dark:text-rose-200">
+            💡 Mẹo nhớ: "VĨ = Vòng ngang". Càng gần 0° (như anh Bi ở Singapore 1,35°B) thì càng nóng quanh năm. Càng lên gần 90° thì càng lạnh có tuyết!
+          </div>
+        </div>
+
+        <!-- Kinh tuyến / Kinh độ / Đông Tây -->
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-amber-200 dark:border-amber-900/60 p-5 shadow-sm space-y-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center text-xl">🧭</span>
+            <div>
+              <h3 class="font-extrabold text-base sm:text-lg text-amber-700 dark:text-amber-300">Kinh tuyến &amp; Kinh độ → Chia ĐÔNG / TÂY</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Đường nối DỌC từ Cực Bắc xuống Cực Nam (như múi cam bổ dọc)</p>
+            </div>
+          </div>
+          <ul class="text-sm space-y-2 text-slate-700 dark:text-slate-300 leading-relaxed">
+            <li>• <strong>Kinh tuyến gốc (0°):</strong> Đi qua Đài thiên văn <strong>Greenwich</strong> ở thủ đô Luân Đôn (nước Anh).</li>
+            <li>• <strong>Bán cầu Đông:</strong> Nằm <em>bên phải</em> kinh tuyến 0° (từ 0° → 180°Đ, Google Maps ghi dấu <strong>+</strong>). Việt Nam, Singapore, Nhật, Úc, Pháp, Đức đều ở <strong>Bán cầu Đông</strong>!</li>
+            <li>• <strong>Bán cầu Tây:</strong> Nằm <em>bên trái</em> kinh tuyến 0° (từ 0° → 180°T, Google Maps ghi dấu <strong>−</strong>). Bạn ở New York (Mỹ) là <code>74°T</code> (Google Maps là <code>-74.01</code>)!</li>
+          </ul>
+          <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200/80 dark:border-amber-800/60 text-xs font-bold text-amber-800 dark:text-amber-200">
+            💡 Mẹo nhớ: "KINH = Kẻ dọc". Kinh độ quyết định MÚI GIỜ! Anh Lì ở Pháp (2,35°Đ) rất gần đường 0° nên giờ gần bằng giờ gốc GMT+0.
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL COMPARISON TABLE OF ALL 8 FRIENDS / PLACES -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+              📋 Bảng Tra Cứu Tọa Độ &amp; Bán Cầu của Nhà mình và Các Bạn/Anh Em
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Bấm nút <strong>"Xem 3D"</strong> ở bất kỳ hàng nào để quay ngay tới vị trí đó trên quả Địa Cầu, hoặc bấm <strong>"Google Maps"</strong> để xem ảnh vệ tinh thật!
+            </p>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 font-extrabold">
+                <th class="py-3 px-3.5">Người quen &amp; Địa điểm</th>
+                <th class="py-3 px-3">Vĩ độ (Bắc/Nam)</th>
+                <th class="py-3 px-3">Kinh độ (Đông/Tây)</th>
+                <th class="py-3 px-3">Số trên Google Maps</th>
+                <th class="py-3 px-3">Bán cầu</th>
+                <th class="py-3 px-3">Múi giờ GMT</th>
+                <th class="py-3 px-3">So với VN</th>
+                <th class="py-3 px-3 text-center">Mở nhanh</th>
+              </tr>
+            </thead>
+            <tbody id="friendsTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN 3: 24 MÚI GIỜ GMT (-12 ĐẾN +12) ==================== -->
+    <section id="sec-gmt" class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg p-5 sm:p-7 space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">Phần 3 • Giải mã 24 Múi giờ</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+            ⏰ Thước 24 Múi Giờ Thế Giới: từ GMT−12 → GMT 0 → GMT+12
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Trái Đất có vòng tròn 360° và tự quay 1 vòng hết 24 giờ ⇒ <strong>360° ÷ 24 = 15° kinh tuyến</strong> cho mỗi múi giờ! Bấm vào bất kỳ múi giờ nào bên dưới để kiểm tra giờ ngay.
+          </p>
+        </div>
+        <button onclick="speakSection(3)" data-tts-id="sec3" type="button" class="tts-btn px-3 py-1.5 rounded-full bg-amber-100 hover:bg-amber-200 dark:bg-amber-900/50 text-amber-800 dark:text-amber-200 text-xs font-bold cursor-pointer transition">
+          🔊 Nghe giải thích múi giờ
+        </button>
+      </div>
+
+      <!-- Formula Strip -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm">
+        <div class="p-3.5 rounded-2xl bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800">
+          <div class="font-extrabold text-sky-700 dark:text-sky-300 mb-1">1. Mốc số 0 (GMT 0)</div>
+          <p class="text-slate-600 dark:text-slate-300">Lấy kinh tuyến gốc 0° ở <strong>Luân Đôn (Anh)</strong> làm chuẩn quốc tế gọi là <strong>GMT</strong> (Greenwich Mean Time).</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800">
+          <div class="font-extrabold text-emerald-700 dark:text-emerald-300 mb-1">2. Phía Đông (+) sớm hơn, Phía Tây (−) muộn hơn</div>
+          <p class="text-slate-600 dark:text-slate-300">Trái Đất quay từ <strong>Tây sang Đông</strong> nên phía Đông đón Mặt Trời mọc trước! Càng sang phải (Đông) càng cộng (+), càng sang trái (Tây) càng trừ (−).</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800">
+          <div class="font-extrabold text-amber-700 dark:text-amber-300 mb-1">3. Công thức đổi giờ từ Việt Nam (GMT+7)</div>
+          <p class="text-slate-600 dark:text-slate-300 font-bold">Giờ nơi đó = Giờ VN + (Múi giờ nơi đó − 7)</p>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">VD: New York (GMT−5) → lấy −5 − 7 = <strong>−12 giờ</strong>!</p>
+        </div>
+      </div>
+
+      <!-- Interactive 25-zone Ribbon (-12 to +12) -->
+      <div>
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2 text-xs font-bold">
+          <span class="text-indigo-600 dark:text-indigo-400">← Bán cầu Tây (GMT−12 đến GMT−1: Giờ muộn hơn GMT 0)</span>
+          <span class="text-emerald-600 dark:text-emerald-400">Bán cầu Đông (GMT+1 đến GMT+12: Giờ sớm hơn GMT 0) →</span>
+        </div>
+        <div id="tzRibbon" class="flex gap-1.5 overflow-x-auto pb-2 no-scrollbar">
+          <!-- Populated by JS (-12 .. 0 .. +12) -->
+        </div>
+      </div>
+
+      <!-- Inspector box for clicked GMT zone -->
+      <div id="tzInspector" class="rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 sm:p-5">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Note on DST -->
+      <div class="p-3.5 rounded-2xl bg-violet-50 dark:bg-violet-950/40 border border-violet-200 dark:border-violet-800/70 text-xs sm:text-sm text-violet-900 dark:text-violet-200 leading-relaxed">
+        <strong>💡 Mách nhỏ khỏi bất ngờ (Giờ mùa hè — DST):</strong> Ở Việt Nam, Singapore và Nhật Bản giờ <strong>không đổi quanh năm</strong>. Nhưng ở <strong>Pháp, Đức, Mỹ (New York)</strong> (mùa hè tháng 3–11) và <strong>Úc (Sydney)</strong> (mùa hè tháng 10–4), người ta chỉnh đồng hồ sớm lên <strong>+1 tiếng</strong> để tận dụng ánh sáng Mặt Trời ban ngày. Vì thế lúc con xem đồng hồ thực tế trên điện thoại có thể lệch 1 tiếng so với múi giờ chuẩn trên sách giáo khoa nhé!
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN 4: GOOGLE MAPS & KIẾN THỨC CHƯƠNG 1 ==================== -->
+    <section id="sec-gmaps" class="space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Phần 4 • Ứng dụng thực tế</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+            📱 Google Maps hoạt động thế nào &amp; Liên quan gì đến Chương 1 Địa lí 6?
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Mỗi lần mở Google Maps gọi xe, tìm đường đi học hay xem nhà bạn Jack ở Úc, thực chất chiếc điện thoại đang chạy <strong>y hệt 5 bài học Chương 1 Địa lí 6</strong> đấy!
+          </p>
+        </div>
+        <button onclick="speakSection(4)" data-tts-id="sec4" type="button" class="tts-btn px-3 py-1.5 rounded-full bg-emerald-100 hover:bg-emerald-200 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 text-xs font-bold cursor-pointer transition">
+          🔊 Nghe giải thích Google Maps
+        </button>
+      </div>
+
+      <!-- 4 Steps of how Google Maps works -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+          <div class="text-2xl mb-1.5">🛰️</div>
+          <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Bước 1: Vệ tinh GPS tìm Tọa độ</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+            Hơn 24 vệ tinh bay quanh Trái Đất gửi tín hiệu xuống điện thoại để tính ra chính xác <strong>Vĩ độ &amp; Kinh độ</strong> (chấm xanh nhấp nháy của mình).
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+          <div class="text-2xl mb-1.5">🗺️</div>
+          <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Bước 2: "Trải phẳng" Quả cầu 3D</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+            Google Maps dùng <strong>Phép chiếu hình trụ (Web Mercator)</strong> để trải mặt cong Trái Đất thành ô vuông phẳng trên màn hình — y hệt Bài 2 SGK!
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+          <div class="text-2xl mb-1.5">🧱</div>
+          <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Bước 3: Ghép 3 Lớp Kí hiệu</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+            Máy tính xếp chồng 3 lớp: <strong>Vùng</strong> (công viên xanh, hồ nước), <strong>Đường</strong> (đường phố, cao tốc, kẹt xe), và <strong>Điểm / Tòa nhà</strong> (trường học, quán ăn).
+          </p>
+        </div>
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
+          <div class="text-2xl mb-1.5">🚗</div>
+          <h3 class="font-extrabold text-sm text-slate-900 dark:text-white">Bước 4: Tính đường &amp; Đổi Tỉ lệ</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+            Dùng <strong>Tỉ lệ bản đồ</strong> khi zoom to/nhỏ, đo tốc độ xe để báo tắc đường và tìm lộ trình ngắn nhất, nhanh nhất (y hệt Bài 3 &amp; Bài 4 SGK!).
+          </p>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE MINI GOOGLE MAPS LAYER & ZOOM SIMULATOR -->
+      <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md p-5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+              🎛️ Thử làm Kỹ sư Google Maps: Bật/tắt các Lớp Kí hiệu &amp; Zoom Tỉ lệ!
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              Thử tích bật/tắt từng lớp (Vùng, Đường, Tòa nhà/Điểm, Lưới tọa độ) và kéo thanh Zoom để xem bản đồ thay đổi thế nào nhé.
+            </p>
+          </div>
+          <span id="gmapsScaleBadge" class="px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-200 text-xs font-extrabold">
+            Tỉ lệ 1 : 10.000 (Rất chi tiết)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+          <!-- Interactive SVG Map -->
+          <div class="lg:col-span-7">
+            <div class="rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 bg-[#f1f5f9] dark:bg-slate-800 relative">
+              <svg id="miniGmapsSvg" viewBox="0 0 500 300" class="w-full h-auto block">
+                <!-- Base background -->
+                <rect width="500" height="300" fill="#eef2f6" />
+
+                <!-- LAYER 1: VÙNG (Diện tích: Hồ nước, Công viên, Khu dân cư) -->
+                <g id="layerArea">
+                  <!-- Khu dân cư -->
+                  <rect x="20" y="20" width="160" height="120" rx="14" fill="#e2e8f0" />
+                  <rect x="220" y="165" width="255" height="115" rx="14" fill="#e2e8f0" />
+                  <!-- Công viên xanh -->
+                  <path d="M 215 25 Q 320 15 360 80 Q 345 140 240 130 Q 195 95 215 25 Z" fill="#bbf7d0" stroke="#4ade80" stroke-width="1.5" />
+                  <text x="275" y="78" font-size="11" font-weight="700" fill="#166534" text-anchor="middle">🌳 Công viên (Kí hiệu VÙNG)</text>
+                  <!-- Hồ nước -->
+                  <ellipse cx="105" cy="225" rx="75" ry="48" fill="#bae6fd" stroke="#38bdf8" stroke-width="1.5" />
+                  <text x="105" y="229" font-size="11" font-weight="700" fill="#0369a1" text-anchor="middle">💧 Hồ nước (VÙNG)</text>
+                  <!-- Sân vận động / Trường -->
+                  <rect x="385" y="28" width="90" height="95" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5" />
+                  <text x="430" y="78" font-size="10" font-weight="700" fill="#b45309" text-anchor="middle">🏫 Khu Trường</text>
+                </g>
+
+                <!-- LAYER 2: ĐƯỜNG (Kí hiệu đường + Tuyến chỉ đường xanh) -->
+                <g id="layerRoad">
+                  <!-- Đường phố chính -->
+                  <path d="M 0 150 L 500 150" stroke="#ffffff" stroke-width="16" />
+                  <path d="M 0 150 L 500 150" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="6 4" />
+                  <path d="M 195 0 L 195 300" stroke="#ffffff" stroke-width="14" />
+                  <path d="M 372 0 L 372 300" stroke="#ffffff" stroke-width="12" />
+                  <!-- Đoạn đường tắc màu đỏ -->
+                  <path d="M 195 150 L 310 150" stroke="#ef4444" stroke-width="5" stroke-linecap="round" />
+                  <text x="252" y="142" font-size="9.5" font-weight="800" fill="#dc2626" text-anchor="middle">⚠️ Đang đông xe</text>
+                  <!-- Đường dẫn xanh Google Maps -->
+                  <path d="M 90 95 L 90 150 L 195 150 L 195 215 L 372 215 L 372 105 L 415 105" fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 4" />
+                  <text x="285" y="232" font-size="10" font-weight="800" fill="#1d4ed8" text-anchor="middle">🛣️ Đường vòng tránh tắc (1,4 km • 5 phút)</text>
+                </g>
+
+                <!-- LAYER 3: TÒA NHÀ & ĐIỂM POI (Kí hiệu điểm & khối 3D) -->
+                <g id="layerBuilding">
+                  <!-- Nhà mình (3D block) -->
+                  <g transform="translate(72,62)">
+                    <polygon points="0,12 18,4 36,12 18,20" fill="#38bdf8" />
+                    <polygon points="0,12 18,20 18,36 0,28" fill="#0284c7" />
+                    <polygon points="36,12 18,20 18,36 36,28" fill="#0369a1" />
+                    <circle cx="18" cy="34" r="6" fill="#2563eb" stroke="#fff" stroke-width="2" />
+                  </g>
+                  <text x="90" y="55" font-size="11" font-weight="800" fill="#0f172a" text-anchor="middle">🏠 Nhà mình</text>
+
+                  <!-- Tòa nhà chung cư -->
+                  <g transform="translate(235,175)">
+                    <rect x="0" y="8" width="26" height="24" rx="2" fill="#94a3b8" />
+                    <rect x="4" y="0" width="26" height="24" rx="2" fill="#cbd5e1" stroke="#64748b" stroke-width="1" />
+                  </g>
+                  <text x="250" y="213" font-size="9.5" font-weight="700" fill="#334155" text-anchor="middle">🏢 Tòa nhà</text>
+
+                  <!-- Quán ăn / Hiệu sách -->
+                  <circle cx="330" cy="185" r="9" fill="#f97316" stroke="#fff" stroke-width="2" />
+                  <text x="330" y="189" font-size="10" text-anchor="middle" fill="#fff">🍜</text>
+                  <text x="330" y="205" font-size="9.5" font-weight="700" fill="#9a3412" text-anchor="middle">Quán phở</text>
+
+                  <!-- Đích đến: Trường 6A03 -->
+                  <circle cx="428" cy="105" r="11" fill="#e11d48" stroke="#fff" stroke-width="2.5" />
+                  <text x="428" y="109" font-size="11" text-anchor="middle" fill="#fff">📍</text>
+                  <text x="428" y="132" font-size="10.5" font-weight="800" fill="#be123c" text-anchor="middle">Trường học</text>
+                </g>
+
+                <!-- LAYER 4: LƯỚI TỌA ĐỘ & LA BÀN BẮC -->
+                <g id="layerGrid">
+                  <line x1="125" y1="0" x2="125" y2="300" stroke="#6366f1" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.6" />
+                  <line x1="250" y1="0" x2="250" y2="300" stroke="#6366f1" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.6" />
+                  <line x1="375" y1="0" x2="375" y2="300" stroke="#6366f1" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.6" />
+                  <line x1="0" y1="100" x2="500" y2="100" stroke="#6366f1" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.6" />
+                  <line x1="0" y1="200" x2="500" y2="200" stroke="#6366f1" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.6" />
+                  <text x="6" y="96" font-size="9" font-weight="700" fill="#4f46e5">21,030°B</text>
+                  <text x="6" y="196" font-size="9" font-weight="700" fill="#4f46e5">21,025°B</text>
+                  <text x="128" y="12" font-size="9" font-weight="700" fill="#4f46e5">105,84°Đ</text>
+                  <text x="253" y="12" font-size="9" font-weight="700" fill="#4f46e5">105,85°Đ</text>
+                  <!-- Mũi tên Bắc -->
+                  <g transform="translate(462,258)">
+                    <circle cx="0" cy="0" r="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+                    <polygon points="0,-13 5,2 0,-1 -5,2" fill="#dc2626" />
+                    <polygon points="0,13 5,2 0,5 -5,2" fill="#94a3b8" />
+                    <text x="0" y="-19" font-size="9" font-weight="800" fill="#dc2626" text-anchor="middle">B</text>
+                  </g>
+                </g>
+
+                <!-- Thước tỉ lệ ở góc dưới trái -->
+                <g transform="translate(16,272)">
+                  <rect x="0" y="0" width="120" height="20" rx="5" fill="rgba(255,255,255,0.9)" stroke="#cbd5e1" />
+                  <line x1="10" y1="14" x2="65" y2="14" stroke="#0f172a" stroke-width="2" />
+                  <line x1="10" y1="10" x2="10" y2="15" stroke="#0f172a" stroke-width="2" />
+                  <line x1="65" y1="10" x2="65" y2="15" stroke="#0f172a" stroke-width="2" />
+                  <text id="svgScaleText" x="72" y="15" font-size="10" font-weight="800" fill="#0f172a">200 m</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Controls for Layers & Zoom -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="space-y-2">
+              <div class="text-xs font-extrabold uppercase tracking-wide text-slate-600 dark:text-slate-300">Bật / Tắt các lớp bản đồ (Layers):</div>
+              <label class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 cursor-pointer text-xs sm:text-sm font-semibold">
+                <span>🏞️ Lớp 1: Vùng (Công viên, hồ, khu dân cư)</span>
+                <input type="checkbox" checked onchange="toggleMapLayer('layerArea', this.checked)" class="w-4 h-4 accent-emerald-600" />
+              </label>
+              <label class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 cursor-pointer text-xs sm:text-sm font-semibold">
+                <span>🛣️ Lớp 2: Đường (Phố, kẹt xe, lộ trình)</span>
+                <input type="checkbox" checked onchange="toggleMapLayer('layerRoad', this.checked)" class="w-4 h-4 accent-blue-600" />
+              </label>
+              <label class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 cursor-pointer text-xs sm:text-sm font-semibold">
+                <span>🏢 Lớp 3: Tòa nhà &amp; Điểm (Nhà, trường, quán)</span>
+                <input type="checkbox" checked onchange="toggleMapLayer('layerBuilding', this.checked)" class="w-4 h-4 accent-rose-600" />
+              </label>
+              <label class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 cursor-pointer text-xs sm:text-sm font-semibold">
+                <span>🧭 Lớp 4: Lưới Kinh–Vĩ tuyến &amp; La bàn Bắc</span>
+                <input type="checkbox" checked onchange="toggleMapLayer('layerGrid', this.checked)" class="w-4 h-4 accent-indigo-600" />
+              </label>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 space-y-2">
+              <div class="flex items-center justify-between text-xs font-extrabold text-emerald-800 dark:text-emerald-200">
+                <span>🔍 Kéo nút Zoom (Giống nút + / − trên Google Maps):</span>
+                <span id="zoomLevelLabel">Mức 3 / 4</span>
+              </div>
+              <input type="range" min="1" max="4" value="3" oninput="updateGmapsZoom(this.value)" class="w-full accent-emerald-600 cursor-pointer" />
+              <p id="zoomExplain" class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <strong>Tỉ lệ lớn (1 : 10.000):</strong> Mẫu số nhỏ → phóng to từng con phố, công viên, tòa nhà. Đúng như Bài 3 SGK: <em>"Bản đồ tỉ lệ càng lớn thì thể hiện càng nhiều chi tiết!"</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BIG DETAILED MAPPING TABLE: CHƯƠNG 1 ĐỊA LÍ 6 <-> GOOGLE MAPS & ĐỜI SỐNG -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div class="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800">
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white">
+            📊 Bảng Đối Chiếu Đầy Đủ: Kiến Thức Chương 1 Địa Lí 6 ↔ Ứng Dụng Trên Google Maps &amp; Đời Sống
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            Học Địa lí không phải để học thuộc lòng cho vui, mà chính là nền tảng để tạo ra Google Maps, xe công nghệ, máy bay và thành phố thông minh!
+          </p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-200 font-extrabold">
+                <th class="py-3 px-3.5 w-1/4">Kiến thức Chương 1 (SGK Địa lí 6)</th>
+                <th class="py-3 px-3.5 w-1/3">Trên Google Maps thể hiện là gì?</th>
+                <th class="py-3 px-3.5">Ứng dụng thực tế ngoài đời sống</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">1. Kinh độ, Vĩ độ &amp; Tọa độ địa lí<br/><span class="text-[11px] font-normal text-slate-500">(Bài 1 • tr. 102–103)</span></td>
+                <td class="py-3 px-3.5">Dãy 2 con số khi bấm giữ một điểm, VD: <code>21.0285, 105.8542</code> (số đầu là Vĩ độ B/N, số sau là Kinh độ Đ/T) + chấm tròn xanh GPS.</td>
+                <td class="py-3 px-3.5">Gọi Grab/Be đón đúng cổng nhà, gửi vị trí cứu hộ khi lạc trong rừng/ngoài biển, máy bay &amp; tàu thủy định vị chính xác từng mét.</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">2. Bản đồ &amp; Lưới kinh vĩ tuyến (Phép chiếu)<br/><span class="text-[11px] font-normal text-slate-500">(Bài 2 • tr. 104–105)</span></td>
+                <td class="py-3 px-3.5">Cách Google Maps "trải phẳng" quả cầu 3D thành bản đồ 2D bằng phép chiếu hình trụ (và chế độ <em>Quả địa cầu</em> khi thu nhỏ hết cỡ).</td>
+                <td class="py-3 px-3.5">Giúp bản đồ hiển thị rõ góc rẽ vuông góc ở ngã tư để tài xế không bị nhầm đường, đồng thời vẫn xem được toàn cầu.</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">3. Phương hướng (8 hướng chính)<br/><span class="text-[11px] font-normal text-slate-500">(Bài 2 • tr. 105)</span></td>
+                <td class="py-3 px-3.5">Biểu tượng <strong>La bàn mũi tên đỏ chỉ hướng Bắc</strong> + chùm sáng xanh xoay theo hướng mình đang quay mặt điện thoại.</td>
+                <td class="py-3 px-3.5">Biết ngay nên rẽ trái hay rẽ phải, đi về hướng Bắc hay hướng Nam mà không bị đi ngược chiều khi mới ra khỏi ngõ.</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">4. Tỉ lệ bản đồ &amp; Tính khoảng cách<br/><span class="text-[11px] font-normal text-slate-500">(Bài 3 • tr. 106–107)</span></td>
+                <td class="py-3 px-3.5"><strong>Thước tỉ lệ</strong> ở góc dưới màn hình tự đổi (<code>50 m → 200 m → 5 km → 500 km</code>) mỗi khi mình phóng to/thu nhỏ, và công cụ <em>Đo khoảng cách</em>.</td>
+                <td class="py-3 px-3.5">Tự động tính quãng đường bao nhiêu km, dự đoán hết bao nhiêu phút đi bộ, xe máy hay ô tô và tính tiền cước giao hàng.</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">5. Kí hiệu ĐIỂM (Tòa nhà &amp; Địa điểm)<br/><span class="text-[11px] font-normal text-slate-500">(Bài 4 • tr. 108)</span></td>
+                <td class="py-3 px-3.5">Các ghim biểu tượng (POI) và mô hình <strong>tòa nhà 3D</strong>: 🏫 Trường học, 🏥 Bệnh viện, ⛽ Cây xăng, 🍜 Quán ăn, ✈️ Sân bay, 🏨 Khách sạn.</td>
+                <td class="py-3 px-3.5">Tìm nhanh cây xăng gần nhất, bệnh viện gần nhất, xem giờ mở cửa và đánh giá của hàng triệu địa điểm trên thế giới.</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">6. Kí hiệu ĐƯỜNG (Giao thông &amp; Ranh giới)<br/><span class="text-[11px] font-normal text-slate-500">(Bài 4 • tr. 108)</span></td>
+                <td class="py-3 px-3.5">Đường cao tốc (vàng/cam), đường phố (trắng), đường sắt (nét gạch), biên giới quốc gia (nét đứt), và <strong>màu kẹt xe</strong> (xanh = thoáng, đỏ = tắc).</td>
+                <td class="py-3 px-3.5">Giúp tài xế tránh đường tắc, tránh đường cấm ô tô/đường một chiều, lập lộ trình xe buýt và tàu điện.</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">7. Kí hiệu DIỆN TÍCH (Các vùng)<br/><span class="text-[11px] font-normal text-slate-500">(Bài 4 • tr. 108)</span></td>
+                <td class="py-3 px-3.5">Các mảng màu phủ kín bề mặt: <strong>Xanh lá</strong> (công viên, rừng), <strong>Xanh dương</strong> (sông, hồ, biển), <strong>Vàng nhạt</strong> (khu mua sắm), <strong>Xám</strong> (khu dân cư, tòa nhà).</td>
+                <td class="py-3 px-3.5">Nhìn thoáng qua là biết khu vực nào có nhiều cây xanh, gần hồ, đâu là khu dân cư đông đúc hay vùng núi cao (chế độ Địa hình).</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 font-bold text-slate-900 dark:text-white">8. Tìm đường đi &amp; Lược đồ trí nhớ<br/><span class="text-[11px] font-normal text-slate-500">(Bài 4 &amp; Bài 5 • tr. 111–114)</span></td>
+                <td class="py-3 px-3.5">Tính năng <strong>Chỉ đường (Directions)</strong> gợi ý 2–3 cung đường ngắn/nhanh nhất + chế độ <strong>Street View</strong> (xem ảnh thực tế 360° để nhớ cột mốc).</td>
+                <td class="py-3 px-3.5">Giúp du khách tự đi du lịch khắp thế giới không sợ lạc, còn mình tự hình dung được đường từ nhà tới trường và các mốc quen thuộc.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PHẦN 5: PHÒNG KIỂM TRA 12 CÂU ==================== -->
+    <section id="sec-quiz" class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg p-5 sm:p-7 space-y-5">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-rose-600 dark:text-rose-400">Phần 5 • Tự kiểm tra &amp; Thực hành</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
+            🎯 Thử thách 12 Câu Hỏi Thực Tế (Cùng bạn bè khắp 5 châu!)
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Thử trả lời xem mình đã nhớ chắc Bán cầu Đông/Tây, Bắc/Nam, 24 Múi giờ GMT và ứng dụng Google Maps chưa nhé!
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="quizScoreBadge" class="px-3.5 py-1.5 rounded-full bg-rose-100 dark:bg-rose-900/50 text-rose-800 dark:text-rose-200 text-xs sm:text-sm font-extrabold">
+            Điểm: 0 / 12
+          </span>
+          <button type="button" onclick="resetQuiz()" class="px-3 py-1.5 rounded-full bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold cursor-pointer transition">
+            🔄 Làm lại
+          </button>
+        </div>
+      </div>
+
+      <div id="quizContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+    Dự án học tập lớp 6A03 • Lịch sử &amp; Địa lí 6 (Kết nối tri thức với cuộc sống) • <a href="index.html" class="text-sky-600 dark:text-sky-400 font-bold hover:underline">Về Trang chủ</a>
+  </footer>
+
+  <script src="assets/common.js"></script>
+  <script>
+    // ==================== 1. DỮ LIỆU ĐỊA ĐIỂM & BẠN BÈ ====================
+    const FRIENDS = [
+      {
+        id: 'hanoi',
+        flag: '🇻🇳',
+        shortName: 'Nhà mình (Hà Nội)',
+        person: 'Nhà mình — Hà Nội, Việt Nam',
+        city: 'Hà Nội, Việt Nam',
+        lat: 21.03,
+        lon: 105.85,
+        gmt: 7,
+        dstNote: 'Giữ nguyên GMT+7 quanh năm',
+        color: '#f43f5e',
+        fact: 'Mốc so sánh của chúng ta! Hà Nội nằm ở Bắc bán cầu và Đông bán cầu. Cột cờ Hà Nội có tọa độ 21°01\'57"B, 105°50\'23"Đ (ngay trong Bài 1 SGK!).'
+      },
+      {
+        id: 'hokkaido',
+        flag: '🇯🇵',
+        shortName: 'Minh (Hokkaido)',
+        person: 'Bạn Minh — Hokkaido, Nhật Bản',
+        city: 'Sapporo, đảo Hokkaido, Nhật Bản',
+        lat: 43.06,
+        lon: 141.35,
+        gmt: 9,
+        dstNote: 'Giữ nguyên GMT+9 quanh năm',
+        color: '#38bdf8',
+        fact: 'Hokkaido nằm tít phía Bắc nước Nhật (43°B) nên mùa đông tuyết rơi dày! Vì nằm xa về phía Đông (141°Đ) nên bạn Minh đón Mặt Trời sớm hơn Việt Nam 2 tiếng.'
+      },
+      {
+        id: 'singapore',
+        flag: '🇸🇬',
+        shortName: 'Anh Bi (Singapore)',
+        person: 'Anh Minh (Anh Bi) — Singapore',
+        city: 'Singapore',
+        lat: 1.35,
+        lon: 103.82,
+        gmt: 8,
+        dstNote: 'Giữ nguyên GMT+8 quanh năm',
+        color: '#fbbf24',
+        fact: 'Điểm siêu đặc biệt: Singapore nằm sát rạt đường Xích đạo (chỉ cách 1,35° về phía Bắc)! Nên ở chỗ anh Bi nóng ẩm quanh năm, không có mùa đông lạnh như Hà Nội.'
+      },
+      {
+        id: 'sydney',
+        flag: '🇦🇺',
+        shortName: 'Jack (Sydney, Úc)',
+        person: 'Bạn Jack — Sydney, Úc',
+        city: 'Sydney, Ô-xtrây-li-a (Úc)',
+        lat: -33.87,
+        lon: 151.21,
+        gmt: 10,
+        dstNote: 'Chuẩn GMT+10 (Mùa hè Úc tháng 10–4 là GMT+11)',
+        color: '#34d399',
+        fact: 'Bạn Jack là người DUY NHẤT trong nhóm sống ở NAM BÁN CẦU (33,87°N — dưới Xích đạo)! Nên khi Việt Nam đang mặc áo ấm đón Giáng sinh mùa đông thì bạn Jack đang đi tắm biển mùa hè!'
+      },
+      {
+        id: 'france',
+        flag: '🇫🇷',
+        shortName: 'Anh Lì (Pháp)',
+        person: 'Anh Lì — Paris, Pháp',
+        city: 'Paris, Cộng hòa Pháp',
+        lat: 48.86,
+        lon: 2.35,
+        gmt: 1,
+        dstNote: 'Chuẩn GMT+1 (Mùa hè tháng 3–10 là GMT+2)',
+        color: '#a78bfa',
+        fact: 'Paris nằm ngay sát Kinh tuyến gốc 0° (chỉ nhích sang Đông 2,35°) nên Pháp thuộc Bán cầu Đông và dùng múi giờ GMT+1 — chậm hơn Hà Nội 6 tiếng!'
+      },
+      {
+        id: 'germany',
+        flag: '🇩🇪',
+        shortName: 'Anh Minh (Đức)',
+        person: 'Anh Minh — Berlin, Đức',
+        city: 'Berlin, Cộng hòa Liên bang Đức',
+        lat: 52.52,
+        lon: 13.40,
+        gmt: 1,
+        dstNote: 'Chuẩn GMT+1 (Mùa hè tháng 3–10 là GMT+2)',
+        color: '#fb923c',
+        fact: 'Đức nằm ở Bắc bán cầu (52,5°B — cao hơn cả Hokkaido!) và Đông bán cầu (13,4°Đ). Đức dùng chung múi giờ GMT+1 với Pháp nên giờ chỗ anh Minh ở Đức và anh Lì ở Pháp giống hệt nhau!'
+      },
+      {
+        id: 'newyork',
+        flag: '🇺🇸',
+        shortName: 'Bạn ở New York',
+        person: 'Bạn ở New York, Mỹ',
+        city: 'New York, Hoa Kỳ',
+        lat: 40.71,
+        lon: -74.01,
+        gmt: -5,
+        dstNote: 'Chuẩn GMT−5 (Mùa hè tháng 3–11 là GMT−4)',
+        color: '#f472b6',
+        fact: 'Người DUY NHẤT trong nhóm ở TÂY BÁN CẦU (74,01°T — bên trái kinh tuyến 0°)! Múi giờ GMT−5 chậm hơn Việt Nam đúng 12 tiếng: lúc mình 12h trưa đi ăn cơm thì bạn ở New York đang 12h đêm ngủ khò!'
+      },
+      {
+        id: 'greenwich',
+        flag: '🇬🇧',
+        shortName: 'Gốc 0° (Greenwich)',
+        person: 'Đài thiên văn Greenwich (Luân Đôn, Anh)',
+        city: 'Greenwich, Luân Đôn, Anh',
+        lat: 51.48,
+        lon: 0.00,
+        gmt: 0,
+        dstNote: 'Mốc chuẩn Kinh tuyến gốc 0° & GMT 0',
+        color: '#facc15',
+        fact: 'Điểm "gốc" của cả thế giới! Ở đây có một vạch kim loại đánh dấu Kinh tuyến 0° — đặt chân trái ở Bán cầu Tây, chân phải ở Bán cầu Đông cùng một lúc được luôn!'
+      }
+    ];
+
+    // Dữ liệu đa giác lục địa đơn giản nhưng rõ dáng (mảng các vòng [lat, lon])
+    const CONTINENTS = [
+      // Bắc Mỹ
+      [[70,-165],[71,-135],[68,-95],[60,-65],[47,-53],[41,-70],[30,-81],[25,-81],[29,-90],[26,-97],[18,-95],[15,-84],[8,-78],[9,-83],[18,-104],[28,-115],[38,-123],[49,-125],[59,-138],[61,-152],[65,-166]],
+      // Greenland
+      [[82,-35],[76,-18],[65,-38],[60,-44],[68,-54],[78,-68],[82,-52]],
+      // Nam Mỹ
+      [[11,-74],[10,-62],[4,-51],[-5,-35],[-15,-39],[-23,-43],[-35,-53],[-46,-66],[-55,-68],[-52,-75],[-38,-73],[-18,-71],[-5,-81],[5,-77]],
+      // Châu Âu
+      [[36,-9],[43,-9],[43,-2],[48,-5],[51,2],[54,8],[58,5],[63,5],[70,20],[70,32],[65,40],[55,40],[47,39],[45,30],[41,28],[38,24],[40,18],[45,13],[44,8],[41,2],[36,-5]],
+      // Anh Quốc
+      [[50,-5],[51,1],[55,-1],[58,-3],[58,-6],[54,-5]],
+      // Châu Phi
+      [[35,-6],[37,10],[32,15],[31,32],[20,38],[12,44],[11,51],[2,45],[-10,40],[-25,33],[-34,25],[-34,18],[-20,12],[-5,10],[4,9],[5,-8],[15,-17],[28,-13]],
+      // Madagascar
+      [[-12,49],[-18,50],[-25,47],[-24,44],[-16,45]],
+      // Châu Á (có bán đảo Đông Dương & Việt Nam rõ nét)
+      [[70,32],[73,70],[74,110],[70,145],[66,178],[60,165],[54,140],[42,131],[38,128],[35,129],[35,126],[39,122],[32,122],[23,116],[21,108],[16,108],[10,106],[8,105],[12,102],[13,100],[6,102],[1,104],[8,98],[16,97],[22,90],[16,80],[8,77],[22,69],[25,62],[26,56],[20,59],[13,44],[29,34],[36,36],[41,29],[45,39],[55,42],[65,42]],
+      // Nhật Bản (Hokkaido + Honshu)
+      [[45,142],[43,145],[42,141],[43,140]],
+      [[41,141],[37,141],[35,139],[34,135],[33,131],[36,136],[40,140]],
+      // Indonesia & Philippines
+      [[5,96],[0,100],[-6,106],[-8,114],[-6,105],[-1,99]],
+      [[6,116],[1,118],[-3,116],[-2,110],[2,110]],
+      [[18,121],[14,122],[7,126],[8,123],[15,120]],
+      // Úc (Australia)
+      [[-12,131],[-12,136],[-16,136],[-11,142],[-20,149],[-28,153],[-34,151],[-38,147],[-38,140],[-34,135],[-32,128],[-34,115],[-22,114],[-15,124]],
+      // New Zealand
+      [[-35,174],[-41,176],[-46,168],[-42,171]],
+      // Nam Cực
+      [[-68,-60],[-72,-10],[-70,40],[-68,90],[-70,140],[-75,180],[-74,-120]]
+    ];
+
+    // ==================== 2. TRẠNG THÁI ỨNG DỤNG ====================
+    let vnHour = 12;
+    let selectedId = 'hanoi';
+    let overlayMode = 'none'; // 'none' | 'ns' | 'ew' | 'tz'
+    let showNight = true;
+    let autoSpin = false;
+
+    // Góc xoay quả cầu 3D (độ)
+    let rotLon = 105.85; // Kinh độ đang hướng về phía mắt người xem
+    let rotLat = 21.03;  // Vĩ độ đang hướng về phía mắt người xem
+    let targetLon = 105.85;
+    let targetLat = 21.03;
+    let isFlying = false;
+
+    // Kéo chuột / cảm ứng
+    let isDragging = false;
+    let lastX = 0, lastY = 0;
+
+    // Múi giờ đang chọn trên thước GMT
+    let selectedTZ = 7;
+
+    // ==================== 3. HÀM TIỆN ÍCH TỌA ĐỘ & GIỜ ====================
+    function fmtLat(lat) {
+      if (lat === 0) return '0° (Xích đạo)';
+      return `${Math.abs(lat).toFixed(2).replace('.', ',')}°${lat > 0 ? 'B' : 'N'}`;
+    }
+    function fmtLon(lon) {
+      if (lon === 0) return '0° (Kinh tuyến gốc)';
+      return `${Math.abs(lon).toFixed(2).replace('.', ',')}°${lon > 0 ? 'Đ' : 'T'}`;
+    }
+    function fmtGMT(g) {
+      if (g === 0) return 'GMT 0';
+      return g > 0 ? `GMT+${g}` : `GMT−${Math.abs(g)}`;
+    }
+    function calcLocalTime(gmtOffset) {
+      const diff = gmtOffset - 7;
+      let h = vnHour + diff;
+      let dayTag = 'Cùng ngày';
+      if (h >= 24) { h -= 24; dayTag = 'Ngày mai'; }
+      else if (h < 0) { h += 24; dayTag = 'Hôm qua'; }
+      const hh = String(h).padStart(2, '0') + ':00';
+      let period = '', icon = '';
+      if (h >= 5 && h < 11) { period = 'Buổi sáng'; icon = '🌅'; }
+      else if (h >= 11 && h < 14) { period = 'Buổi trưa'; icon = '☀️'; }
+      else if (h >= 14 && h < 18) { period = 'Buổi chiều'; icon = '🌤️'; }
+      else if (h >= 18 && h < 22) { period = 'Buổi tối'; icon = '🌆'; }
+      else { period = 'Đêm khuya (đang ngủ)'; icon = '🌙'; }
+      return { hour: h, text: hh, dayTag, period, icon, diff };
+    }
+    function fmtDiffVN(diff) {
+      if (diff === 0) return 'Giờ giống VN';
+      return diff > 0 ? `Sớm hơn VN +${diff} giờ` : `Muộn hơn VN ${diff} giờ`;
+    }
+
+    // ==================== 4. ENGINE VẼ QUẢ ĐỊA CẦU 3D (CANVAS) ====================
+    const canvas = document.getElementById('globeCanvas');
+    const ctx = canvas.getContext('2d');
+    const DEG = Math.PI / 180;
+
+    // Chiếu điểm (lat, lon) lên mặt phẳng 2D theo góc nhìn (rotLat, rotLon)
+    function project(lat, lon, R, cx, cy) {
+      const phi = lat * DEG;
+      const lam = (lon - rotLon) * DEG;
+      const phi0 = rotLat * DEG;
+
+      const cosPhi = Math.cos(phi), sinPhi = Math.sin(phi);
+      const cosLam = Math.cos(lam), sinLam = Math.sin(lam);
+      const cosPhi0 = Math.cos(phi0), sinPhi0 = Math.sin(phi0);
+
+      // Tọa độ 3D sau khi xoay
+      const x = cosPhi * sinLam;
+      const y = cosPhi0 * sinPhi - sinPhi0 * cosPhi * cosLam;
+      const z = sinPhi0 * sinPhi + cosPhi0 * cosPhi * cosLam;
+
+      return {
+        x: cx + x * R,
+        y: cy - y * R,
+        z: z,
+        visible: z >= 0
+      };
+    }
+
+    function drawGlobe() {
+      const W = canvas.width, H = canvas.height;
+      const cx = W / 2, cy = H / 2;
+      const R = Math.min(W, H) * 0.43;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Nền vũ trụ + vài ngôi sao nhẹ
+      ctx.fillStyle = '#020617';
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      for (let i = 0; i < 36; i++) {
+        const sx = (i * 157 + 43) % W;
+        const sy = (i * 97 + 29) % H;
+        ctx.fillRect(sx, sy, (i % 3 === 0) ? 2 : 1.2, (i % 3 === 0) ? 2 : 1.2);
+      }
+
+      // Hào quang khí quyển quanh Trái Đất
+      const halo = ctx.createRadialGradient(cx, cy, R * 0.92, cx, cy, R * 1.15);
+      halo.addColorStop(0, 'rgba(56, 189, 248, 0.35)');
+      halo.addColorStop(1, 'rgba(56, 189, 248, 0)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * 1.15, 0, Math.PI * 2);
+      ctx.fillStyle = halo;
+      ctx.fill();
+
+      // Mặt cầu đại dương 3D (có tạo bóng tròn)
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.clip();
+
+      const oceanGrad = ctx.createRadialGradient(cx - R * 0.32, cy - R * 0.32, R * 0.1, cx, cy, R);
+      oceanGrad.addColorStop(0, '#0ea5e9');
+      oceanGrad.addColorStop(0.55, '#0369a1');
+      oceanGrad.addColorStop(1, '#0c2d57');
+      ctx.fillStyle = oceanGrad;
+      ctx.fillRect(cx - R, cy - R, R * 2, R * 2);
+
+      // LỚP PHỦ BÁN CẦU HOẶC 24 MÚI GIỜ (Vẽ trước lục địa để vẫn nhìn rõ đất liền)
+      if (overlayMode === 'ns') {
+        drawHemisphereBand(0, 90, -180, 180, 'rgba(244, 63, 94, 0.28)', R, cx, cy);
+        drawHemisphereBand(-90, 0, -180, 180, 'rgba(56, 189, 248, 0.28)', R, cx, cy);
+      } else if (overlayMode === 'ew') {
+        drawHemisphereBand(-90, 90, 0, 180, 'rgba(16, 185, 129, 0.28)', R, cx, cy);
+        drawHemisphereBand(-90, 90, -180, 0, 'rgba(245, 158, 11, 0.28)', R, cx, cy);
+      } else if (overlayMode === 'tz') {
+        for (let tz = -12; tz <= 11; tz++) {
+          const lon1 = tz * 15 - 7.5;
+          const lon2 = tz * 15 + 7.5;
+          const col = (tz === 7)
+            ? 'rgba(244, 63, 94, 0.42)'
+            : (tz === 0 ? 'rgba(250, 204, 21, 0.38)' : (tz % 2 === 0 ? 'rgba(99, 102, 241, 0.22)' : 'rgba(14, 165, 233, 0.14)'));
+          drawLonStrip(lon1, lon2, col, R, cx, cy);
+        }
+      }
+
+      // VẼ CÁC LỤC ĐỊA
+      CONTINENTS.forEach(poly => {
+        ctx.beginPath();
+        let started = false;
+        let visibleCount = 0;
+        for (let i = 0; i < poly.length; i++) {
+          const p = project(poly[i][0], poly[i][1], R, cx, cy);
+          if (p.z > -0.15) {
+            visibleCount++;
+            if (!started) { ctx.moveTo(p.x, p.y); started = true; }
+            else ctx.lineTo(p.x, p.y);
+          } else {
+            started = false;
+          }
+        }
+        if (visibleCount >= 3) {
+          ctx.closePath();
+          ctx.fillStyle = '#22c55e';
+          ctx.fill();
+          ctx.strokeStyle = '#15803d';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      });
+
+      // VẼ LƯỚI VĨ TUYẾN (mỗi 30°) & KINH TUYẾN (mỗi 15° = đúng 1 múi giờ!)
+      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+      for (let lat = -60; lat <= 60; lat += 30) {
+        if (lat === 0) continue;
+        drawLatLine(lat, R, cx, cy);
+      }
+      for (let lon = -165; lon <= 180; lon += 15) {
+        if (lon === 0 || lon === 180) continue;
+        drawLonLine(lon, R, cx, cy);
+      }
+
+      // ĐƯỜNG XÍCH ĐẠO 0° (Đỏ nổi bật)
+      ctx.lineWidth = 2.6;
+      ctx.strokeStyle = '#fb7185';
+      drawLatLine(0, R, cx, cy);
+
+      // KINH TUYẾN GỐC 0° GREENWICH (Vàng cam nổi bật)
+      ctx.lineWidth = 2.6;
+      ctx.strokeStyle = '#facc15';
+      drawLonLine(0, R, cx, cy);
+
+      // KINH TUYẾN 180° (Đường đổi ngày - Nét đứt tím)
+      ctx.save();
+      ctx.setLineDash([5, 4]);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#c084fc';
+      drawLonLine(180, R, cx, cy);
+      ctx.restore();
+
+      // LỚP BÓNG NGÀY / ĐÊM THEO GIỜ VIỆT NAM (GMT+7)
+      // Khi giờ VN = 12h trưa -> Mặt Trời chiếu thẳng kinh tuyến ~105°Đ
+      if (showNight) {
+        const sunLon = 105 - (vnHour - 12) * 15;
+        drawNightShadow(sunLon, R, cx, cy);
+      }
+
+      // NHÃN BÁN CẦU HOẶC MÚI GIỜ TRÊN MẶT CẦU
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      if (overlayMode === 'ns') {
+        drawGlobeText('NỬA CẦU BẮC (+)', 32, rotLon, R, cx, cy, '#ffe4e6', 13);
+        drawGlobeText('NỬA CẦU NAM (−)', -32, rotLon, R, cx, cy, '#e0f2fe', 13);
+      } else if (overlayMode === 'ew') {
+        drawGlobeText('BÁN CẦU ĐÔNG (+)', 12, 45, R, cx, cy, '#d1fae5', 12);
+        drawGlobeText('BÁN CẦU ĐÔNG (+)', 12, 135, R, cx, cy, '#d1fae5', 12);
+        drawGlobeText('BÁN CẦU TÂY (−)', 12, -45, R, cx, cy, '#fef3c7', 12);
+        drawGlobeText('BÁN CẦU TÂY (−)', 12, -120, R, cx, cy, '#fef3c7', 12);
+      } else if (overlayMode === 'tz') {
+        for (let tz = -11; tz <= 12; tz += 1) {
+          const lon = tz * 15;
+          const lbl = tz === 0 ? '0' : (tz > 0 ? `+${tz}` : `${tz}`);
+          drawGlobeText(lbl, 0, lon, R, cx, cy, tz === 7 ? '#fecdd3' : '#fef08a', 10);
+        }
+      }
+
+      // Nhãn Xích đạo & Kinh tuyến gốc 0°
+      drawGlobeText('Xích đạo 0°', 4, rotLon - 28, R, cx, cy, '#fda4af', 10);
+      drawGlobeText('0° Greenwich', 26, 2, R, cx, cy, '#fde047', 10);
+
+      // Cực Bắc & Cực Nam
+      const pN = project(90, 0, R, cx, cy);
+      if (pN.visible) {
+        ctx.fillStyle = '#fff';
+        ctx.beginPath(); ctx.arc(pN.x, pN.y, 3.5, 0, Math.PI * 2); ctx.fill();
+        ctx.font = '700 10px "Be Vietnam Pro", sans-serif';
+        ctx.fillText('Cực Bắc (90°B)', pN.x, pN.y - 10);
+      }
+      const pS = project(-90, 0, R, cx, cy);
+      if (pS.visible) {
+        ctx.fillStyle = '#fff';
+        ctx.beginPath(); ctx.arc(pS.x, pS.y, 3.5, 0, Math.PI * 2); ctx.fill();
+        ctx.font = '700 10px "Be Vietnam Pro", sans-serif';
+        ctx.fillText('Cực Nam (90°N)', pS.x, pS.y + 12);
+      }
+
+      ctx.restore(); // End clip
+
+      // Viền quả cầu 3D
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(125, 211, 252, 0.55)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // VẼ GHIM BẠN BÈ (vẽ ngoài clip để nhãn tên không bị cắt ở mép!)
+      const pins = FRIENDS.map(f => ({
+        f,
+        p: project(f.lat, f.lon, R, cx, cy)
+      })).sort((a, b) => a.p.z - b.p.z);
+
+      pins.forEach(({ f, p }) => {
+        if (p.z <= 0.05) return; // Mặt khuất sau quả cầu
+        const isSel = f.id === selectedId;
+        const rDot = isSel ? 7 : 5;
+
+        // Vòng phát sáng cho điểm đang chọn
+        if (isSel) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 14, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rDot, 0, Math.PI * 2);
+        ctx.fillStyle = f.color;
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = isSel ? 2.5 : 1.6;
+        ctx.stroke();
+
+        // Nhãn tên + giờ mini
+        const t = calcLocalTime(f.gmt);
+        const label = `${f.flag} ${f.shortName} (${t.text})`;
+        ctx.font = `${isSel ? '800 11.5px' : '700 10px'} "Be Vietnam Pro", sans-serif`;
+        const tw = ctx.measureText(label).width;
+        const bx = p.x - tw / 2 - 6;
+        const by = p.y - (isSel ? 29 : 24);
+        ctx.fillStyle = isSel ? 'rgba(15, 23, 42, 0.94)' : 'rgba(15, 23, 42, 0.78)';
+        ctx.strokeStyle = isSel ? f.color : 'rgba(255,255,255,0.28)';
+        ctx.lineWidth = isSel ? 1.8 : 1;
+        roundRect(ctx, bx, by, tw + 12, 19, 6);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(label, p.x, by + 9.5);
+      });
+    }
+
+    function roundRect(c, x, y, w, h, r) {
+      c.beginPath();
+      c.moveTo(x + r, y);
+      c.lineTo(x + w - r, y);
+      c.quadraticCurveTo(x + w, y, x + w, y + r);
+      c.lineTo(x + w, y + h - r);
+      c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      c.lineTo(x + r, y + h);
+      c.quadraticCurveTo(x, y + h, x, y + h - r);
+      c.lineTo(x, y + r);
+      c.quadraticCurveTo(x, y, x + r, y);
+      c.closePath();
+    }
+
+    function drawLatLine(lat, R, cx, cy) {
+      ctx.beginPath();
+      let started = false;
+      for (let lon = -180; lon <= 180; lon += 4) {
+        const p = project(lat, lon, R, cx, cy);
+        if (p.visible) {
+          if (!started) { ctx.moveTo(p.x, p.y); started = true; }
+          else ctx.lineTo(p.x, p.y);
+        } else started = false;
+      }
+      ctx.stroke();
+    }
+
+    function drawLonLine(lon, R, cx, cy) {
+      ctx.beginPath();
+      let started = false;
+      for (let lat = -90; lat <= 90; lat += 4) {
+        const p = project(lat, lon, R, cx, cy);
+        if (p.visible) {
+          if (!started) { ctx.moveTo(p.x, p.y); started = true; }
+          else ctx.lineTo(p.x, p.y);
+        } else started = false;
+      }
+      ctx.stroke();
+    }
+
+    function drawLonStrip(lon1, lon2, color, R, cx, cy) {
+      const pts = [];
+      for (let lat = -85; lat <= 85; lat += 10) pts.push(project(lat, lon1, R, cx, cy));
+      for (let lat = 85; lat >= -85; lat -= 10) pts.push(project(lat, lon2, R, cx, cy));
+      if (!pts.some(p => p.visible)) return;
+      ctx.beginPath();
+      let started = false;
+      pts.forEach(p => {
+        if (p.z > -0.1) {
+          if (!started) { ctx.moveTo(p.x, p.y); started = true; }
+          else ctx.lineTo(p.x, p.y);
+        }
+      });
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    function drawHemisphereBand(latMin, latMax, lonMin, lonMax, color, R, cx, cy) {
+      // Vẽ theo từng ô lưới 15° để phủ đẹp mặt cong 3D
+      ctx.fillStyle = color;
+      for (let lon = lonMin; lon < lonMax; lon += 15) {
+        for (let lat = latMin; lat < latMax; lat += 15) {
+          const p1 = project(lat, lon, R, cx, cy);
+          const p2 = project(lat, lon + 15, R, cx, cy);
+          const p3 = project(lat + 15, lon + 15, R, cx, cy);
+          const p4 = project(lat + 15, lon, R, cx, cy);
+          if (p1.z > -0.05 && p2.z > -0.05 && p3.z > -0.05 && p4.z > -0.05) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.lineTo(p3.x, p3.y);
+            ctx.lineTo(p4.x, p4.y);
+            ctx.closePath();
+            ctx.fill();
+          }
+        }
+      }
+    }
+
+    function drawNightShadow(sunLon, R, cx, cy) {
+      // Phủ tối cho các ô có góc lệch so với kinh tuyến Mặt Trời > 90°
+      ctx.fillStyle = 'rgba(2, 6, 23, 0.52)';
+      for (let lon = -180; lon < 180; lon += 15) {
+        let diff = Math.abs(((lon + 7.5 - sunLon + 540) % 360) - 180);
+        if (diff > 90) {
+          drawLonStrip(lon, lon + 15, 'rgba(2, 6, 23, 0.52)', R, cx, cy);
+        }
+      }
+    }
+
+    function drawGlobeText(text, lat, lon, R, cx, cy, color, size) {
+      const p = project(lat, lon, R, cx, cy);
+      if (p.z < 0.25) return;
+      ctx.font = `800 ${size}px "Be Vietnam Pro", sans-serif`;
+      ctx.fillStyle = color;
+      ctx.fillText(text, p.x, p.y);
+    }
+
+    // Vòng lặp animation mượt mà (fly-to + auto-spin)
+    function animateGlobe() {
+      if (isFlying) {
+        let dLon = ((targetLon - rotLon + 540) % 360) - 180;
+        let dLat = targetLat - rotLat;
+        rotLon += dLon * 0.14;
+        rotLat += dLat * 0.14;
+        if (Math.abs(dLon) < 0.25 && Math.abs(dLat) < 0.25) {
+          rotLon = targetLon;
+          rotLat = targetLat;
+          isFlying = false;
+        }
+      } else if (autoSpin && !isDragging) {
+        rotLon = ((rotLon + 0.35 + 180) % 360) - 180;
+      }
+      drawGlobe();
+      requestAnimationFrame(animateGlobe);
+    }
+
+    // Xử lý kéo chuột & chạm tay xoay quả cầu 3D
+    canvas.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      isFlying = false;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      rotLon = ((rotLon - dx * 0.45 + 180) % 360) - 180;
+      rotLat = Math.max(-75, Math.min(75, rotLat + dy * 0.45));
+    });
+    canvas.addEventListener('pointerup', () => { isDragging = false; });
+    canvas.addEventListener('pointercancel', () => { isDragging = false; });
+
+    // Bấm trực tiếp lên ghim trên quả cầu 3D
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+      const cx = canvas.width / 2, cy = canvas.height / 2;
+      const R = Math.min(canvas.width, canvas.height) * 0.43;
+      for (const f of FRIENDS) {
+        const p = project(f.lat, f.lon, R, cx, cy);
+        if (p.z > 0.05 && Math.hypot(p.x - mx, p.y - my) < 20) {
+          selectFriend(f.id);
+          break;
+        }
+      }
+    });
+
+    // ==================== 5. ĐIỀU KHIỂN GIAO DIỆN QUẢ CẦU & BẠN BÈ ====================
+    function setGlobeOverlay(mode) {
+      overlayMode = mode;
+      const map = { none: 'btnModeNormal', ns: 'btnModeNS', ew: 'btnModeEW', tz: 'btnModeTZ' };
+      document.querySelectorAll('.overlay-btn').forEach(b => {
+        b.className = 'overlay-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-200 cursor-pointer transition';
+      });
+      const activeBtn = document.getElementById(map[mode]);
+      if (activeBtn) activeBtn.className = 'overlay-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-500 text-white cursor-pointer transition';
+    }
+
+    function toggleNightLayer() {
+      showNight = !showNight;
+      const btn = document.getElementById('btnNightToggle');
+      btn.textContent = showNight ? '☀️🌙 Ngày/Đêm: BẬT' : '☀️🌙 Ngày/Đêm: TẮT';
+      btn.className = showNight
+        ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/25 border border-amber-400/50 text-amber-200 cursor-pointer transition'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-300 cursor-pointer transition';
+    }
+
+    function toggleAutoSpin() {
+      autoSpin = !autoSpin;
+      const btn = document.getElementById('btnSpinToggle');
+      btn.textContent = autoSpin ? '🔄 Tự xoay: BẬT' : '🔄 Tự xoay: TẮT';
+      btn.className = autoSpin
+        ? 'px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-500 text-white cursor-pointer transition'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-slate-200 cursor-pointer transition';
+    }
+
+    function selectFriend(id, scrollUp = false) {
+      const f = FRIENDS.find(x => x.id === id);
+      if (!f) return;
+      selectedId = id;
+      targetLon = f.lon;
+      targetLat = f.lat;
+      isFlying = true;
+      autoSpin = false;
+      const spinBtn = document.getElementById('btnSpinToggle');
+      if (spinBtn) spinBtn.textContent = '🔄 Tự xoay: TẮT';
+      selectedTZ = f.gmt;
+      renderFriendsGrid();
+      renderSelectedFriendCard();
+      renderTZRibbon();
+      renderTZInspector();
+      if (scrollUp) {
+        document.getElementById('sec-3d').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function onVNTimeChange(val) {
+      vnHour = parseInt(val, 10);
+      const tVN = calcLocalTime(7);
+      document.getElementById('vnTimeDisplay').textContent = `${tVN.text} (${tVN.period})`;
+      renderFriendsGrid();
+      renderSelectedFriendCard();
+      renderTZRibbon();
+      renderTZInspector();
+    }
+
+    function setNowVNTime() {
+      const now = new Date();
+      const utcH = now.getUTCHours();
+      const h = (utcH + 7) % 24;
+      document.getElementById('vnHourSlider').value = h;
+      onVNTimeChange(h);
+    }
+
+    function renderFriendsGrid() {
+      const el = document.getElementById('friendsGrid');
+      el.innerHTML = FRIENDS.map(f => {
+        const isSel = f.id === selectedId;
+        const t = calcLocalTime(f.gmt);
+        return `
+          <button type="button" onclick="selectFriend('${f.id}')"
+            class="text-left p-2.5 rounded-xl border transition cursor-pointer ${isSel
+              ? 'bg-sky-50 dark:bg-sky-900/50 border-sky-500 ring-2 ring-sky-400/40 shadow-sm'
+              : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-sky-400'}">
+            <div class="flex items-center justify-between gap-1">
+              <span class="font-extrabold text-xs text-slate-900 dark:text-white truncate">${f.flag} ${f.shortName}</span>
+              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 shrink-0">${fmtGMT(f.gmt)}</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+              <span>${t.icon} <strong>${t.text}</strong></span>
+              <span>${f.lat >= 0 ? 'Bắc' : 'Nam'} • ${f.lon >= 0 ? 'Đông' : 'Tây'}</span>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderSelectedFriendCard() {
+      const f = FRIENDS.find(x => x.id === selectedId);
+      const t = calcLocalTime(f.gmt);
+      const nsBadge = f.lat >= 0
+        ? '<span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-200 font-bold text-[11px]">⬆️ Nửa cầu Bắc</span>'
+        : '<span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 dark:bg-sky-900/50 dark:text-sky-200 font-bold text-[11px]">⬇️ Nửa cầu Nam</span>';
+      const ewBadge = f.lon === 0
+        ? '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200 font-bold text-[11px]">⭐ Kinh tuyến gốc 0°</span>'
+        : (f.lon > 0
+          ? '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-200 font-bold text-[11px]">➡️ Bán cầu Đông</span>'
+          : '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200 font-bold text-[11px]">⬅️ Bán cầu Tây</span>');
+
+      document.getElementById('selectedFriendCard').innerHTML = `
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <div class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">${f.flag} ${f.person}</div>
+            <div class="flex flex-wrap gap-1.5 mt-1.5">${nsBadge} ${ewBadge}</div>
+          </div>
+          <a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank" rel="noopener"
+            class="shrink-0 px-2.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold shadow-sm transition">
+            📍 Mở Google Maps ↗
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-700">
+            <div class="text-slate-500 dark:text-slate-400 text-[11px]">Tọa độ (theo SGK)</div>
+            <div class="font-extrabold text-slate-900 dark:text-white mt-0.5">${fmtLat(f.lat)} • ${fmtLon(f.lon)}</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">Google Maps: <code>${f.lat.toFixed(2)}, ${f.lon.toFixed(2)}</code></div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-700">
+            <div class="text-slate-500 dark:text-slate-400 text-[11px]">Giờ lúc này (${fmtGMT(f.gmt)})</div>
+            <div class="font-extrabold text-sky-700 dark:text-sky-300 text-sm mt-0.5">${t.icon} ${t.text} (${t.dayTag})</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">${t.period} • ${fmtDiffVN(t.diff)}</div>
+          </div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-sky-50/70 dark:bg-sky-950/40 p-3 rounded-xl border border-sky-200/70 dark:border-sky-800/50">
+          💡 ${f.fact}
+        </p>
+      `;
+    }
+
+    function renderFriendsTable() {
+      const tbody = document.getElementById('friendsTableBody');
+      tbody.innerHTML = FRIENDS.map(f => {
+        const diff = f.gmt - 7;
+        return `
+          <tr class="hover:bg-sky-50/60 dark:hover:bg-slate-800/60 transition">
+            <td class="py-3 px-3.5 font-extrabold text-slate-900 dark:text-white">${f.flag} ${f.person}</td>
+            <td class="py-3 px-3 font-semibold ${f.lat < 0 ? 'text-sky-600 dark:text-sky-400' : 'text-rose-600 dark:text-rose-400'}">${fmtLat(f.lat)}</td>
+            <td class="py-3 px-3 font-semibold ${f.lon < 0 ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400'}">${fmtLon(f.lon)}</td>
+            <td class="py-3 px-3 font-mono text-xs text-slate-600 dark:text-slate-300">${f.lat.toFixed(2)}, ${f.lon.toFixed(2)}</td>
+            <td class="py-3 px-3 text-xs font-bold">
+              ${f.lat >= 0 ? 'Bắc' : '<span class="text-sky-600 dark:text-sky-400">Nam</span>'} &amp;
+              ${f.lon === 0 ? 'Gốc 0°' : (f.lon > 0 ? 'Đông' : '<span class="text-amber-600 dark:text-amber-400">Tây</span>')}
+            </td>
+            <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-extrabold text-xs">${fmtGMT(f.gmt)}</span></td>
+            <td class="py-3 px-3 text-xs font-bold">${fmtDiffVN(diff)}</td>
+            <td class="py-3 px-3 text-center whitespace-nowrap space-x-1">
+              <button type="button" onclick="selectFriend('${f.id}', true)" class="px-2 py-1 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-[11px] font-bold cursor-pointer">Xem 3D</button>
+              <a href="https://www.google.com/maps?q=${f.lat},${f.lon}" target="_blank" rel="noopener" class="inline-block px-2 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold">Maps ↗</a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ==================== 6. THƯỚC 24 MÚI GIỜ GMT (-12 → +12) ====================
+    const TZ_PLACES = {
+      '-12': 'Đảo Baker (Thái Bình Dương — Đường đổi ngày)',
+      '-11': 'Đảo Samoa (Thái Bình Dương)',
+      '-10': 'Hawaii (Mỹ)',
+      '-9': 'Alaska (Mỹ)',
+      '-8': 'Los Angeles, San Francisco (Bờ Tây Mỹ)',
+      '-7': 'Denver (Mỹ), Calgary (Canada)',
+      '-6': 'Chicago (Mỹ), Mexico City',
+      '-5': '🇺🇸 Bạn ở New York (Mỹ), Toronto (Canada)',
+      '-4': 'Santiago (Chile), Caracas',
+      '-3': 'São Paulo (Brazil), Buenos Aires (Argentina)',
+      '-2': 'Giữa Đại Tây Dương',
+      '-1': 'Quần đảo Azores (Bồ Đào Nha)',
+      '0': '🇬🇧 Luân Đôn — Đài thiên văn Greenwich (Mốc 0°)',
+      '1': '🇫🇷 Anh Lì (Pháp) • 🇩🇪 Anh Minh (Đức)',
+      '2': 'Cairo (Ai Cập), Athens (Hy Lạp)',
+      '3': 'Moskva (Nga), Ả Rập Xê Út',
+      '4': 'Dubai (UAE)',
+      '5': 'Pakistan, Maldives',
+      '6': 'Bangladesh, Kazakhstan',
+      '7': '🇻🇳 NHÀ MÌNH — Việt Nam, Thái Lan, Lào',
+      '8': '🇸🇬 Anh Bi (Singapore), Bắc Kinh (TQ), Philippines',
+      '9': '🇯🇵 Bạn Minh (Hokkaido, Nhật Bản), Seoul (Hàn Quốc)',
+      '10': '🇦🇺 Bạn Jack (Sydney, Úc)',
+      '11': 'Quần đảo Solomon',
+      '12': 'New Zealand, Fiji (Nơi đón năm mới sớm nhất!)'
+    };
+
+    function renderTZRibbon() {
+      const ribbon = document.getElementById('tzRibbon');
+      let html = '';
+      for (let g = -12; g <= 12; g++) {
+        const t = calcLocalTime(g);
+        const isSel = g === selectedTZ;
+        const isVN = g === 7;
+        const isZero = g === 0;
+        const hasFriend = [-5, 0, 1, 7, 8, 9, 10].includes(g);
+        const label = g === 0 ? '0' : (g > 0 ? `+${g}` : `${g}`);
+        let cls = 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200';
+        if (isVN) cls = 'bg-rose-100 dark:bg-rose-900/50 border-rose-400 text-rose-800 dark:text-rose-200';
+        else if (isZero) cls = 'bg-amber-100 dark:bg-amber-900/50 border-amber-400 text-amber-800 dark:text-amber-200';
+        else if (hasFriend) cls = 'bg-sky-50 dark:bg-sky-900/40 border-sky-300 dark:border-sky-700 text-sky-900 dark:text-sky-200';
+
+        html += `
+          <button type="button" onclick="selectTZ(${g})"
+            class="tz-cell shrink-0 w-[62px] py-2 px-1 rounded-xl border text-center cursor-pointer ${cls} ${isSel ? 'ring-2 ring-indigo-500 scale-105 shadow-md' : ''}">
+            <div class="text-[11px] font-extrabold">GMT${label}</div>
+            <div class="text-xs font-extrabold mt-0.5">${t.text}</div>
+            <div class="text-[10px] mt-0.5">${t.icon} ${hasFriend ? '⭐' : ''}</div>
+          </button>
+        `;
+      }
+      ribbon.innerHTML = html;
+    }
+
+    function selectTZ(g) {
+      selectedTZ = g;
+      renderTZRibbon();
+      renderTZInspector();
+    }
+
+    function renderTZInspector() {
+      const t = calcLocalTime(selectedTZ);
+      const tVN = calcLocalTime(7);
+      const diff = selectedTZ - 7;
+      const diffStr = diff === 0 ? '0 giờ (Trùng giờ Việt Nam)' : (diff > 0 ? `+${diff} giờ (Sớm hơn Việt Nam)` : `${diff} giờ (Muộn hơn Việt Nam)`);
+      const signCalc = diff >= 0 ? `+ ${diff}` : `− ${Math.abs(diff)}`;
+
+      document.getElementById('tzInspector').innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-lg bg-indigo-600 text-white text-xs font-extrabold">${fmtGMT(selectedTZ)}</span>
+              <span class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${TZ_PLACES[String(selectedTZ)] || ''}</span>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1.5">
+              Cách tính: Giờ VN (<strong>${tVN.text}</strong>) ${signCalc} giờ = <strong class="text-sky-700 dark:text-sky-300 text-base">${t.icon} ${t.text} (${t.dayTag} — ${t.period})</strong>.
+            </p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Chênh lệch so với Việt Nam: <strong>${diffStr}</strong> • Kinh tuyến trung tâm của múi giờ này: <strong>${Math.abs(selectedTZ * 15)}°${selectedTZ === 0 ? ' (Gốc)' : (selectedTZ > 0 ? 'Đ' : 'T')}</strong>.
+            </p>
+          </div>
+          <div class="text-xs font-bold px-3.5 py-2 rounded-xl ${t.hour >= 7 && t.hour <= 21 ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200' : 'bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-200'}">
+            ${t.hour >= 7 && t.hour <= 21 ? '📞 Giờ này gọi điện nói chuyện được!' : '🤫 Giờ này bên đó đang ngủ, đừng gọi nhé!'}
+          </div>
+        </div>
+      `;
+    }
+
+    // ==================== 7. MÔ PHỎNG GOOGLE MAPS MINI ====================
+    function toggleMapLayer(id, show) {
+      const g = document.getElementById(id);
+      if (g) g.style.opacity = show ? '1' : '0.04';
+    }
+
+    function updateGmapsZoom(lvl) {
+      lvl = parseInt(lvl, 10);
+      const badge = document.getElementById('gmapsScaleBadge');
+      const label = document.getElementById('zoomLevelLabel');
+      const explain = document.getElementById('zoomExplain');
+      const scaleTxt = document.getElementById('svgScaleText');
+      const svg = document.getElementById('miniGmapsSvg');
+      label.textContent = `Mức ${lvl} / 4`;
+
+      const data = {
+        1: {
+          badge: 'Tỉ lệ nhỏ 1 : 50.000.000 (Toàn châu lục)',
+          scale: '500 km',
+          vb: '-140 -90 780 480',
+          txt: '<strong>Tỉ lệ nhỏ (1 : 50.000.000):</strong> Mẫu số cực lớn → thu nhỏ cả châu Á và các nước! Không còn thấy rõ ngõ ngách hay tòa nhà nhỏ.'
+        },
+        2: {
+          badge: 'Tỉ lệ trung bình 1 : 500.000 (Cả thành phố)',
+          scale: '5 km',
+          vb: '-55 -35 610 370',
+          txt: '<strong>Tỉ lệ trung bình (1 : 500.000):</strong> Thấy toàn cảnh thành phố Hà Nội, các quận, hồ lớn và đường cao tốc nối liền.'
+        },
+        3: {
+          badge: 'Tỉ lệ lớn 1 : 10.000 (Rất chi tiết)',
+          scale: '200 m',
+          vb: '0 0 500 300',
+          txt: '<strong>Tỉ lệ lớn (1 : 10.000):</strong> Mẫu số nhỏ → phóng to từng con phố, công viên, tòa nhà. Đúng như Bài 3 SGK: <em>"Bản đồ tỉ lệ càng lớn thì thể hiện càng nhiều chi tiết!"</em>'
+        },
+        4: {
+          badge: 'Tỉ lệ cực lớn 1 : 2.000 (Từng ngôi nhà)',
+          scale: '20 m',
+          vb: '45 30 330 200',
+          txt: '<strong>Tỉ lệ cực lớn (1 : 2.000):</strong> Nhìn rõ từng cổng trường, quán phở, số nhà và hình khối 3D của từng tòa nhà!'
+        }
+      };
+      const d = data[lvl];
+      badge.textContent = d.badge;
+      scaleTxt.textContent = d.scale;
+      svg.setAttribute('viewBox', d.vb);
+      explain.innerHTML = d.txt;
+    }
+
+    // ==================== 8. BỘ CÂU HỎI KIỂM TRA 12 CÂU ====================
+    const QUIZZES = [
+      {
+        q: '1. Đường nào chia Trái Đất thành Nửa cầu Bắc và Nửa cầu Nam?',
+        opts: ['Kinh tuyến gốc 0°', 'Đường Xích đạo (Vĩ tuyến gốc 0°)', 'Kinh tuyến 180°', 'Chí tuyến Bắc'],
+        ans: 1,
+        exp: 'Đường Xích đạo (0°) nằm ngang ở chính giữa, chia Trái Đất thành Nửa cầu Bắc (phía trên) và Nửa cầu Nam (phía dưới).'
+      },
+      {
+        q: '2. Đường Kinh tuyến gốc 0° (chia Bán cầu Đông & Bán cầu Tây) đi qua địa điểm nổi tiếng nào?',
+        opts: ['Tháp Eiffel ở Paris (Pháp)', 'Cột cờ Hà Nội (Việt Nam)', 'Đài thiên văn Greenwich ở Luân Đôn (Anh)', 'Tượng Nữ thần Tự do ở New York (Mỹ)'],
+        ans: 2,
+        exp: 'Kinh tuyến gốc 0° đi qua Đài thiên văn Hoàng gia Greenwich ở ngoại ô Luân Đôn (Anh) — cũng là gốc của múi giờ GMT 0.'
+      },
+      {
+        q: '3. Trong nhóm bạn bè của mình, ai sống ở NAM BÁN CẦU (nên mùa đông VN lại là mùa hè ở chỗ bạn ấy)?',
+        opts: ['Bạn Minh ở Hokkaido (Nhật Bản)', 'Bạn Jack ở Sydney (Úc)', 'Anh Lì ở Paris (Pháp)', 'Bạn ở New York (Mỹ)'],
+        ans: 1,
+        exp: 'Sydney (Úc) có vĩ độ 33,87°N (phía Nam Xích đạo), nên bạn Jack sống ở Nam bán cầu!'
+      },
+      {
+        q: '4. Trong nhóm người quen của mình, ai sống ở TÂY BÁN CẦU?',
+        opts: ['Bạn ở New York (Mỹ — 74°T)', 'Anh Minh ở Berlin (Đức — 13,4°Đ)', 'Anh Lì ở Paris (Pháp — 2,35°Đ)', 'Anh Bi ở Singapore (103,8°Đ)'],
+        ans: 0,
+        exp: 'New York có kinh độ 74,01°T (nằm bên trái kinh tuyến 0°), là người duy nhất trong nhóm ở Bán cầu Tây. Pháp và Đức vẫn ở Bán cầu Đông!'
+      },
+      {
+        q: '5. Anh Bi ở Singapore có vĩ độ 1,35°B. Điều đó cho biết Singapore nằm ở đâu?',
+        opts: ['Sát Cực Bắc nên quanh năm có tuyết', 'Nằm ở Nam bán cầu', 'Nằm rất sát đường Xích đạo nên nóng ẩm quanh năm', 'Nằm ngay trên Kinh tuyến gốc 0°'],
+        ans: 2,
+        exp: 'Vĩ độ 1,35°B chỉ cách đường Xích đạo 0° một xíu về phía Bắc, nên khí hậu Singapore nóng ẩm quanh năm.'
+      },
+      {
+        q: '6. Trái Đất được chia thành 24 múi giờ. Mỗi múi giờ rộng khoảng bao nhiêu độ kinh tuyến?',
+        opts: ['10° kinh tuyến', '15° kinh tuyến', '24° kinh tuyến', '30° kinh tuyến'],
+        ans: 1,
+        exp: 'Cả vòng Trái Đất là 360°, chia đều cho 24 giờ: 360° ÷ 24 = 15° kinh tuyến mỗi múi giờ!'
+      },
+      {
+        q: '7. Lúc 8 giờ sáng ở Hà Nội (GMT+7), ở chỗ bạn Minh tại Hokkaido, Nhật Bản (GMT+9) đang là mấy giờ?',
+        opts: ['6 giờ sáng', '8 giờ sáng', '10 giờ sáng', '12 giờ trưa'],
+        ans: 2,
+        exp: 'Hokkaido (GMT+9) ở phía Đông nên sớm hơn Việt Nam 9 − 7 = 2 tiếng → 8 + 2 = 10 giờ sáng!'
+      },
+      {
+        q: '8. Lúc 12 giờ trưa ở Việt Nam (GMT+7), có nên gọi điện nói chuyện với bạn ở New York, Mỹ (GMT−5) không?',
+        opts: ['Nên gọi, bên đó đang 12 giờ trưa', 'Nên gọi, bên đó đang 5 giờ chiều', 'Không nên gọi, bên đó đang 0 giờ nửa đêm (đang ngủ!)', 'Không nên gọi, bên đó đang 10 giờ tối'],
+        ans: 2,
+        exp: 'New York (GMT−5) muộn hơn Việt Nam: −5 − 7 = −12 giờ. Khi VN 12 giờ trưa thì New York là 0 giờ nửa đêm!'
+      },
+      {
+        q: '9. Lúc 19 giờ tối ở Hà Nội (GMT+7), ở chỗ anh Lì (Pháp) và anh Minh (Đức) (đều GMT+1) đang là mấy giờ?',
+        opts: ['13 giờ trưa (1 giờ chiều)', '15 giờ chiều', '20 giờ tối', '1 giờ sáng'],
+        ans: 0,
+        exp: 'Pháp và Đức cùng múi giờ chuẩn GMT+1, muộn hơn Việt Nam 6 tiếng (1 − 7 = −6) → 19 − 6 = 13 giờ trưa!'
+      },
+      {
+        q: '10. Trên Google Maps hiện tọa độ "-33.87, 151.21". Dấu trừ (−) ở số đầu tiên có nghĩa là gì?',
+        opts: ['Ở Bán cầu Tây', 'Ở Nửa cầu Nam (vĩ độ 33,87°N — chính là Sydney!)', 'Ở độ cao dưới mực nước biển', 'Ở múi giờ GMT−3'],
+        ans: 1,
+        exp: 'Trên Google Maps: số đầu là Vĩ độ (+ là Bắc, − là Nam); số sau là Kinh độ (+ là Đông, − là Tây). Vậy -33.87 là 33,87°N (Nam bán cầu)!'
+      },
+      {
+        q: '11. Trên Google Maps, công viên (mảng màu xanh lá) và hồ nước (mảng màu xanh dương) thuộc loại kí hiệu bản đồ nào trong Bài 4 SGK?',
+        opts: ['Kí hiệu điểm', 'Kí hiệu đường', 'Kí hiệu diện tích (vùng)', 'Tỉ lệ thước'],
+        ans: 2,
+        exp: 'Mảng màu phủ kín bề mặt như công viên, hồ nước, biển, khu dân cư chính là Kí hiệu diện tích (vùng) trong Bài 4 Chương 1.'
+      },
+      {
+        q: '12. Khi mình bấm dấu cộng (+) phóng to trên Google Maps từ tỉ lệ 1 : 500.000 lên 1 : 10.000 thì điều gì xảy ra?',
+        opts: ['Tỉ lệ bản đồ nhỏ đi và thấy ít chi tiết hơn', 'Tỉ lệ bản đồ lớn lên và thấy rõ từng con phố, tòa nhà, quán ăn', 'Tỉ lệ bản đồ không thay đổi', 'Kinh tuyến và vĩ tuyến biến mất hoàn toàn'],
+        ans: 1,
+        exp: 'Theo Bài 3 SGK: Mẫu số càng nhỏ (10.000 < 500.000) thì tỉ lệ bản đồ càng LỚN và càng thể hiện được nhiều chi tiết!'
+      }
+    ];
+
+    let quizAnswers = {};
+
+    function renderQuiz() {
+      const box = document.getElementById('quizContainer');
+      box.innerHTML = QUIZZES.map((item, idx) => {
+        const chosen = quizAnswers[idx];
+        const isDone = chosen !== undefined;
+        return `
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-4 flex flex-col justify-between gap-3">
+            <div class="font-extrabold text-sm text-slate-900 dark:text-white leading-snug">${item.q}</div>
+            <div class="space-y-1.5">
+              ${item.opts.map((opt, oi) => {
+                let cls = 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:border-sky-400 text-slate-700 dark:text-slate-200';
+                if (isDone) {
+                  if (oi === item.ans) cls = 'bg-emerald-100 dark:bg-emerald-900/50 border-emerald-500 text-emerald-900 dark:text-emerald-100 font-bold';
+                  else if (oi === chosen) cls = 'bg-rose-100 dark:bg-rose-900/50 border-rose-500 text-rose-900 dark:text-rose-100';
+                }
+                return `
+                  <button type="button" ${isDone ? 'disabled' : ''} onclick="answerQuiz(${idx}, ${oi})"
+                    class="w-full text-left px-3 py-2 rounded-xl border text-xs sm:text-sm transition ${isDone ? 'cursor-default' : 'cursor-pointer'} ${cls}">
+                    <span class="font-extrabold mr-1.5">${String.fromCharCode(65 + oi)}.</span>${opt}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            ${isDone ? `
+              <div class="text-xs p-2.5 rounded-xl ${chosen === item.ans ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-200' : 'bg-rose-50 dark:bg-rose-950/50 text-rose-800 dark:text-rose-200'}">
+                <strong>${chosen === item.ans ? '✅ Chính xác!' : '❌ Chưa đúng rồi!'}</strong> ${item.exp}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+      const score = Object.keys(quizAnswers).filter(k => quizAnswers[k] === QUIZZES[k].ans).length;
+      document.getElementById('quizScoreBadge').textContent = `Điểm: ${score} / ${QUIZZES.length}`;
+    }
+
+    function answerQuiz(idx, oi) {
+      quizAnswers[idx] = oi;
+      renderQuiz();
+    }
+
+    function resetQuiz() {
+      quizAnswers = {};
+      renderQuiz();
+    }
+
+    // ==================== 9. GIỌNG ĐỌC TTS (DÙNG assets/common.js) ====================
+    function speakSection(num) {
+      const scripts = {
+        1: [
+          'Chào bạn đến với Quả Địa Cầu 3D tương tác!',
+          'Bạn hãy dùng chuột hoặc ngón tay xoay Trái Đất 360 độ, và bấm vào tên từng người quen như bạn Minh ở Hokkaido Nhật Bản, anh Bi ở Singapore, bạn Jack ở Sydney nước Úc, anh Lì ở Pháp, anh Minh ở Đức và bạn ở New York nước Mỹ.',
+          'Bạn cũng có thể kéo thanh trượt giờ Hà Nội để xem cùng lúc đó bên chỗ bạn bè đang là ban ngày hay ban đêm nhé!'
+        ],
+        2: [
+          'Mẹo nhớ siêu nhanh Kinh độ, Vĩ độ và 4 Bán cầu trong 10 giây!',
+          'Vĩ tuyến là các vòng tròn nằm ngang như chiếc thắt lưng. Đường Xích đạo 0 độ ở giữa chia Trái Đất thành Nửa cầu Bắc ở trên và Nửa cầu Nam ở dưới. Bạn Jack ở Sydney có vĩ độ 33,87 độ Nam nên ở Nam bán cầu!',
+          'Còn Kinh tuyến là các đường kẻ dọc từ Cực Bắc xuống Cực Nam như múi cam. Kinh tuyến gốc 0 độ đi qua Luân Đôn nước Anh chia Trái Đất thành Bán cầu Đông ở bên phải và Bán cầu Tây ở bên trái. Việt Nam, Singapore, Nhật, Úc, Pháp và Đức đều ở Bán cầu Đông; còn bạn ở New York nước Mỹ là 74 độ Tây nên ở Bán cầu Tây!'
+        ],
+        3: [
+          'Vì sao thế giới có 24 múi giờ? Vì Trái Đất là vòng tròn 360 độ và tự quay hết 1 vòng trong 24 giờ. Lấy 360 chia 24 bằng 15 độ kinh tuyến cho mỗi múi giờ.',
+          'Lấy Luân Đôn làm mốc G M T 0. Vì Trái Đất quay từ Tây sang Đông nên phía Đông đón Mặt Trời sớm hơn, mang dấu cộng. Phía Tây đón Mặt Trời muộn hơn, mang dấu trừ.',
+          'Việt Nam ở múi giờ G M T cộng 7. Singapore cộng 8 nên sớm hơn 1 tiếng. Hokkaido Nhật Bản cộng 9 nên sớm hơn 2 tiếng. Sydney nước Úc cộng 10 nên sớm hơn 3 tiếng. Pháp và Đức cộng 1 nên muộn hơn 6 tiếng. Còn New York trừ 5 nên muộn hơn Việt Nam đúng 12 tiếng, ngày đêm đảo ngược hoàn toàn!'
+        ],
+        4: [
+          'Google Maps thực chất là ứng dụng siêu đỉnh của toàn bộ Chương 1 Địa lí lớp 6!',
+          'Thứ nhất, vệ tinh G P S tìm chính xác Vĩ độ và Kinh độ để đặt chấm tròn xanh của bạn lên bản đồ. Thứ hai, Google Maps dùng phép chiếu bản đồ để trải phẳng quả cầu 3D lên màn hình điện thoại.',
+          'Thứ ba, khi bạn phóng to thu nhỏ là bạn đang đổi tỉ lệ bản đồ: tỉ lệ càng lớn thì càng thấy rõ từng con phố, tòa nhà. Và thứ tư, mọi thứ bạn thấy trên Google Maps đều chia thành 3 loại kí hiệu như Bài 4 sách giáo khoa: kí hiệu vùng là công viên hồ nước, kí hiệu đường là phố xá và đường tắc, còn kí hiệu điểm là trường học, quán ăn và các tòa nhà 3D!'
+        ]
+      };
+      if (typeof startTTS === 'function' && scripts[num]) {
+        startTTS('sec' + num, scripts[num]);
+      }
+    }
+
+    function speakFullPage() {
+      if (typeof startTTS !== 'function') return;
+      startTTS('full', [
+        'Xin chào các bạn lớp 6A03! Hôm nay chúng ta cùng khám phá Quả Địa Cầu 3D về Kinh độ, Vĩ độ, 4 Bán cầu, 24 Múi giờ G M T và bí mật của Google Maps.',
+        'Đường Xích đạo 0 độ nằm ngang chia Trái Đất thành Nửa cầu Bắc và Nửa cầu Nam. Đường Kinh tuyến gốc 0 độ đi qua Greenwich ở Anh chia thành Bán cầu Đông và Bán cầu Tây.',
+        'Trong nhóm người quen của chúng ta: nhà mình ở Hà Nội, anh Bi ở Singapore, bạn Minh ở Hokkaido Nhật Bản, anh Lì ở Pháp và anh Minh ở Đức đều thuộc Bắc bán cầu và Đông bán cầu. Riêng bạn Jack ở Sydney nước Úc thuộc Nam bán cầu; còn bạn ở New York nước Mỹ thuộc Tây bán cầu.',
+        'Về 24 múi giờ G M T: đi sang Đông thì cộng giờ, đi sang Tây thì trừ giờ. So với Việt Nam G M T cộng 7, Singapore sớm hơn 1 giờ, Nhật Bản sớm hơn 2 giờ, Sydney Úc sớm hơn 3 giờ, Pháp và Đức muộn hơn 6 giờ, còn New York muộn hơn đúng 12 giờ.',
+        'Cuối cùng, Google Maps vận dụng trọn vẹn Chương 1 Địa lí 6: từ tọa độ kinh vĩ độ của vệ tinh G P S, phép chiếu bản đồ, la bàn phương hướng, tỉ lệ bản đồ khi phóng to thu nhỏ, đến 3 loại kí hiệu vùng, đường và điểm tòa nhà. Chúc bạn làm đúng hết 12 câu hỏi kiểm tra ở cuối trang nhé!'
+      ]);
+    }
+
+    // ==================== 10. KHỞI TẠO TRANG ====================
+    renderFriendsGrid();
+    renderSelectedFriendCard();
+    renderFriendsTable();
+    renderTZRibbon();
+    renderTZInspector();
+    renderQuiz();
+    onVNTimeChange(12);
+    animateGlobe();
+  </script>
+</body>
+</html>
