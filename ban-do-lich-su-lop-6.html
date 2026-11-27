@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bản Đồ Lịch Sử Lớp 6 &amp; Bí Kíp 10 Điểm — Lớp 6A03</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+    .tab-btn-active {
+      background: linear-gradient(135deg, #b45309, #dc2626);
+      color: #ffffff;
+      box-shadow: 0 6px 16px -4px rgba(180, 83, 9, 0.45);
+    }
+    .chapter-card-active {
+      box-shadow: 0 0 0 3px #f59e0b, 0 12px 24px -8px rgba(245, 158, 11, 0.35);
+      transform: translateY(-2px);
+    }
+    .blur-cell {
+      filter: blur(5px);
+      user-select: none;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+    .blur-cell:hover, .blur-cell.revealed {
+      filter: none;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeUp 0.25s ease-out; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased min-h-screen flex flex-col">
+
+  <!-- HERO HEADER -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-amber-950 to-rose-950 text-white shadow-xl">
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-9">
+      <!-- Top nav bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+        <div class="flex flex-wrap items-center gap-2">
+          <a href="index.html" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs sm:text-sm font-bold transition">🏠 Trang chủ</a>
+          <a href="ban-do-dia-li-lop-6.html" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs sm:text-sm font-bold transition">🗺️ Bản đồ Địa lí 6</a>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="speakIntro()" data-tts-id="intro" type="button" class="tts-btn px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs sm:text-sm font-bold shadow cursor-pointer transition">🔊 Nghe giới thiệu</button>
+          <button id="copyLinkBtn" onclick="copyShareLink()" type="button" class="px-3 py-1.5 rounded-full bg-amber-500/90 hover:bg-amber-500 text-slate-950 text-xs sm:text-sm font-bold shadow cursor-pointer transition">🔗 Chia sẻ</button>
+          <button id="themeToggle" type="button" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-xs font-bold cursor-pointer transition"><span id="themeIcon">🌙</span> <span id="themeLabel">Tối</span></button>
+        </div>
+      </div>
+
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs font-extrabold mb-3">
+        🏛️ BẢN ĐỒ TƯ DUY &amp; BÍ KÍP 10 ĐIỂM • LỊCH SỬ 6 (KNTT)
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+        Lịch Sử Lớp 6: Hiểu Quy Luật — Né Bẫy Đề — Ăn Trọn 10 Điểm!
+      </h1>
+      <p class="mt-2.5 text-sm sm:text-base text-amber-100/90 max-w-3xl leading-relaxed">
+        Không cần học vẹt ngày tháng! Toàn bộ <strong>5 Chương • 20 Bài học</strong> (từ Người tối cổ đến Chiến thắng Bạch Đằng năm 938) được xâu chuỗi theo quy luật nhân – quả, ma trận so sánh, Top 10 bẫy hay sai và đấu trường luyện phản xạ.
+      </p>
+
+      <!-- Quick jump pills -->
+      <div class="mt-5 flex flex-wrap gap-2">
+        <button onclick="switchTab(1); selectChapter(1)" type="button" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-amber-500/30 border border-white/15 text-xs font-bold transition cursor-pointer">Ch.1: Học sử &amp; Thời gian</button>
+        <button onclick="switchTab(1); selectChapter(2)" type="button" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-amber-500/30 border border-white/15 text-xs font-bold transition cursor-pointer">Ch.2: Xã hội nguyên thuỷ</button>
+        <button onclick="switchTab(1); selectChapter(3)" type="button" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-amber-500/30 border border-white/15 text-xs font-bold transition cursor-pointer">Ch.3: 4 nền văn minh cổ đại</button>
+        <button onclick="switchTab(1); selectChapter(4)" type="button" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-amber-500/30 border border-white/15 text-xs font-bold transition cursor-pointer">Ch.4: Đông Nam Á cổ</button>
+        <button onclick="switchTab(1); selectChapter(5)" type="button" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-amber-500/30 border border-white/15 text-xs font-bold transition cursor-pointer">Ch.5: Việt Nam đến 938</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- STICKY TAB NAV -->
+  <nav class="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 flex items-center gap-2 overflow-x-auto">
+      <button id="tabBtn-1" onclick="switchTab(1)" type="button" class="tab-btn tab-btn-active shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer transition">🗺️ 1. Bản đồ 5 Chương &amp; Thời gian</button>
+      <button id="tabBtn-2" onclick="switchTab(2)" type="button" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition">⚙️ 2. 6 Quy luật &amp; Sự thật</button>
+      <button id="tabBtn-3" onclick="switchTab(3)" type="button" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition">📊 3. Ma trận So sánh</button>
+      <button id="tabBtn-4" onclick="switchTab(4)" type="button" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition">🪤 4. Top 10 Bẫy đề thi</button>
+      <button id="tabBtn-5" onclick="switchTab(5)" type="button" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition">🏆 5. Bí kíp 10đ &amp; Quiz 15 câu</button>
+      <button id="tabBtn-6" onclick="switchTab(6)" type="button" class="tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition">📚 6. Tra cứu 20 Bài</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-1 w-full">
+
+    <!-- ==================== TAB 1: BẢN ĐỒ 5 CHƯƠNG & THỜI GIAN ==================== -->
+    <section id="tabPanel-1" class="animate-fade-up space-y-8">
+      <!-- 5-chapter interactive grid -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">🧭 Sơ đồ Dòng chảy 5 Chương Lịch sử 6</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Bấm vào từng chương để xem mạch liên kết, kiến thức bắt buộc phải thuộc và chỗ hay nhầm nhất!</p>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200 text-xs font-extrabold">5 Chương • 20 Bài • SGK tr. 7–94</span>
+        </div>
+
+        <div id="chaptersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"></div>
+
+        <!-- Selected chapter detail -->
+        <div id="chapterDetail" class="mt-5 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-5"></div>
+      </div>
+
+      <!-- Interactive Timeline SVG -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">⏳ Trục Thời Gian Vàng (12 Mốc Bắt Buộc Phải Nhớ)</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Bấm vào từng chấm tròn trên trục thời gian để xem sự kiện và mẹo nhớ 5 giây!</p>
+          </div>
+          <button onclick="speakTimeline()" data-tts-id="timeline" type="button" class="tts-btn px-3 py-1.5 rounded-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold cursor-pointer transition">🔊 Nghe trục thời gian</button>
+        </div>
+
+        <div class="overflow-x-auto pb-2">
+          <svg id="timelineSvg" viewBox="0 0 1080 185" class="w-full min-w-[780px] h-auto select-none"></svg>
+        </div>
+
+        <div id="timelineInfo" class="mt-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 p-4"></div>
+      </div>
+
+      <!-- Interactive TCN / CN Time Calculator Simulator -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border-2 border-indigo-300 dark:border-indigo-700/70 p-5 sm:p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 text-[11px] font-extrabold mb-1">MÔ PHỎNG TƯƠNG TÁC • BÀI 3 (HAY THI NHẤT GIỮA KÌ 1!)</span>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">🧮 Máy Tính Thời Gian Lịch Sử (TCN ↔ CN &amp; Đổi Thế Kỉ)</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Nhập bất kỳ năm nào hoặc bấm mốc mẫu để xem máy vẽ trục Công lịch, tính khoảng cách tới năm 2026 và đổi ra Thế kỉ La Mã!</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+          <div class="lg:col-span-5 space-y-3">
+            <div class="flex gap-2">
+              <input id="calcYear" type="number" min="1" max="5000" value="208"
+                class="w-32 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-extrabold text-base focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+              <select id="calcEra"
+                class="flex-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="TCN" selected>Trước Công nguyên (TCN)</option>
+                <option value="CN">Công nguyên (CN)</option>
+              </select>
+              <button onclick="updateTimeCalc()" type="button" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm cursor-pointer transition">Tính</button>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="setCalcPreset(3200,'TCN','Mê-nét thống nhất Ai Cập')" type="button" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-xs font-bold cursor-pointer">3200 TCN (Ai Cập)</button>
+              <button onclick="setCalcPreset(208,'TCN','Thục Phán lập nước Âu Lạc')" type="button" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-xs font-bold cursor-pointer">208 TCN (Âu Lạc)</button>
+              <button onclick="setCalcPreset(179,'TCN','Triệu Đà chiếm Âu Lạc')" type="button" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-xs font-bold cursor-pointer">179 TCN (Bắc thuộc)</button>
+              <button onclick="setCalcPreset(40,'CN','Khởi nghĩa Hai Bà Trưng')" type="button" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-xs font-bold cursor-pointer">40 CN (Hai Bà Trưng)</button>
+              <button onclick="setCalcPreset(938,'CN','Chiến thắng Bạch Đằng')" type="button" class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-xs font-bold cursor-pointer">938 CN (Bạch Đằng)</button>
+            </div>
+            <div class="rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 p-3 text-xs leading-relaxed">
+              <strong>💡 Mẹo nhớ 10 giây:</strong><br/>
+              • Từ <strong>TCN → Năm hiện tại</strong>: <strong>CỘNG</strong> 2 số lại (vì ở hai bên mốc năm 1).<br/>
+              • Từ <strong>CN → Năm hiện tại</strong>: <strong>TRỪ</strong> 2 số (vì ở cùng bên phải).<br/>
+              • <strong>Đổi sang Thế kỉ:</strong> Chia 100 rồi <strong>làm tròn lên</strong>! (VD: 208 → 2,08 → <strong>Thế kỉ III</strong>; 938 → 9,38 → <strong>Thế kỉ X</strong>).
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 space-y-3">
+            <svg id="calcSvg" viewBox="0 0 600 115" class="w-full h-auto rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700"></svg>
+            <div id="calcOutput" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: 6 QUY LUẬT & SỰ THẬT ==================== -->
+    <section id="tabPanel-2" class="hidden animate-fade-up space-y-8">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">⚙️ 6 Quy Luật &amp; Nguyên Lý Vàng Của Lịch Sử 6</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Nắm 6 quy luật này, bạn sẽ hiểu ngay TẠI SAO sự kiện xảy ra — gặp câu tự luận khó vẫn tự suy luận ra ý đúng!</p>
+        </div>
+        <button onclick="speakRules()" data-tts-id="rules" type="button" class="tts-btn px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold cursor-pointer transition">🔊 Nghe 6 quy luật</button>
+      </div>
+
+      <div id="rulesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+
+      <!-- Surprising Facts -->
+      <div class="rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-rose-950/30 border border-amber-200 dark:border-amber-800/60 p-5 sm:p-6">
+        <h3 class="text-lg sm:text-xl font-extrabold text-amber-900 dark:text-amber-200 mb-3">🤯 8 Sự Thật Thú Vị Trong SGK (Đọc 1 Lần Nhớ Cả Đời!)</h3>
+        <div id="factsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: MA TRẬN SO SÁNH ==================== -->
+    <section id="tabPanel-3" class="hidden animate-fade-up space-y-7">
+      <div class="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm">
+        <div>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">📊 4 Ma Trận So Sánh &amp; Kiến Thức Bắt Buộc Phải Thuộc</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Chuyên trị câu hỏi tự luận so sánh 2–3 điểm! Bật chế độ <strong>Che để tự nhẩm</strong> rồi chạm vào từng ô để kiểm tra trí nhớ.</p>
+        </div>
+        <button id="recallToggleBtn" onclick="toggleRecallMode()" type="button" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-extrabold shadow cursor-pointer transition">🙈 Bật chế độ Che để tự ôn</button>
+      </div>
+
+      <!-- Matrix 1: Phương Đông vs Phương Tây -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <h3 class="text-base sm:text-lg font-extrabold text-amber-700 dark:text-amber-300">1️⃣ So sánh 4 Nền Văn Minh Phương Đông vs Phương Tây Cổ Đại (Chương 3)</h3>
+          <span class="text-xs font-bold text-slate-500">SGK Bài 7 → Bài 10</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Quốc gia</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Tự nhiên cốt lõi</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Kinh tế &amp; Nhà nước</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Chữ viết &amp; Số đếm</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Thành tựu phải nhớ</th>
+              </tr>
+            </thead>
+            <tbody id="matrix1Body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Matrix 2: 3 Quốc gia cổ trên đất Việt Nam -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <h3 class="text-base sm:text-lg font-extrabold text-emerald-700 dark:text-emerald-300">2️⃣ So sánh 3 Quốc Gia Cổ Trên Đất Nước Việt Nam (Bài 14, 19, 20)</h3>
+          <span class="text-xs font-bold text-slate-500">Bắc Bộ • Trung Bộ • Nam Bộ</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Tiêu chí</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Văn Lang – Âu Lạc</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Chăm-pa (Lâm Ấp)</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Phù Nam</th>
+              </tr>
+            </thead>
+            <tbody id="matrix2Body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Matrix 3: 8 Mốc đấu tranh thời Bắc thuộc -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <h3 class="text-base sm:text-lg font-extrabold text-rose-700 dark:text-rose-300">3️⃣ Chuỗi 8 Mốc Đấu Tranh Giành Độc Lập Thời Bắc Thuộc (40 → 938)</h3>
+          <span class="text-xs font-bold text-slate-500">SGK Bài 16 &amp; Bài 18 (Trọng tâm thi Học kì 2!)</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Thời gian</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Người lãnh đạo</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Chống kẻ thù nào?</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Địa bàn / Kinh đô</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Điểm sáng &amp; Ý nghĩa</th>
+              </tr>
+            </thead>
+            <tbody id="matrix3Body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Matrix 4: Tiến hoá & Di chỉ Việt Nam -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <h3 class="text-base sm:text-lg font-extrabold text-sky-700 dark:text-sky-300">4️⃣ Tiến Hoá Loài Người &amp; Các Di Chỉ Khảo Cổ Tại Việt Nam (Bài 4–6)</h3>
+          <span class="text-xs font-bold text-slate-500">Đá cũ → Đá mới → Đồ đồng</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Giai đoạn</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Niên đại</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Tổ chức &amp; Công cụ</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Dấu tích tiêu biểu ở Việt Nam</th>
+              </tr>
+            </thead>
+            <tbody id="matrix4Body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: TOP 10 BẪY ĐỀ THI ==================== -->
+    <section id="tabPanel-4" class="hidden animate-fade-up space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">🪤 Top 10 Bẫy Đề Thi Lịch Sử 6 &amp; Cách Né Trong 3 Giây</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">90% các bạn bị mất điểm 10 là do vướng phải 1 trong 10 cái bẫy quen thuộc dưới đây!</p>
+        </div>
+        <button onclick="speakTraps()" data-tts-id="traps" type="button" class="tts-btn px-3.5 py-1.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold cursor-pointer transition">🔊 Nghe Top 10 bẫy</button>
+      </div>
+
+      <div id="trapsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
+
+    <!-- ==================== TAB 5: BÍ KÍP 10 ĐIỂM & QUIZ ==================== -->
+    <section id="tabPanel-5" class="hidden animate-fade-up space-y-8">
+      <!-- 4-Step 10-Point Strategy -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">🏆 Công Thức 4 Bước Ăn Trọn 10 Điểm Môn Lịch Sử</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Chiến thuật làm bài thực chiến cho kiểm tra 15 phút, giữa kì và cuối kì!</p>
+          </div>
+          <button onclick="speakStrategy()" data-tts-id="strategy" type="button" class="tts-btn px-3.5 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold cursor-pointer transition">🔊 Nghe bí kíp 10đ</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800/60 p-4">
+            <div class="font-extrabold text-sky-800 dark:text-sky-200 text-sm mb-1.5">🎯 Bước 1: Trắc nghiệm — Gạch chân 3 Từ khoá Vàng</div>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              Đọc đề gạch ngay 3 thứ: <strong>Thời gian</strong> (TCN/CN, thế kỉ nào?), <strong>Đối tượng</strong> (Ai Cập hay Lưỡng Hà? Hán hay Đường?), và <strong>Từ bẫy</strong> (<em>"không đúng"</em>, <em>"sớm nhất"</em>, <em>"quan trọng nhất"</em>). Loại 2 đáp án sai rõ ràng trước khi chọn!
+            </p>
+          </div>
+          <div class="rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 p-4">
+            <div class="font-extrabold text-amber-800 dark:text-amber-200 text-sm mb-1.5">✍️ Bước 2: Tự luận kể sự kiện — Dùng Khung 5 Ý (Khỏi thiếu!)</div>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              Khi đề hỏi trình bày 1 cuộc khởi nghĩa hay 1 nhà nước, cứ gạch đủ 5 đầu dòng: <strong>① Thời gian</strong> → <strong>② Nguyên nhân</strong> → <strong>③ Lãnh đạo &amp; Địa điểm</strong> → <strong>④ Diễn biến chính (2–3 mốc)</strong> → <strong>⑤ Kết quả &amp; Ý nghĩa</strong>. Thầy cô chấm theo ý, viết tách dòng rất dễ ăn trọn điểm!
+            </p>
+          </div>
+          <div class="rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 p-4">
+            <div class="font-extrabold text-emerald-800 dark:text-emerald-200 text-sm mb-1.5">⚖️ Bước 3: Tự luận "So sánh / Vì sao?" — Kẻ bảng &amp; Nối Nhân – Quả</div>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              • <strong>Đề so sánh</strong> (VD: Văn Lang vs Âu Lạc; Chăm-pa vs Phù Nam): Luôn nêu <strong>Giống nhau</strong> trước, rồi kẻ bảng <strong>Khác nhau</strong> theo tiêu chí (Địa bàn, Kinh tế, Nhà nước, Văn hoá).<br/>
+              • <strong>Đề "Vì sao?"</strong>: Lôi ngay <strong>6 Quy luật ở Tab 2</strong> (Điều kiện tự nhiên → Kinh tế → Xã hội).
+            </p>
+          </div>
+          <div class="rounded-xl bg-violet-50 dark:bg-violet-950/40 border border-violet-200 dark:border-violet-800/60 p-4">
+            <div class="font-extrabold text-violet-800 dark:text-violet-200 text-sm mb-1.5">🌟 Bước 4: Câu Vận dụng (Lấy điểm 9–10) — Nối Quá Khứ Với Hôm Nay</div>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              Luôn liên hệ 1 di sản/phong tục đang còn sống: <em>Giỗ Tổ 10/3, bánh chưng bánh giầy, tiếng Việt, Chùa Trấn Quốc, Thánh địa Mỹ Sơn, lễ hội Ka-tê, chữ số 0, dương lịch…</em> + nêu 2 việc học sinh lớp 6 có thể làm (tìm hiểu, trân trọng, giữ gìn di tích, học tốt).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15-Question Boss Quiz -->
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border-2 border-amber-400/70 dark:border-amber-600/60 p-5 sm:p-6 shadow-md">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-200 text-[11px] font-extrabold mb-1">ĐẤU TRƯỜNG PHẢN XẠ • PHỦ ĐỦ 5 CHƯƠNG + TOP BẪY</span>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">🎮 Thử Thách 15 Câu Săn Điểm 10 Lịch Sử 6</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="quizScoreBadge" class="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-xs sm:text-sm font-extrabold">Điểm: 0 / 15</span>
+            <button onclick="resetQuiz()" type="button" class="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-xs font-extrabold cursor-pointer transition">🔄 Làm lại</button>
+          </div>
+        </div>
+
+        <div id="quizContainer" class="space-y-4"></div>
+
+        <div id="quizSummary" class="hidden mt-6 rounded-2xl bg-gradient-to-r from-amber-500 to-rose-500 text-white p-5 text-center shadow-lg"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: TRA CỨU 20 BÀI HỌC ==================== -->
+    <section id="tabPanel-6" class="hidden animate-fade-up space-y-5">
+      <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">📚 Bảng Tra Cứu Nhanh 20 Bài Lịch Sử 6 (SGK KNTT)</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Gõ từ khoá (VD: <em>Bạch Đằng, Ai Cập, Phù Nam, La Mã, 208</em>…) hoặc lọc theo chương để ôn cực nhanh!</p>
+          </div>
+          <span id="lessonCountBadge" class="px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-200 text-xs font-extrabold">20 / 20 bài</span>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5 mb-4">
+          <input id="lessonSearch" oninput="renderLessonsTable()" type="text" placeholder="🔍 Tìm tên bài, nhân vật, mốc năm..."
+            class="flex-1 min-w-[220px] px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500" />
+          <select id="lessonChapterFilter" onchange="renderLessonsTable()"
+            class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <option value="0">Tất cả 5 Chương</option>
+            <option value="1">Chương 1: Vì sao phải học lịch sử?</option>
+            <option value="2">Chương 2: Xã hội nguyên thuỷ</option>
+            <option value="3">Chương 3: Xã hội cổ đại</option>
+            <option value="4">Chương 4: Đông Nam Á cổ</option>
+            <option value="5">Chương 5: Việt Nam đến thế kỉ X</option>
+          </select>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold w-16">Bài</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Tên bài &amp; Trang SGK</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold w-28">Trọng tâm</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold">Từ khoá cốt lõi phải nhớ</th>
+                <th class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold w-24 text-center">Nghe</th>
+              </tr>
+            </thead>
+            <tbody id="lessonsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 py-5 text-center text-xs text-slate-500 dark:text-slate-400">
+    Dự án học tập lớp 6A03 • Bản đồ Hệ thống Kiến thức Lịch sử 6 (Kết nối tri thức với cuộc sống)
+  </footer>
+
+  <script src="assets/common.js"></script>
+  <script>
+    // ==================== DATA: 5 CHAPTERS ====================
+    const CHAPTERS = [
+      {
+        id: 1,
+        short: 'Chương 1',
+        title: 'Vì sao phải học lịch sử?',
+        icon: '🧭',
+        lessons: 'Bài 1 – Bài 3 (tr. 7–15)',
+        color: 'sky',
+        core: 'Học sử để biết cội nguồn, rút kinh nghiệm từ quá khứ; dùng 4 nguồn tư liệu và biết cách tính thời gian TCN/CN.',
+        prereq: 'Nền tảng bắt buộc cho toàn bộ 4 chương sau (biết đọc trục thời gian, thế kỉ, thiên niên kỉ).',
+        next: 'Mở khoá công cụ để đọc hiểu niên đại hàng triệu năm ở Chương 2 và hàng nghìn năm TCN ở Chương 3.',
+        mustKnow: [
+          'Lịch sử là những gì đã xảy ra trong quá khứ VÀ là khoa học phục dựng quá khứ.',
+          '4 nguồn tư liệu: Hiện vật (trung thực), Chữ viết (đầy đủ nhưng mang tính chủ quan), Truyền miệng (không rõ ngày/nơi), Tư liệu gốc (đáng tin cậy nhất).',
+          'Âm lịch theo Mặt Trăng quay quanh Trái Đất; Dương lịch (Công lịch) theo Trái Đất quay quanh Mặt Trời.',
+          'Thập kỉ = 10 năm; Thế kỉ = 100 năm; Thiên niên kỉ = 1 000 năm. Công lịch lấy năm 1 (Chúa Giê-su ra đời) làm mốc.'
+        ],
+        trap: 'Hay nhầm cách tính khoảng cách năm TCN đến hiện tại (phải CỘNG, không trừ!) và nhầm Bia Tiến sĩ chỉ là hiện vật (nó là tư liệu chữ viết & gốc).'
+      },
+      {
+        id: 2,
+        short: 'Chương 2',
+        title: 'Xã hội nguyên thuỷ',
+        icon: '🪨',
+        lessons: 'Bài 4 – Bài 6 (tr. 16–27)',
+        color: 'amber',
+        core: 'Từ Vượn người tiến hoá thành Người tinh khôn nhờ lao động; kim loại xuất hiện tạo của cải dư thừa làm xã hội nguyên thuỷ tan rã.',
+        prereq: 'Biết đọc mốc "vạn năm trước" và "thiên niên kỉ TCN" từ Chương 1.',
+        next: 'Khi xã hội nguyên thuỷ tan rã, giai cấp và các Nhà nước cổ đại đầu tiên ra đời ở Chương 3.',
+        mustKnow: [
+          'Tiến hoá: Vượn người (5–6 triệu năm) → Người tối cổ (4 triệu năm) → Người tinh khôn (15 vạn năm).',
+          '2 giai đoạn: Bầy người nguyên thuỷ (Người tối cổ, đá ghè đẽo, săn bắt hái lượm) → Công xã thị tộc (Người tinh khôn, đá mài, trồng trọt chăn nuôi, làm chung hưởng chung).',
+          'Kim loại: Đồng đỏ (3500 TCN) → Đồng thau (2000 TCN) → Sắt (cuối TNK II – đầu TNK I TCN).',
+          'Phương Đông phân hoá sớm nhưng KHÔNG TRIỆT ĐỂ vì phải liên kết làm thuỷ lợi và chống ngoại xâm.',
+          'Việt Nam: An Khê (Gia Lai, ~80 vạn năm, cổ xưa nhất VN), Thẩm Khuyên – Thẩm Hai, Núi Đọ, Hoà Bình – Bắc Sơn → Đồ đồng: Phùng Nguyên (2000 TCN) → Đồng Đậu (1500 TCN) → Gò Mun (1000 TCN).'
+        ],
+        trap: 'Hay quên lý do phương Đông phân hoá "không triệt để" (làm thuỷ lợi + chống ngoại xâm) và nhầm thứ tự Phùng Nguyên → Đồng Đậu → Gò Mun.'
+      },
+      {
+        id: 3,
+        short: 'Chương 3',
+        title: 'Xã hội cổ đại',
+        icon: '🏛️',
+        lessons: 'Bài 7 – Bài 10 (tr. 28–49)',
+        color: 'violet',
+        core: '4 nền văn minh phương Đông gắn với dòng sông lớn (quân chủ chuyên chế) đối lập với Hy Lạp – La Mã gắn với biển đảo (thành bang, dân chủ, đế chế).',
+        prereq: 'Hiểu sự xuất hiện kim loại và phân hoá xã hội ở Chương 2.',
+        next: 'Hai trung tâm văn minh Ấn Độ và Trung Quốc trực tiếp giao lưu, ảnh hưởng sâu sắc tới Đông Nam Á ở Chương 4.',
+        mustKnow: [
+          'Ai Cập (sông Nin, Pha-ra-ông, chữ tượng hình, giấy pa-pi-rút, hệ đếm 10, Kim tự tháp) & Lưỡng Hà (Ơ-phơ-rát & Ti-gơ-rơ, En-xi, chữ hình nêm trên đất sét, hệ đếm 60, Vườn treo Ba-bi-lon).',
+          'Ấn Độ (sông Ấn – sông Hằng, đẳng cấp Vác-na 4 tầng: Bra-man, Ksa-tri-a, Vai-si-a, Su-đra; chữ Phạn, 10 chữ số & số 0, Phật giáo & Hin-đu giáo, sử thi Ma-ha-bha-ra-ta & Ra-ma-y-a-na).',
+          'Trung Quốc (Hoàng Hà – Trường Giang; Hạ → Thương → Chu → Xuân Thu – Chiến Quốc → Tần 221 TCN; chữ giáp cốt, Kinh Thi, Sở Từ, Khổng Tử – Nho gia, Biển Thước, âm-dương lịch).',
+          'Hy Lạp – La Mã (nhiều cảng biển như Pi-rê; Hy Lạp: thành bang dân chủ A-ten, bỏ phiếu vỏ sò; La Mã: đế chế từ 27 TCN – Ốc-ta-vi-út; chữ La-tinh, số La Mã, dương lịch, Pi-ta-go/Ác-si-mét, Đền Pác-tê-nông, Đấu trường Cô-li-dê).'
+        ],
+        trap: 'Cực hay nhầm người Ả Rập phát minh số 0 (đúng là Ấn Độ!), nhầm hệ đếm 10 (Ai Cập) với 60 (Lưỡng Hà), và nhầm La Mã cũng là dân chủ.'
+      },
+      {
+        id: 4,
+        short: 'Chương 4',
+        title: 'Đông Nam Á cổ (đến TK X)',
+        icon: '⛵',
+        lessons: 'Bài 11 – Bài 13 (tr. 50–58)',
+        color: 'emerald',
+        core: 'Đông Nam Á là "ngã tư đường" giữa Ấn Độ Dương – Thái Bình Dương, cái nôi lúa nước và gia vị; tiếp thu văn hoá Ấn Độ & Trung Quốc một cách sáng tạo.',
+        prereq: 'Nắm được văn minh Ấn Độ và Trung Quốc ở Chương 3.',
+        next: 'Đặt Việt Nam cổ đại (Văn Lang – Âu Lạc, Chăm-pa, Phù Nam) vào đúng bức tranh chung của khu vực ở Chương 5.',
+        mustKnow: [
+          'Vị trí: Gồm ĐNA lục địa & ĐNA hải đảo, nằm trong vùng nhiệt đới gió mùa → cái nôi văn minh lúa nước & "Con đường gia vị".',
+          'Quốc gia sơ kì (TK VII TCN – TK VII): Văn Lang – Âu Lạc, Chăm-pa, Phù Nam, Đva-ra-va-ti, Ta-ru-ma... Hải cảng: Óc Eo, Ta-cô-la.',
+          'Vương quốc phong kiến (TK VII – X): Đại Cồ Việt, Pa-gan, Chân Lạp, Sri Vi-giay-a (đảo Vàng, thương cảng Pa-lem-bang), Ka-lin-ga. Thương cảng Đại Chiêm (Chăm-pa).',
+          'Giao lưu văn hoá: Dung hợp tín ngưỡng bản địa (phồn thực, thờ tổ tiên, cầu mưa) với Ấn Độ giáo (Thần – Vua) & Phật giáo. Hầu hết cải biên chữ Ấn Độ, RIÊNG người Việt kế thừa chữ Hán. Kiến trúc: Đền Bô-rô-bu-đua (In-đô-nê-xi-a), Mỹ Sơn (Việt Nam).'
+        ],
+        trap: 'Hay nhầm ĐNA lục địa (nông nghiệp chính: Chăm-pa, Chân Lạp) với ĐNA hải đảo (thương mại biển chính: Sri Vi-giay-a, Ma-ta-ram) và quên ngoại lệ chữ viết của người Việt.'
+      },
+      {
+        id: 5,
+        short: 'Chương 5',
+        title: 'Việt Nam (TK VII TCN – đầu TK X)',
+        icon: '🇻🇳',
+        lessons: 'Bài 14 – Bài 20 (tr. 59–94)',
+        color: 'rose',
+        core: 'Từ Nhà nước đầu tiên (Văn Lang – Âu Lạc), trải qua hơn 1000 năm Bắc thuộc kiên cường đấu tranh & giữ gìn bản sắc, tới chiến thắng Bạch Đằng 938; song hành cùng Chăm-pa và Phù Nam.',
+        prereq: 'Hiểu thời đại đồ đồng Việt Nam (Chương 2) và giao lưu văn hoá ĐNA (Chương 4).',
+        next: 'Chương trọng tâm lớn nhất (7 bài), chiếm tỉ trọng điểm cao nhất Học kì 2 và nối thẳng lên Lịch sử lớp 7!',
+        mustKnow: [
+          'Văn Lang (TK VII TCN, Hùng Vương, Phong Châu, 15 bộ: Lạc hầu – Lạc tướng – Bồ chính) → Âu Lạc (208 TCN, Thục Phán – An Dương Vương, Cổ Loa 3 vòng xoáy trôn ốc, nỏ Liên Châu).',
+          'Bắc thuộc từ 179 TCN (Triệu Đà): Chính sách cai trị (chia châu-quận-huyện, sau năm 43 từ huyện trở lên do người Hán nắm), bóc lột (độc quyền sắt & muối, cống nạp), đồng hoá.',
+          '8 mốc đấu tranh: Hai Bà Trưng (40, Hán) → Bà Triệu (248, Ngô) → Lý Bí lập Vạn Xuân (542–544, Lương) → Mai Thúc Loan (713–722, Đường) → Phùng Hưng (cuối TK VIII, Đường) → Khúc Thừa Dụ (905) & cải cách Khúc Hạo (907) → Dương Đình Nghệ (931, Nam Hán) → Ngô Quyền – Bạch Đằng (938, Nam Hán).',
+          'Bảo tồn văn hoá: Giữ tiếng Việt, thờ tổ tiên, ăn trầu, nhuộm răng đen, xăm mình, bánh chưng bánh giầy + tiếp thu có chọn lọc (làm giấy, thuỷ tinh, chữ Hán, lễ tết).',
+          'Chăm-pa (năm 192, Khu Liên, miền Trung, thương cảng Đại Chiêm, Thánh địa Mỹ Sơn, lễ hội Ka-tê) & Phù Nam (TK I–VII, Nam Bộ, văn hoá & cảng thị Óc Eo, bị Chân Lạp xâm chiếm đầu TK VII).'
+        ],
+        trap: 'Cực hay nhầm triều đại đô hộ của từng cuộc khởi nghĩa (Hán / Ngô / Lương / Đường / Nam Hán) và nhầm vai trò Khúc Thừa Dụ (905 – dựng quyền tự chủ) với Ngô Quyền (938 – chấm dứt vĩnh viễn Bắc thuộc).'
+      }
+    ];
+
+    // ==================== DATA: 12 TIMELINE MILESTONES ====================
+    const TIMELINE = [
+      { x: 45,  label: '5–6 tr năm', title: 'Vượn người xuất hiện', detail: 'Chặng đầu tiến hoá từ Vượn người thành người (khoảng 5–6 triệu năm trước). Dấu tích tìm thấy ở Đông Phi, Mi-an-ma, In-đô-nê-xi-a.', tip: 'Nhớ bộ ba: 5–6 triệu (Vượn người) → 4 triệu (Tối cổ) → 15 vạn (Tinh khôn).' },
+      { x: 135, label: '3500 TCN', title: 'Phát hiện Đồng đỏ', detail: 'Người Tây Á và Ai Cập biết dùng đồng đỏ; mở đầu thời đại kim loại làm xã hội nguyên thuỷ dần phân hoá.', tip: 'Đồng đỏ 3500 TCN → Đồng thau 2000 TCN → Sắt cuối TNK II TCN.' },
+      { x: 225, label: '3200 TCN', title: 'Vua Mê-nét lập Ai Cập', detail: 'Vua Mê-nét thống nhất các công xã (nôm) ven sông Nin thành Nhà nước Ai Cập cổ đại. Cùng khoảng TNK IV–III TCN, người Xu-me lập thành bang Lưỡng Hà.', tip: 'Ai Cập & Lưỡng Hà là 2 cái nôi văn minh sớm nhất thế giới!' },
+      { x: 315, label: '2000 TCN', title: 'Văn hoá Phùng Nguyên', detail: 'Mở đầu thời đại đồ đồng ở Bắc Bộ Việt Nam (~4000 năm trước), tiếp nối bởi Đồng Đậu (1500 TCN) và Gò Mun (1000 TCN).', tip: 'Mẹo nhớ thứ tự 3 chữ đầu: P (Phùng Nguyên) → Đ (Đồng Đậu) → G (Gò Mun).' },
+      { x: 405, label: 'TK VII TCN', title: 'Nhà nước Văn Lang', detail: 'Nhà nước đầu tiên của người Việt cổ ra đời ở Bắc Bộ & Bắc Trung Bộ, đứng đầu là Hùng Vương (15 bộ), đóng đô ở Phong Châu.', tip: 'Thế kỉ VII TCN = Mở ra thời kì dựng nước đầu tiên!' },
+      { x: 495, label: '208 TCN', title: 'Thục Phán lập Âu Lạc', detail: 'Sau khi kháng chiến chống Tần thắng lợi, Thục Phán xưng An Dương Vương lập nước Âu Lạc, dời đô xuống Cổ Loa (Đông Anh, Hà Nội).', tip: '208 TCN thuộc Thế kỉ III TCN (cách 2026 là 2234 năm!).' },
+      { x: 585, label: '179 TCN', title: 'Mở đầu Bắc thuộc', detail: 'Triệu Đà chiếm được Âu Lạc, mở ra hơn 1 000 năm đất nước bị các triều đại phong kiến phương Bắc đô hộ.', tip: 'Từ 179 TCN đến 938 CN = Hơn 1 100 năm Bắc thuộc!' },
+      { x: 675, label: 'Năm 1 CN', title: 'Mốc Công nguyên', detail: 'Công lịch lấy năm ra đời của Chúa Giê-su là năm 1 Công nguyên. Ngay trước đó là năm 1 TCN (không có năm 0).', tip: 'Mốc chia đôi trục thời gian: Trái là TCN, Phải là CN.' },
+      { x: 765, label: 'Năm 40', title: 'Khởi nghĩa Hai Bà Trưng', detail: 'Tháng 3 năm 40, Trưng Trắc & Trưng Nhị phất cờ ở Hát Môn đánh đuổi Tô Định (nhà Hán), đóng đô ở Mê Linh.', tip: 'Cuộc khởi nghĩa mở đầu thời Bắc thuộc — chống nhà Hán!' },
+      { x: 855, label: 'Năm 544', title: 'Lý Bí lập nước Vạn Xuân', detail: 'Sau khi khởi nghĩa đánh đuổi quân Lương (542), Lý Bí xưng Lý Nam Đế, lập nước Vạn Xuân (đóng đô cửa sông Tô Lịch). Sau Triệu Quang Phục giữ nước tới 602.', tip: 'Vạn Xuân = mong đất nước độc lập muôn mùa xuân!' },
+      { x: 945, label: 'Năm 905', title: 'Khúc Thừa Dụ dựng tự chủ', detail: 'Nhân nhà Đường suy yếu, Khúc Thừa Dụ đánh chiếm Đại La, tự xưng Tiết độ sứ. Năm 907, Khúc Hạo tiến hành cải cách khoan dung, giản dị.', tip: '905 Khúc Thừa Dụ mở nền tự chủ → 931 Dương Đình Nghệ giữ vững.' },
+      { x: 1035, label: 'Năm 938', title: 'Ngô Quyền – Bạch Đằng', detail: 'Ngô Quyền dùng trận địa cọc ngầm lợi dụng thuỷ triều đánh tan quân Nam Hán (Hoằng Tháo) trên sông Bạch Đằng.', tip: 'CHẤM DỨT VĨNH VIỄN Bắc thuộc, mở kỉ nguyên độc lập lâu dài!' }
+    ];
+
+    // ==================== DATA: 6 GOLDEN RULES ====================
+    const RULES = [
+      {
+        num: '01',
+        title: 'Công cụ tiến bộ → Xã hội đổi thay',
+        badge: 'Chương 2',
+        color: 'amber',
+        formula: 'Đá ghè đẽo → Đá mài → Kim loại (Đồng, Sắt) ⇒ Của cải dư thừa ⇒ Giàu – Nghèo ⇒ Nhà nước ra đời',
+        desc: 'Mọi bước ngoặt lớn của loài người thời xưa đều bắt đầu từ bàn tay lao động và công cụ mới. Khi lưỡi cày đồng/sắt giúp làm ra nhiều lúa gạo hơn mức ăn, của cải dư thừa rơi vào tay một số người → xuất hiện kẻ giàu, người nghèo → Xã hội nguyên thuỷ tan rã!',
+        example: 'Ví dụ dễ nhớ: Ở Việt Nam, nhờ đồ đồng Phùng Nguyên – Đồng Đậu – Gò Mun, người Việt cổ mới rời núi xuống đồng bằng sông Hồng trồng lúa và lập ra nước Văn Lang.'
+      },
+      {
+        num: '02',
+        title: 'Địa lí quyết định Kinh tế & Kiểu Nhà nước',
+        badge: 'Chương 3',
+        color: 'indigo',
+        formula: 'Sông lớn + Phù sa (Phương Đông) → Nông nghiệp + Trị thuỷ → Vua chuyên chế  |  Biển đảo + Cảng (Phương Tây) → Buôn bán biển → Thành bang & Dân chủ',
+        desc: 'Tại sao Ai Cập, Lưỡng Hà, Trung Quốc có 1 ông vua nắm toàn quyền, còn Hy Lạp lại chia thành hàng chục thành bang? Vì ở phương Đông phải gom sức cả nước đắp đê sông Nin, Hoàng Hà; còn Hy Lạp bị núi chia cắt thành ô nhỏ, đất ít nhưng nhiều cảng biển đẹp!',
+        example: 'Áp dụng ngay câu tự luận "Vì sao?": Hễ đề hỏi nguyên nhân hình thành văn minh hay kiểu nhà nước, hãy nhìn vào BẢN ĐỒ TỰ NHIÊN đầu tiên!'
+      },
+      {
+        num: '03',
+        title: 'Vị trí "Ngã tư đường" tạo Giao lưu & Chọn lọc',
+        badge: 'Chương 4',
+        color: 'emerald',
+        formula: 'Giữa Ấn Độ Dương & Thái Bình Dương + Giữa Ấn Độ & Trung Quốc ⇒ Cảng thị sầm uất + Tiếp thu sáng tạo',
+        desc: 'Đông Nam Á nằm ngay cầu nối giao thương Á – Âu (Con đường gia vị). Khi thương nhân mang theo tôn giáo, chữ viết, kiến trúc tới, cư dân bản địa không sao chép y nguyên mà kết hợp với văn hoá gốc của mình.',
+        example: 'Ví dụ: Người Chăm, Khơ-me biến chữ Phạn thành chữ riêng; còn người Việt tiếp thu chữ Hán nhưng vẫn nói tiếng Việt.'
+      },
+      {
+        num: '04',
+        title: 'Áp bức càng nặng → Khởi nghĩa càng mạnh',
+        badge: 'Chương 5',
+        color: 'rose',
+        formula: 'Cai trị hà khắc + Bóc lột tô thuế + Đồng hoá ⇒ Mâu thuẫn bao trùm ⇒ Chuỗi khởi nghĩa liên tục (40 → 938)',
+        desc: 'Suốt hơn 1000 năm Bắc thuộc, hễ triều đại phương Bắc nào (Hán, Ngô, Lương, Đường, Nam Hán) tăng thuế và đàn áp, nhân dân ta lại nổi dậy. Cuộc trước dù thất bại vẫn tạo đà và bài học cho cuộc sau, cho tới thắng lợi trọn vẹn năm 938!',
+        example: 'Mẹo làm tự luận "Nguyên nhân khởi nghĩa": Luôn gồm 2 vế: ① Chính sách cai trị hà khắc, thuế nặng của nhà [X]; ② Lòng yêu nước, khát vọng độc lập của nhân dân ta.'
+      },
+      {
+        num: '05',
+        title: '"Hoà nhập nhưng không hoà tan"',
+        badge: 'Bài 17',
+        color: 'teal',
+        formula: 'Giữ chặt lõi bản địa (Tiếng Việt, Phong tục, Làng xã) + Học cái hay có chọn lọc ⇒ 1000 năm vẫn là người Việt',
+        desc: 'Chính quyền phương Bắc nắm đến cấp huyện, nhưng cấp LÀNG XÃ vẫn do hào trưởng người Việt giữ. Nhờ vậy tiếng Việt, tục thờ tổ tiên, ăn trầu, bánh chưng bánh giầy sống bền bỉ; đồng thời dân ta học thêm nghề làm giấy, thuỷ tinh để mạnh lên!',
+        example: 'Đây là đáp án chuẩn 10/10 cho câu hỏi khó: "Vì sao trải qua hơn 1000 năm Bắc thuộc, người Việt không bị đồng hoá?"'
+      },
+      {
+        num: '06',
+        title: 'Nguyên tắc "Thám tử Sử học" (Kiểm chứng đa nguồn)',
+        badge: 'Bài 2',
+        color: 'sky',
+        formula: 'Tư liệu Hiện vật (trung thực) + Chữ viết (đầy đủ, có chủ quan) + Truyền miệng (gợi hiện thực) + Tư liệu Gốc (tin cậy nhất)',
+        desc: 'Nhà sử học giống như thám tử: không bao giờ tin 1 lời kể duy nhất! Phải ghép đồ vật đào dưới đất (trống đồng, bia đá) với sách ghi chép và truyền thuyết dân gian mới dựng lại đúng sự thật quá khứ.',
+        example: 'Ví dụ: Truyền thuyết Thánh Gióng, Sơn Tinh – Thuỷ Tinh (truyền miệng) kết hợp trống đồng Ngọc Lũ, lẫy nỏ Cổ Loa (hiện vật) giúp ta hiểu đời sống Văn Lang – Âu Lạc.'
+      }
+    ];
+
+    // ==================== DATA: 8 SURPRISING FACTS ====================
+    const FACTS = [
+      { icon: '📜', title: 'Chữ "Paper" từ Ai Cập!', text: 'Người Ai Cập ép thân cây pa-pi-rút (papyrus) làm giấy viết. Từ "paper" trong tiếng Anh bắt nguồn chính từ đây!' },
+      { icon: '0️⃣', title: 'Số 0 là của Ấn Độ!', text: '10 chữ số 0–9 ngày nay do người Ấn Độ cổ đại phát minh (đặc biệt là số 0), người Ả Rập chỉ học rồi truyền sang châu Âu.' },
+      { icon: '⏱️', title: 'Vì sao 1 giờ = 60 phút?', text: 'Do người Lưỡng Hà cổ đại phát minh hệ đếm 60! Nhờ họ ta có 60 giây, 60 phút và vòng tròn 360 độ.' },
+      { icon: '🐚', title: 'Bỏ phiếu bằng... vỏ sò!', text: 'Ở thành bang A-ten, ai bị nghi đe doạ dân chủ sẽ bị khắc tên lên mảnh vỏ sò/gốm. Đủ 6 000 phiếu phải rời A-ten 10 năm!' },
+      { icon: '🪙', title: 'Tiền vàng La Mã ở An Giang!', text: 'Khảo cổ ở di chỉ Óc Eo (Phù Nam) đào được cả đồng tiền vàng và huy chương La Mã cổ đại — chứng tỏ Phù Nam buôn bán xuyên đại dương!' },
+      { icon: '🗿', title: 'Bia chữ Phạn cổ nhất ĐNA ở VN!', text: 'Bia Võ Cạnh (Khánh Hoà, thế kỉ III–IV) là tấm bia khắc chữ Phạn cổ xưa nhất tìm thấy ở cả khu vực Đông Nam Á.' },
+      { icon: '🌿', title: '1 lạng gừng đắt bằng... con bò!', text: 'Thế kỉ X, 1 pao gừng (~4 lạng) ở châu Âu đắt ngang 1 con bò! Vì thế gia vị Đông Nam Á mới tạo nên "Con đường gia vị" lừng danh.' },
+      { icon: '🌊', title: 'Thuỷ triều Bạch Đằng chênh 2–3m!', text: 'Ngô Quyền chọn sông Bạch Đằng vì nước triều lên – xuống chênh tới 2–3m: triều lên giấu kín cọc bịt sắt, triều rút cọc nhô lên đâm thủng thuyền giặc!' }
+    ];
+
+    // ==================== DATA: 4 COMPARISON MATRICES ====================
+    const MATRIX_1 = [
+      ['Ai Cập cổ đại', 'Đông Bắc châu Phi, sông Nin ("tặng phẩm sông Nin")', 'Nông nghiệp lúa mì + thương mại sông. Quân chủ chuyên chế (vua Pha-ra-ông)', 'Chữ tượng hình (giấy pa-pi-rút); Hệ đếm thập phân (10)', 'Kim tự tháp Kê-ốp (147m), tượng Nhân sư, kĩ thuật ướp xác, lịch 12 tháng'],
+      ['Lưỡng Hà cổ đại', 'Tây Nam Á, giữa sông Ơ-phơ-rát & Ti-gơ-rơ', 'Nông nghiệp + buôn bán. Thành bang Xu-me → Ba-bi-lon (vua En-xi, Ha-mu-ra-bi)', 'Chữ hình nêm (trên đất sét ướt); Hệ đếm 60', 'Vườn treo Ba-bi-lon, bánh xe, cái cày, cỗ chiến xa, tính diện tích hình'],
+      ['Ấn Độ cổ đại', 'Bán đảo Nam Á, dãy Hi-ma-lay-a, sông Ấn (khô) & sông Hằng (mưa nhiều)', 'Nông nghiệp, thủ công. Chế độ 4 đẳng cấp Vác-na (Bra-man, Ksa-tri-a, Vai-si-a, Su-đra)', 'Chữ Phạn (San-xkrít); Phát minh 10 chữ số & số 0', 'Phật giáo (TK VI TCN) & Bà La Môn/Hin-đu; Ma-ha-bha-ra-ta, Ra-ma-y-a-na; Cột đá A-sô-ca, tháp San-chi'],
+      ['Trung Quốc cổ đại', 'Lưu vực Hoàng Hà & Trường Giang (đồng bằng Hoa Bắc/Trung/Nam)', 'Nông nghiệp + chăn nuôi. Hạ → Thương → Chu → Xuân Thu – Chiến Quốc → Tần (221 TCN)', 'Chữ giáp cốt (xương thú, mai rùa) → gốc chữ Hán', 'Kinh Thi, Sở Từ (Khuất Nguyên), Nho gia (Khổng Tử), Đạo gia, Đông y (Biển Thước), lịch âm-dương, đúc đồng'],
+      ['Hy Lạp & La Mã (Phương Tây)', 'Nam Âu, Địa Trung Hải; núi chia cắt, đất ít, nhiều vũng vịnh & cảng biển (Pi-rê)', 'Thủ công (rượu nho, dầu ô liu) & thương mại biển. Hy Lạp: Thành bang dân chủ (A-ten). La Mã: Đế chế (27 TCN, Ốc-ta-vi-út)', 'Hệ chữ cái La-tinh (A,B,C...); Chữ số La Mã (I,V,X,L,C,D,M)', 'Dương lịch; Pi-ta-go, Ta-lét, Ác-si-mét; Sử thi I-li-át, Ô-đi-xê; Đền Pác-tê-nông, Đấu trường Cô-li-dê, tượng Lực sĩ ném đĩa']
+    ];
+
+    const MATRIX_2 = [
+      ['Thời gian & Địa bàn', 'Văn Lang (TK VII TCN) → Âu Lạc (208–179 TCN) • Bắc Bộ & Bắc Trung Bộ', 'Năm 192 (Lâm Ấp) đến TK X • Dải đất miền Trung (Nam Hoành Sơn → sông Đồng Nai)', 'Thế kỉ I – đầu thế kỉ VII (bị Chân Lạp chiếm) • Nam Bộ (châu thổ sông Cửu Long)'],
+      ['Người lập / Kinh đô', 'Hùng Vương (Phong Châu) → An Dương Vương (Cổ Loa, Đông Anh, Hà Nội)', 'Khu Liên lập nước. Kinh đô: Sin-ha-pu-ra → Vi-ra-pu-ra → In-đra-pu-ra', 'Trung tâm chính trị – kinh tế lớn: Óc Eo (An Giang) & Ăng-co Bo-rây'],
+      ['Kinh tế nổi bật', 'Nông nghiệp trồng lúa nước dùng cày đồng, đúc đồng tinh xảo (trống đồng), rèn sắt', 'Trồng lúa, khai thác lâm-hải sản (trầm hương, kì nam, ngọc trai), GIỎI ĐI BIỂN (cảng Đại Chiêm)', 'Trồng lúa, thủ công (gốm, thuỷ tinh, trang sức), GIỎI BUÔN BÁN QUỐC TẾ (cảng thị Óc Eo)'],
+      ['Tổ chức xã hội', 'Văn Lang: Hùng Vương – Lạc hầu → Lạc tướng (Bộ) → Bồ chính (Chiềng, chạ)', 'Vua (Thần – Vua) → Tể tướng & 2 đại thần → Châu – Huyện – Làng. Tầng lớp: Tăng lữ, quý tộc, dân tự do, nô lệ', 'Vua quyền lực cao nhất → Quan lại nhiều cấp. Tầng lớp: Tăng lữ, quý tộc, dân tự do, nô lệ'],
+      ['Văn hoá đặc sắc', 'Thờ tổ tiên, thần tự nhiên; xăm mình, ăn trầu, nhuộm răng đen, bánh chưng bánh giầy; trống đồng Ngọc Lũ', 'Chữ Chăm cổ (từ chữ Phạn); Bà La Môn & Phật giáo; Thánh địa Mỹ Sơn, Phật viện Đồng Dương, lễ hội Ka-tê', 'Văn hoá Óc Eo; thờ đa thần, tiếp nhận & truyền bá Phật giáo – Bà La Môn; nhà sàn gỗ trên nước; tượng Vi-snu, Phật Sơn Thọ']
+    ];
+
+    const MATRIX_3 = [
+      ['40 – 43', 'Hai Bà Trưng (Trưng Trắc, Trưng Nhị)', 'Nhà Hán (Tô Định, Mã Viện)', 'Hát Môn → Mê Linh (kinh đô), Cổ Loa, Luy Lâu', 'Mở đầu phong trào đấu tranh Bắc thuộc, chứng tỏ tinh thần bất khuất của người Việt.'],
+      ['248', 'Bà Triệu (Triệu Thị Trinh)', 'Nhà Ngô', 'Núi Nưa (Thanh Hoá) → Cửu Chân, Nhật Nam (hi sinh ở núi Tùng)', 'Làm chấn động Giao Châu, thức tỉnh ý thức dân tộc, tạo đà cho Lý Bí.'],
+      ['542 – 602', 'Lý Bí (Lý Nam Đế) & Triệu Quang Phục', 'Nhà Lương (602 bị nhà Tuỳ diệt)', 'Lập nước Vạn Xuân (544), đóng đô cửa sông Tô Lịch; Dạ Trạch (Hưng Yên)', 'Lần đầu tự xưng Đế, dựng quốc hiệu Vạn Xuân, chùa Khai Quốc (Trấn Quốc).'],
+      ['713 – 722', 'Mai Thúc Loan (Mai Hắc Đế)', 'Nhà Đường (Dương Tư Húc đàn áp)', 'Hoan Châu (Hà Tĩnh, Nghệ An) → chiếm Tống Bình; quốc đô thành Vạn An', 'Giữ độc lập gần 10 năm; quy mô lớn, có cả nhân dân Chăm-pa, Chân Lạp hưởng ứng.'],
+      ['Cuối TK VIII', 'Phùng Hưng (Bố Cái đại vương)', 'Nhà Đường', 'Đường Lâm (Sơn Tây, Hà Nội) → bao vây chiếm thành Tống Bình', 'Tự sắp đặt cai trị trong 9 năm, khẳng định quyết tâm giành độc lập.'],
+      ['905 – 907', 'Khúc Thừa Dụ & Khúc Hạo', 'Nhà Đường suy yếu', 'Hồng Châu (Hải Phòng) → chiếm thành Đại La', 'Mở đầu xây dựng chính quyền tự chủ; Khúc Hạo cải cách "khoan dung, giản dị" (thuế, hộ khẩu, bỏ lực dịch).'],
+      ['930 – 931', 'Dương Đình Nghệ', 'Quân Nam Hán (lần 1)', 'Tụ nghĩa làng Giàng (Thanh Hoá) → vây chiếm Đại La', 'Đánh đuổi quân Nam Hán, xưng Tiết độ sứ, củng cố vững chắc nền tự chủ.'],
+      ['938', 'Ngô Quyền', 'Quân Nam Hán (Hoằng Tháo)', 'Cửa sông Bạch Đằng (Quảng Ninh – Hải Phòng)', 'Trận địa cọc ngầm lợi dụng thuỷ triều → CHẤM DỨT VĨNH VIỄN Bắc thuộc, mở kỉ nguyên độc lập lâu dài!']
+    ];
+
+    const MATRIX_4 = [
+      ['Người tối cổ (Đá cũ)', 'Khoảng 4 triệu năm trước', 'Bầy người nguyên thuỷ (vài chục người); rìu đá ghè đẽo thô sơ; tạo lửa; săn bắt, hái lượm', 'Răng hoá thạch: Thẩm Khuyên, Thẩm Hai (Lạng Sơn). Công cụ đá: An Khê (Gia Lai – 80 vạn năm, cổ nhất VN), Núi Đọ (Thanh Hoá), Xuân Lộc (Đồng Nai), Sơn Vi (Phú Thọ)'],
+      ['Người tinh khôn (Đá mới)', 'Khoảng 15 vạn năm trước', 'Công xã thị tộc (2–3 thế hệ cùng họ hàng, làm chung hưởng chung); rìu đá mài, đồ gốm, dệt vải; biết trồng trọt, chăn nuôi', 'Văn hoá Hoà Bình, Bắc Sơn (rìu mài lưỡi Lạng Sơn), Quỳnh Văn (gốm Nghệ An), Hạ Long, Bàu Tró, mặt người hang Đồng Nội (Phú Thọ)'],
+      ['Thời đại Đồ đồng (Xã hội phân hoá)', '2000 TCN → 1000 TCN', 'Gia đình phụ hệ; nông nghiệp dùng cày lưỡi đồng; chuyển từ trung du xuống đồng bằng ven sông lớn → cơ sở lập nhà nước', 'Phùng Nguyên (2000 TCN, xỉ đồng) → Đồng Đậu & Tiền Sa Huỳnh (1500 TCN) → Gò Mun (rìu lưỡi xéo) & Đồng Nai (1000 TCN)']
+    ];
+
+    // ==================== DATA: TOP 10 EXAM TRAPS ====================
+    const TRAPS = [
+      {
+        num: 1,
+        title: 'Bẫy tính năm TCN & đổi ra Thế kỉ',
+        wrong: 'Lấy 2026 − 208 = 1818 năm, hoặc tưởng năm 208 TCN là thế kỉ II TCN, năm 938 là thế kỉ IX.',
+        right: 'TCN → hiện tại phải CỘNG (208 + 2026 = 2234 năm). Đổi thế kỉ: lấy số năm chia 100 rồi LÀM TRÒN LÊN (208 → TK III TCN; 938 → TK X!).',
+        tip: 'Mẹo: Hai chữ số đầu + 1 (trừ năm tròn trăm như 200 là TK II, 900 là TK IX).'
+      },
+      {
+        num: 2,
+        title: 'Bẫy phân loại Tư liệu gốc & Bia đá',
+        wrong: 'Nghĩ Bia Tiến sĩ Văn Miếu chỉ là tư liệu hiện vật, hoặc nghĩ SGK Lịch sử 6 là tư liệu gốc.',
+        right: 'Bia Tiến sĩ khắc chữ Hán nên vừa là hiện vật, vừa là TƯ LIỆU CHỮ VIẾT và là TƯ LIỆU GỐC. SGK là TƯ LIỆU THỨ CẤP (tổng hợp lại).',
+        tip: 'Hễ thấy vật có khắc chữ trực tiếp từ thời xưa (bia đá, sắc phong, di chúc) → Tư liệu chữ viết & gốc!'
+      },
+      {
+        num: 3,
+        title: 'Bẫy "Ai phát minh 10 chữ số & số 0?"',
+        wrong: 'Thấy hay gọi "chữ số Ả Rập" nên khoanh người Ả Rập phát minh.',
+        right: 'Chủ nhân phát minh 10 chữ số (đặc biệt là số 0) là người ẤN ĐỘ cổ đại! Người Ả Rập chỉ học rồi truyền sang châu Âu.',
+        tip: 'Nhớ câu thần chú: "Ấn Độ sáng tạo số 0 — Ả Rập làm cầu nối sang Âu".'
+      },
+      {
+        num: 4,
+        title: 'Bẫy tráo hệ đếm Ai Cập vs Lưỡng Hà',
+        wrong: 'Nhầm Ai Cập dùng hệ đếm 60 còn Lưỡng Hà dùng hệ đếm 10.',
+        right: 'Ai Cập dùng HỆ THẬP PHÂN (10), viết chữ tượng hình trên giấy pa-pi-rút. Lưỡng Hà dùng HỆ ĐẾM 60, viết chữ hình nêm trên đất sét.',
+        tip: 'Mẹo nhớ: "Ai Cập 10 ngón tay — Lưỡng Hà 60 phút đồng hồ".'
+      },
+      {
+        num: 5,
+        title: 'Bẫy gom chung Hy Lạp & La Mã đều dân chủ',
+        wrong: 'Cho rằng cả Hy Lạp và La Mã đều là nhà nước dân chủ, mọi người dân đều có quyền bầu cử.',
+        right: 'Chỉ thành bang A-ten (Hy Lạp) tiêu biểu cho dân chủ (và chỉ công dân NAM từ 18 tuổi, KHÔNG có phụ nữ & nô lệ). La Mã từ 27 TCN là ĐẾ CHẾ (Hoàng đế nắm quyền tối cao).',
+        tip: 'Đọc kĩ tên nước: Hy Lạp (A-ten) = Dân chủ thành bang; La Mã (Ốc-ta-vi-út) = Đế chế.'
+      },
+      {
+        num: 6,
+        title: 'Bẫy thiếu từ khoá "phân hoá không triệt để"',
+        wrong: 'Chỉ viết xã hội nguyên thuỷ phương Đông phân hoá sớm mà quên giải thích vì sao "không triệt để".',
+        right: 'Bắt buộc phải có 2 cụm từ ăn điểm: cư dân sống ven sông lớn phải liên kết cộng đồng để LÀM THUỶ LỢI và CHỐNG NGOẠI XÂM.',
+        tip: 'Thiếu 2 cụm "thuỷ lợi" & "chống ngoại xâm" là mất ngay nửa số điểm câu tự luận!'
+      },
+      {
+        num: 7,
+        title: 'Bẫy nhầm Văn Lang với Âu Lạc',
+        wrong: 'Nhầm kinh đô Cổ Loa của Văn Lang, hoặc nhầm năm thành lập Âu Lạc (208 TCN) với năm mất nước (179 TCN).',
+        right: 'Văn Lang: TK VII TCN, Hùng Vương, kinh đô Phong Châu (trung du). Âu Lạc: 208 TCN, Thục Phán (An Dương Vương), kinh đô Cổ Loa (đồng bằng), mất nước năm 179 TCN.',
+        tip: 'Nhớ đường đi kinh đô: Từ núi trung du (Phong Châu) → xuống đồng bằng (Cổ Loa).'
+      },
+      {
+        num: 8,
+        title: 'Bẫy nhầm kẻ thù các cuộc khởi nghĩa Bắc thuộc',
+        wrong: 'Cho rằng Bà Triệu đánh nhà Hán, Lý Bí đánh nhà Đường, hay Ngô Quyền đánh nhà Đường/Hán.',
+        right: 'Hai Bà Trưng → Hán; Bà Triệu → Ngô; Lý Bí → Lương; Mai Thúc Loan & Phùng Hưng → Đường; Dương Đình Nghệ & Ngô Quyền → NAM HÁN!',
+        tip: 'Đọc vần 5 kẻ thù theo thứ tự thời gian: "Hán – Ngô – Lương – Đường – Nam Hán"!'
+      },
+      {
+        num: 9,
+        title: 'Bẫy nhầm công lao Khúc Thừa Dụ vs Ngô Quyền',
+        wrong: 'Chọn Khúc Thừa Dụ (905) là người chấm dứt vĩnh viễn thời Bắc thuộc.',
+        right: 'Khúc Thừa Dụ (905) là người MỞ ĐẦU xây dựng quyền tự chủ (vẫn xưng Tiết độ sứ). NGÔ QUYỀN (938) mới là người CHẤM DỨT VĨNH VIỄN thời Bắc thuộc!',
+        tip: '905: Mở cửa tự chủ (Khúc Thừa Dụ) → 938: Chốt sổ độc lập vĩnh viễn (Ngô Quyền).'
+      },
+      {
+        num: 10,
+        title: 'Bẫy nhầm thương cảng & chữ viết Đông Nam Á',
+        wrong: 'Nhầm cảng Óc Eo của Chăm-pa, hoặc nghĩ tất cả các nước ĐNA đều dùng chữ Ấn Độ.',
+        right: 'Đại Chiêm = Chăm-pa (miền Trung); Óc Eo = Phù Nam (Nam Bộ); Pa-lem-bang = Sri Vi-giay-a. Về chữ viết: hầu hết ĐNA cải biên chữ Ấn Độ, RIÊNG người Việt kế thừa chữ Hán!',
+        tip: 'Luôn nhớ ngoại lệ duy nhất ở ĐNA: Riêng người Việt tiếp thu chữ Hán (Trung Quốc).'
+      }
+    ];
+
+    // ==================== DATA: 15 BOSS QUIZ QUESTIONS ====================
+    const QUIZ_DATA = [
+      { q: 'Thục Phán lập ra nước Âu Lạc vào khoảng năm 208 TCN. Năm 208 TCN thuộc thế kỉ nào và cách năm 2026 bao nhiêu năm?', opts: ['Thế kỉ II TCN; cách 1818 năm', 'Thế kỉ III TCN; cách 2234 năm', 'Thế kỉ III TCN; cách 1818 năm', 'Thế kỉ II TCN; cách 2234 năm'], ans: 1, exp: '208 chia 100 = 2,08 → làm tròn lên là Thế kỉ III TCN. Từ TCN đến 2026 CN phải CỘNG: 208 + 2026 = 2234 năm!' },
+      { q: 'Tấm bia Tiến sĩ khắc chữ Hán ở Văn Miếu – Quốc Tử Giám (Hà Nội) thuộc loại tư liệu nào và có giá trị gì?', opts: ['Chỉ là tư liệu truyền miệng', 'Tư liệu thứ cấp do đời sau viết lại', 'Tư liệu chữ viết (đồng thời là hiện vật & tư liệu gốc đáng tin cậy)', 'Không phải tư liệu lịch sử'], ans: 2, exp: 'Bia đá khắc chữ trực tiếp từ thời xưa vừa là tư liệu hiện vật, vừa là tư liệu chữ viết và là tư liệu gốc!' },
+      { q: 'Dấu tích cổ xưa nhất chứng tỏ sự xuất hiện sớm của người nguyên thuỷ trên đất nước Việt Nam (khoảng 80 vạn năm trước) được tìm thấy ở đâu?', opts: ['Di chỉ An Khê (tỉnh Gia Lai)', 'Hang Thẩm Khuyên (Lạng Sơn)', 'Văn hoá Phùng Nguyên (Phú Thọ)', 'Di chỉ Quỳnh Văn (Nghệ An)'], ans: 0, exp: 'Tại di chỉ An Khê (Gia Lai) phát hiện trên 3 000 hiện vật đá có niên đại khoảng 80 vạn năm — cổ xưa nhất Việt Nam!' },
+      { q: 'Vì sao xã hội nguyên thuỷ ở các nước phương Đông cổ đại phân hoá sớm nhưng KHÔNG TRIỆT ĐỂ?', opts: ['Vì người phương Đông chưa phát hiện ra kim loại', 'Vì cư dân ven sông lớn phải liên kết làm thuỷ lợi và chống ngoại xâm', 'Vì địa hình bị chia cắt thành nhiều đảo nhỏ', 'Vì không có nông nghiệp trồng trọt'], ans: 1, exp: 'Quy luật vàng: Sống ven sông lớn phải hợp sức đắp đê làm thuỷ lợi và chống ngoại xâm nên tính cộng đồng nguyên thuỷ vẫn được bảo lưu.' },
+      { q: 'Thứ tự đúng của các nền văn hoá đồ đồng ở Bắc Bộ Việt Nam từ sớm đến muộn là:', opts: ['Gò Mun → Đồng Đậu → Phùng Nguyên', 'Đồng Đậu → Phùng Nguyên → Gò Mun', 'Phùng Nguyên → Đồng Đậu → Gò Mun', 'Hoà Bình → Bắc Sơn → Phùng Nguyên'], ans: 2, exp: 'Mẹo 3 chữ đầu P → Đ → G: Phùng Nguyên (2000 TCN) → Đồng Đậu (1500 TCN) → Gò Mun (1000 TCN).' },
+      { q: 'Cặp ghép nào dưới đây ĐÚNG về chữ viết và hệ đếm của Ai Cập – Lưỡng Hà cổ đại?', opts: ['Ai Cập: chữ hình nêm, hệ đếm 60', 'Ai Cập: chữ tượng hình trên giấy pa-pi-rút, hệ đếm thập phân (10)', 'Lưỡng Hà: chữ tượng hình, hệ đếm thập phân (10)', 'Lưỡng Hà: chữ Phạn, hệ đếm 60'], ans: 1, exp: 'Ai Cập: chữ tượng hình (pa-pi-rút) + hệ đếm 10. Lưỡng Hà: chữ hình nêm (đất sét) + hệ đếm 60.' },
+      { q: 'Chủ nhân thực sự đã phát minh ra hệ thống 10 chữ số (0, 1, 2,... 9), đặc biệt là chữ số 0 là cư dân cổ đại nào?', opts: ['Người Ả Rập', 'Người La Mã cổ đại', 'Người Ấn Độ cổ đại', 'Người Trung Quốc cổ đại'], ans: 2, exp: 'Cẩn thận bẫy! Người Ấn Độ cổ đại mới là chủ nhân phát minh 10 chữ số và số 0; người Ả Rập chỉ học rồi truyền sang châu Âu.' },
+      { q: 'Trong chế độ đẳng cấp Vác-na ở Ấn Độ cổ đại, đẳng cấp đứng cao nhất là:', opts: ['Ksa-tri-a (Vương công – Quý tộc)', 'Bra-man (Tăng lữ)', 'Vai-si-a (Người bình dân)', 'Su-đra (Người có địa vị thấp kém)'], ans: 1, exp: 'Kim tự tháp 4 tầng Vác-na từ trên xuống: ① Bra-man (Tăng lữ) → ② Ksa-tri-a → ③ Vai-si-a → ④ Su-đra.' },
+      { q: 'Điểm khác biệt nổi bật về tổ chức nhà nước giữa thành bang A-ten (Hy Lạp) và đế chế La Mã từ năm 27 TCN là gì?', opts: ['A-ten là nhà nước dân chủ (Đại hội nhân dân quyết định), còn La Mã là đế chế (Hoàng đế nắm quyền tối cao)', 'Cả hai đều là quân chủ chuyên chế như Ai Cập', 'La Mã là nhà nước dân chủ, còn A-ten là đế chế', 'Ở A-ten cả phụ nữ và nô lệ đều được bỏ phiếu'], ans: 0, exp: 'A-ten tiêu biểu cho nền dân chủ cổ đại (công dân nam từ 18 tuổi), còn từ 27 TCN Ốc-ta-vi-út mở ra thời đế chế La Mã (Đại hội nhân dân chỉ là hình thức).' },
+      { q: 'Trong quá trình giao lưu văn hoá Đông Nam Á từ đầu Công nguyên đến thế kỉ X, nét riêng biệt về chữ viết của người Việt là gì?', opts: ['Cải biên chữ Phạn của Ấn Độ', 'Sáng tạo chữ Khơ-me cổ', 'Kế thừa hệ thống chữ Hán của người Trung Quốc', 'Sử dụng chữ cái La-tinh ngay từ thế kỉ I'], ans: 2, exp: 'Hầu hết các dân tộc Đông Nam Á cải biên chữ cổ Ấn Độ, riêng người Việt kế thừa hệ thống chữ Hán của Trung Quốc.' },
+      { q: 'So với Nhà nước Văn Lang, Nhà nước Âu Lạc có điểm tiến bộ nổi bật nào?', opts: ['Có kinh đô ở Phong Châu, chia làm 15 bộ', 'Chuyển kinh đô xuống đồng bằng Cổ Loa, có thành 3 vòng kiên cố và vũ khí tốt (nỏ, mũi tên đồng)', 'Đã có chữ viết riêng là chữ Chăm cổ', 'Đánh bại quân Nam Hán trên sông Bạch Đằng'], ans: 1, exp: 'Âu Lạc (208 TCN) dời đô từ trung du Phong Châu xuống đồng bằng Cổ Loa (Đông Anh, Hà Nội), xây thành xoáy trôn ốc 3 vòng và có quân đội, vũ khí mạnh.' },
+      { q: 'Từ sau cuộc khởi nghĩa Hai Bà Trưng (40 – 43), nhà Hán đã thay đổi bộ máy cai trị ở nước ta như thế nào?', opts: ['Trao toàn bộ quyền cai trị cho Lạc tướng người Việt', 'Chính quyền từ cấp huyện trở lên đều do người Hán nắm giữ', 'Bãi bỏ hoàn toàn tô thuế cho dân Việt', 'Cho phép nước ta tự bầu vua'], ans: 1, exp: 'Sau năm 43, nhà Hán xoá bỏ quyền cai trị của Lạc tướng ở cấp huyện; từ huyện trở lên do người Hán nắm, chỉ cấp làng xã còn hào trưởng người Việt.' },
+      { q: 'Cuộc khởi nghĩa nào trong thời Bắc thuộc đã lập ra nước Vạn Xuân và đóng đô ở vùng cửa sông Tô Lịch (Hà Nội)?', opts: ['Khởi nghĩa Hai Bà Trưng (40)', 'Khởi nghĩa Bà Triệu (248)', 'Khởi nghĩa Lý Bí (542 – 544)', 'Khởi nghĩa Mai Thúc Loan (713 – 722)'], ans: 2, exp: 'Đầu năm 544, sau khi đánh đuổi quân Lương, Lý Bí xưng Lý Nam Đế, lập nước Vạn Xuân, đóng đô ở cửa sông Tô Lịch.' },
+      { q: 'Sự kiện lịch sử nào đã CHẤM DỨT VĨNH VIỄN thời kì Bắc thuộc và mở ra kỉ nguyên độc lập tự chủ lâu dài cho dân tộc ta?', opts: ['Khúc Thừa Dụ đánh chiếm thành Đại La (905)', 'Dương Đình Nghệ đánh tan quân Nam Hán lần 1 (931)', 'Chiến thắng Bạch Đằng của Ngô Quyền chống quân Nam Hán (938)', 'Khởi nghĩa Phùng Hưng chiếm thành Tống Bình (cuối TK VIII)'], ans: 2, exp: 'Khúc Thừa Dụ (905) mở đầu quyền tự chủ, Dương Đình Nghệ (931) củng cố, còn Ngô Quyền (938) trên sông Bạch Đằng đã chấm dứt vĩnh viễn hơn 1000 năm Bắc thuộc!' },
+      { q: 'Cặp ghép nào dưới đây ĐÚNG về hai vương quốc cổ Chăm-pa và Phù Nam?', opts: ['Chăm-pa: Nam Bộ, cảng Óc Eo — Phù Nam: Miền Trung, cảng Đại Chiêm', 'Chăm-pa: Miền Trung, cảng Đại Chiêm, Thánh địa Mỹ Sơn — Phù Nam: Nam Bộ, cảng thị Óc Eo', 'Cả hai đều không chịu ảnh hưởng của văn hoá Ấn Độ', 'Phù Nam tồn tại đến tận thế kỉ XV'], ans: 1, exp: 'Chăm-pa ở miền Trung (thương cảng Đại Chiêm, Mỹ Sơn, lễ hội Ka-tê); Phù Nam ở Nam Bộ (TK I–VII, văn hoá & cảng thị Óc Eo, nhà sàn trên nước).' }
+    ];
+
+    // ==================== DATA: 20 LESSONS TABLE ====================
+    const LESSONS = [
+      { id: 1, ch: 1, name: 'Lịch sử và cuộc sống', page: '9–10', star: '⭐⭐', kw: 'Khái niệm lịch sử, môn Lịch sử; học để biết cội nguồn & rút bài học kinh nghiệm; lời Bác Hồ tại Đền Hùng.' },
+      { id: 2, ch: 1, name: 'Dựa vào đâu để biết và phục dựng lại lịch sử?', page: '11–13', star: '⭐⭐⭐', kw: '4 nguồn tư liệu: Hiện vật (trống đồng, Hoàng thành), Chữ viết (bia Tiến sĩ, Di chúc), Truyền miệng (Thánh Gióng), Tư liệu gốc (tin cậy nhất) vs thứ cấp.' },
+      { id: 3, ch: 1, name: 'Thời gian trong lịch sử', page: '14–15', star: '⭐⭐⭐', kw: 'Âm lịch (Mặt Trăng), Dương lịch / Công lịch (Mặt Trời); năm 1 CN, TCN; thập kỉ, thế kỉ, thiên niên kỉ; cách tính khoảng cách năm.' },
+      { id: 4, ch: 2, name: 'Nguồn gốc loài người', page: '17–19', star: '⭐⭐', kw: 'Vượn người (5–6 tr năm) → Người tối cổ (4 tr năm) → Người tinh khôn (15 vạn năm). VN: An Khê (80 vạn năm), Thẩm Khuyên – Thẩm Hai, Núi Đọ.' },
+      { id: 5, ch: 2, name: 'Xã hội nguyên thuỷ', page: '20–23', star: '⭐⭐', kw: 'Bầy người nguyên thuỷ (đá ghè đẽo, lửa) → Công xã thị tộc (đá mài, trồng trọt, làm chung hưởng chung). VN: Sơn Vi, Hoà Bình, Bắc Sơn, Quỳnh Văn. Vai trò lao động.' },
+      { id: 6, ch: 2, name: 'Sự chuyển biến và phân hoá của xã hội nguyên thuỷ', page: '24–27', star: '⭐⭐⭐', kw: 'Đồng đỏ (3500 TCN) → Đồng thau (2000 TCN) → Sắt. Gia đình phụ hệ, giàu – nghèo. Phương Đông phân hoá không triệt để (thuỷ lợi, chống ngoại xâm). VN: Phùng Nguyên → Đồng Đậu → Gò Mun.' },
+      { id: 7, ch: 3, name: 'Ai Cập và Lưỡng Hà cổ đại', page: '29–33', star: '⭐⭐⭐', kw: 'Sông Nin (Ai Cập, Mê-nét 3200 TCN, Pha-ra-ông, tượng hình, pa-pi-rút, hệ 10, Kim tự tháp) & Ơ-phơ-rát/Ti-gơ-rơ (Lưỡng Hà, Xu-me, En-xi, hình nêm, hệ 60, Vườn treo Ba-bi-lon).' },
+      { id: 8, ch: 3, name: 'Ấn Độ cổ đại', page: '34–38', star: '⭐⭐⭐', kw: 'Sông Ấn (khô) & sông Hằng (mưa nhiều); 4 đẳng cấp Vác-na; chữ Phạn; 10 chữ số & số 0; Phật giáo & Hin-đu giáo; Ma-ha-bha-ra-ta, Ra-ma-y-a-na; cột đá A-sô-ca, tháp San-chi.' },
+      { id: 9, ch: 3, name: 'Trung Quốc cổ đại', page: '39–43', star: '⭐⭐', kw: 'Hoàng Hà & Trường Giang; Hạ → Thương → Chu → Xuân Thu – Chiến Quốc → Tần (221 TCN); chữ giáp cốt, Kinh Thi, Sở Từ, Khổng Tử (Nho gia), Biển Thước, âm-dương lịch, Ân Khư.' },
+      { id: 10, ch: 3, name: 'Hy Lạp và La Mã cổ đại', page: '44–49', star: '⭐⭐⭐', kw: 'Nhiều hải cảng (Pi-rê), buôn bán biển. A-ten (thành bang dân chủ, bỏ phiếu vỏ sò) vs La Mã (đế chế 27 TCN, Ốc-ta-vi-út). Chữ La-tinh, số La Mã, dương lịch, Pi-ta-go, Pác-tê-nông, Cô-li-dê.' },
+      { id: 11, ch: 4, name: 'Các quốc gia sơ kì ở Đông Nam Á', page: '51–53', star: '⭐⭐', kw: 'Ngã tư đường Ấn Độ Dương – Thái Bình Dương, cái nôi lúa nước. Quốc gia sơ kì (TK VII TCN – TK VII): Văn Lang – Âu Lạc, Chăm-pa, Phù Nam... Cảng Óc Eo, Ta-cô-la.' },
+      { id: 12, ch: 4, name: 'Các vương quốc phong kiến ở ĐNA (TK VII – X)', page: '54–55', star: '⭐⭐', kw: 'Đại Cồ Việt, Pa-gan, Chân Lạp, Sri Vi-giay-a (đảo Vàng, Pa-lem-bang), Ka-lin-ga. Lục địa: nông nghiệp; Hải đảo: thương mại biển & Con đường gia vị; cảng Đại Chiêm.' },
+      { id: 13, ch: 4, name: 'Giao lưu văn hoá ở ĐNA (đầu CN – TK X)', page: '56–58', star: '⭐⭐', kw: 'Dung hợp tín ngưỡng bản địa (phồn thực, cầu mưa) với Ấn Độ giáo (Thần – Vua) & Phật giáo. Chữ viết từ Ấn Độ (riêng VN kế thừa chữ Hán). Bia Võ Cạnh, đền Bô-rô-bu-đua, Mỹ Sơn.' },
+      { id: 14, ch: 5, name: 'Nhà nước Văn Lang, Âu Lạc', page: '60–64', star: '⭐⭐⭐', kw: 'Văn Lang (TK VII TCN, Hùng Vương, Phong Châu, 15 bộ: Lạc hầu – Lạc tướng – Bồ chính). Âu Lạc (208 TCN, An Dương Vương, Cổ Loa 3 vòng, nỏ đồng). Trống đồng Ngọc Lũ, thờ tổ tiên, ăn trầu, bánh chưng.' },
+      { id: 15, ch: 5, name: 'Chính sách cai trị phương Bắc & chuyển biến xã hội', page: '65–69', star: '⭐⭐⭐', kw: '179 TCN (Triệu Đà). Sáp nhập, chia châu–quận–huyện (sau năm 43 người Hán nắm từ huyện trở lên; làng xã do hào trưởng Việt). Độc quyền sắt & muối, cống nạp, đồng hoá. Mâu thuẫn bao trùm → khởi nghĩa.' },
+      { id: 16, ch: 5, name: 'Các cuộc khởi nghĩa tiêu biểu trước thế kỉ X', page: '70–77', star: '⭐⭐⭐', kw: '5 cuộc khởi nghĩa: Hai Bà Trưng (40, Hán), Bà Triệu (248, Ngô), Lý Bí – Vạn Xuân (542–544, Lương), Mai Thúc Loan (713–722, Đường), Phùng Hưng (cuối TK VIII, Đường).' },
+      { id: 17, ch: 5, name: 'Đấu tranh bảo tồn và phát triển văn hoá dân tộc', page: '78–79', star: '⭐⭐', kw: 'Giữ gốc: tiếng Việt, thờ tổ tiên, xăm mình, nhuộm răng đen, ăn trầu, bánh chưng bánh giầy. Tiếp thu có chọn lọc: làm giấy, thuỷ tinh, chữ Hán, Phật/Đạo giáo, lễ tết.' },
+      { id: 18, ch: 5, name: 'Bước ngoặt lịch sử đầu thế kỉ X', page: '80–85', star: '⭐⭐⭐', kw: 'Khúc Thừa Dụ (905) dựng tự chủ, Khúc Hạo (907) cải cách; Dương Đình Nghệ (931) đánh Nam Hán; Ngô Quyền (938) thắng Bạch Đằng (cọc ngầm + thuỷ triều) → chấm dứt vĩnh viễn Bắc thuộc!' },
+      { id: 19, ch: 5, name: 'Vương quốc Chăm-pa (TK II – X)', page: '86–90', star: '⭐⭐', kw: 'Năm 192 Khu Liên lập Lâm Ấp (miền Trung). Kinh đô: Sin-ha-pu-ra → Vi-ra-pu-ra → In-đra-pu-ra. Cảng Đại Chiêm, trầm hương. Chữ Chăm cổ, Thánh địa Mỹ Sơn (UNESCO 1999), lễ hội Ka-tê.' },
+      { id: 20, ch: 5, name: 'Vương quốc Phù Nam', page: '91–94', star: '⭐⭐', kw: 'TK I – đầu TK VII (bị Chân Lạp chiếm), Nam Bộ (sông Cửu Long). Văn hoá & cảng thị Óc Eo (tiền vàng La Mã). Giỏi buôn bán biển, nhà sàn gỗ trên nước, tượng thần Vi-snu & Phật Sơn Thọ.' }
+    ];
+
+    // ==================== TAB SWITCHING ====================
+    function switchTab(num) {
+      [1, 2, 3, 4, 5, 6].forEach(i => {
+        const panel = document.getElementById('tabPanel-' + i);
+        const btn = document.getElementById('tabBtn-' + i);
+        if (!panel || !btn) return;
+        if (i === num) {
+          panel.classList.remove('hidden');
+          btn.className = 'tab-btn tab-btn-active shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer transition';
+        } else {
+          panel.classList.add('hidden');
+          btn.className = 'tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition';
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== TAB 1: CHAPTERS MAP ====================
+    let activeChapter = 1;
+    function renderChaptersGrid() {
+      const grid = document.getElementById('chaptersGrid');
+      const colorMap = {
+        sky: 'border-sky-300 dark:border-sky-700 bg-sky-50/70 dark:bg-sky-950/30',
+        amber: 'border-amber-300 dark:border-amber-700 bg-amber-50/70 dark:bg-amber-950/30',
+        violet: 'border-violet-300 dark:border-violet-700 bg-violet-50/70 dark:bg-violet-950/30',
+        emerald: 'border-emerald-300 dark:border-emerald-700 bg-emerald-50/70 dark:bg-emerald-950/30',
+        rose: 'border-rose-300 dark:border-rose-700 bg-rose-50/70 dark:bg-rose-950/30'
+      };
+      grid.innerHTML = CHAPTERS.map(c => `
+        <button onclick="selectChapter(${c.id})" type="button"
+          class="text-left rounded-2xl border p-3.5 transition cursor-pointer ${colorMap[c.color]} ${c.id === activeChapter ? 'chapter-card-active' : 'hover:shadow-md'}">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-extrabold uppercase tracking-wide text-slate-500 dark:text-slate-400">${c.short}</span>
+            <span class="text-xl">${c.icon}</span>
+          </div>
+          <div class="font-extrabold text-sm text-slate-900 dark:text-white leading-snug">${c.title}</div>
+          <div class="mt-1.5 text-[11px] font-semibold text-slate-500 dark:text-slate-400">${c.lessons}</div>
+        </button>
+      `).join('');
+      renderChapterDetail();
+    }
+
+    function selectChapter(id) {
+      activeChapter = id;
+      renderChaptersGrid();
+    }
+
+    function renderChapterDetail() {
+      const c = CHAPTERS.find(x => x.id === activeChapter);
+      const box = document.getElementById('chapterDetail');
+      box.innerHTML = `
+        <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+          <div>
+            <span class="text-xs font-extrabold uppercase text-amber-600 dark:text-amber-400">${c.short} • ${c.lessons}</span>
+            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white">${c.icon} ${c.title}</h3>
+          </div>
+          <button onclick="speakChapter(${c.id})" data-tts-id="ch-${c.id}" type="button"
+            class="tts-btn px-3 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold cursor-pointer transition">
+            🔊 Nghe tóm tắt ${c.short}
+          </button>
+        </div>
+        <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-4 leading-relaxed">💡 <strong>Ý cốt lõi 1 câu:</strong> ${c.core}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+          <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-3.5 text-xs sm:text-sm">
+            <div class="font-extrabold text-indigo-600 dark:text-indigo-400 mb-1">🔗 Nối từ trước (Tiên quyết)</div>
+            <p class="text-slate-600 dark:text-slate-300">${c.prereq}</p>
+          </div>
+          <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-3.5 text-xs sm:text-sm">
+            <div class="font-extrabold text-emerald-600 dark:text-emerald-400 mb-1">➡️ Mở ra phía sau (Hệ quả)</div>
+            <p class="text-slate-600 dark:text-slate-300">${c.next}</p>
+          </div>
+        </div>
+        <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4 mb-3">
+          <div class="font-extrabold text-sm text-slate-900 dark:text-white mb-2">📌 Kiến thức bắt buộc phải nắm chắc:</div>
+          <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 list-disc pl-5">
+            ${c.mustKnow.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60 p-3.5 text-xs sm:text-sm text-rose-900 dark:text-rose-200">
+          ⚠️ <strong>Chỗ hay nhầm nhất:</strong> ${c.trap}
+        </div>
+      `;
+    }
+
+    // ==================== TAB 1: TIMELINE SVG ====================
+    let activeMilestone = 11; // Default highlight 938
+    function renderTimeline() {
+      const svg = document.getElementById('timelineSvg');
+      let html = `
+        <defs>
+          <linearGradient id="tlGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="62%" stop-color="#6366f1"/>
+            <stop offset="100%" stop-color="#e11d48"/>
+          </linearGradient>
+        </defs>
+        <rect x="20" y="88" width="1040" height="8" rx="4" fill="url(#tlGrad)" opacity="0.85"/>
+        <line x1="675" y1="22" x2="675" y2="164" stroke="#6366f1" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="675" y="16" text-anchor="middle" fill="#6366f1" font-size="11" font-weight="800">MỐC CÔNG NGUYÊN (NĂM 1)</text>
+      `;
+      TIMELINE.forEach((m, i) => {
+        const isTop = i % 2 === 0;
+        const isSel = i === activeMilestone;
+        const yText = isTop ? 56 : 138;
+        const ySub = isTop ? 70 : 153;
+        html += `
+          <g onclick="selectMilestone(${i})" style="cursor:pointer">
+            <line x1="${m.x}" y1="92" x2="${m.x}" y2="${isTop ? 74 : 114}" stroke="${isSel ? '#e11d48' : '#94a3b8'}" stroke-width="${isSel ? 2.5 : 1.5}"/>
+            <circle cx="${m.x}" cy="92" r="${isSel ? 11 : 7}" fill="${isSel ? '#e11d48' : '#ffffff'}" stroke="${isSel ? '#fbbf24' : '#475569'}" stroke-width="${isSel ? 3.5 : 2.5}"/>
+            <text x="${m.x}" y="${yText}" text-anchor="middle" fill="${isSel ? '#e11d48' : 'currentColor'}" font-size="11" font-weight="800">${m.label}</text>
+            <text x="${m.x}" y="${ySub}" text-anchor="middle" fill="currentColor" opacity="${isSel ? '1' : '0.72'}" font-size="10" font-weight="${isSel ? '700' : '500'}">${m.title.length > 18 ? m.title.slice(0,17) + '…' : m.title}</text>
+          </g>
+        `;
+      });
+      svg.innerHTML = html;
+
+      const m = TIMELINE[activeMilestone];
+      document.getElementById('timelineInfo').innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+          <div class="font-extrabold text-amber-900 dark:text-amber-200 text-sm sm:text-base">📍 Mốc ${m.label}: ${m.title}</div>
+          <span class="text-xs font-bold text-amber-700 dark:text-amber-300">Mốc ${activeMilestone + 1} / ${TIMELINE.length}</span>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">${m.detail}</p>
+        <p class="mt-2 text-xs font-bold text-indigo-700 dark:text-indigo-300">✨ Mẹo nhớ nhanh: ${m.tip}</p>
+      `;
+    }
+    function selectMilestone(i) { activeMilestone = i; renderTimeline(); }
+
+    // ==================== TAB 1: TCN/CN CALCULATOR ====================
+    let calcPresetNote = 'Thục Phán lập nước Âu Lạc';
+    function toRoman(num) {
+      const pairs = [[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+      let res = '';
+      for (const [v, s] of pairs) { while (num >= v) { res += s; num -= v; } }
+      return res;
+    }
+    function setCalcPreset(y, era, note) {
+      document.getElementById('calcYear').value = y;
+      document.getElementById('calcEra').value = era;
+      calcPresetNote = note;
+      updateTimeCalc();
+    }
+    function updateTimeCalc() {
+      const CURRENT_YEAR = 2026;
+      let y = parseInt(document.getElementById('calcYear').value, 10);
+      if (isNaN(y) || y < 1) y = 1;
+      if (y > 5000) y = 5000;
+      const era = document.getElementById('calcEra').value;
+
+      const dist = era === 'TCN' ? (y + CURRENT_YEAR) : Math.abs(CURRENT_YEAR - y);
+      const formulaText = era === 'TCN' ? `${y} + ${CURRENT_YEAR} = ${dist} năm` : `${CURRENT_YEAR} − ${y} = ${dist} năm`;
+      const century = Math.ceil(y / 100);
+      const millennium = Math.ceil(y / 1000);
+      const eraSuffix = era === 'TCN' ? ' TCN' : '';
+
+      // Draw SVG axis: center (year 1) at x = 320
+      const xZero = 320;
+      const xNow = 540; // represents 2026
+      let xEvent;
+      if (era === 'TCN') {
+        const clamped = Math.min(y, 3500);
+        xEvent = xZero - (clamped / 3500) * 265;
+      } else {
+        const clamped = Math.min(y, 2026);
+        xEvent = xZero + (clamped / 2026) * (xNow - xZero);
+      }
+
+      document.getElementById('calcSvg').innerHTML = `
+        <line x1="30" y1="62" x2="575" y2="62" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+        <polygon points="575,62 565,56 565,68" fill="#94a3b8"/>
+        <line x1="${xZero}" y1="22" x2="${xZero}" y2="96" stroke="#6366f1" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="${xZero}" y="16" text-anchor="middle" fill="#6366f1" font-size="11" font-weight="800">Năm 1 CN</text>
+        <text x="90" y="106" text-anchor="middle" fill="#b45309" font-size="10" font-weight="700">← TRƯỚC CÔNG NGUYÊN (TCN)</text>
+        <text x="455" y="106" text-anchor="middle" fill="#059669" font-size="10" font-weight="700">CÔNG NGUYÊN (CN) →</text>
+
+        <line x1="${xEvent}" y1="62" x2="${xNow}" y2="62" stroke="#e11d48" stroke-width="5" opacity="0.85"/>
+        <circle cx="${xEvent}" cy="62" r="7.5" fill="#e11d48" stroke="#ffffff" stroke-width="2"/>
+        <text x="${xEvent}" y="44" text-anchor="middle" fill="#e11d48" font-size="11" font-weight="800">${y}${eraSuffix}</text>
+
+        <circle cx="${xNow}" cy="62" r="7" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
+        <text x="${xNow}" y="44" text-anchor="middle" fill="#059669" font-size="11" font-weight="800">${CURRENT_YEAR}</text>
+
+        <text x="${(xEvent + xNow) / 2}" y="83" text-anchor="middle" fill="#be123c" font-size="11" font-weight="800">↔ ${dist.toLocaleString('vi-VN')} năm</text>
+      `;
+
+      document.getElementById('calcOutput').innerHTML = `
+        <div class="rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60 p-3">
+          <div class="text-[11px] font-bold text-rose-600 dark:text-rose-300">Cách năm ${CURRENT_YEAR}</div>
+          <div class="text-lg font-extrabold text-rose-700 dark:text-rose-200">${dist.toLocaleString('vi-VN')} năm</div>
+          <div class="text-[11px] text-slate-600 dark:text-slate-400">Phép tính: ${formulaText}</div>
+        </div>
+        <div class="rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 p-3">
+          <div class="text-[11px] font-bold text-indigo-600 dark:text-indigo-300">Thuộc Thế kỉ</div>
+          <div class="text-lg font-extrabold text-indigo-700 dark:text-indigo-200">Thế kỉ ${toRoman(century)}${eraSuffix}</div>
+          <div class="text-[11px] text-slate-600 dark:text-slate-400">(${y} ÷ 100 làm tròn lên = ${century})</div>
+        </div>
+        <div class="rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 p-3">
+          <div class="text-[11px] font-bold text-emerald-600 dark:text-emerald-300">Thiên niên kỉ</div>
+          <div class="text-lg font-extrabold text-emerald-700 dark:text-emerald-200">TNK ${toRoman(millennium)}${eraSuffix}</div>
+          <div class="text-[11px] text-slate-600 dark:text-slate-400 truncate" title="${calcPresetNote}">${calcPresetNote}</div>
+        </div>
+      `;
+    }
+
+    // ==================== TAB 2: RULES & FACTS ====================
+    function renderRulesAndFacts() {
+      document.getElementById('rulesGrid').innerHTML = RULES.map(r => `
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-200 text-xs font-extrabold">QUY LUẬT ${r.num} • ${r.badge}</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white mb-2">${r.title}</h3>
+            <div class="rounded-xl bg-slate-100 dark:bg-slate-800 px-3 py-2 text-xs font-extrabold text-indigo-700 dark:text-indigo-300 mb-3 leading-relaxed">${r.formula}</div>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">${r.desc}</p>
+          </div>
+          <div class="rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 p-3 text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed">
+            💡 ${r.example}
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('factsGrid').innerHTML = FACTS.map(f => `
+        <div class="rounded-xl bg-white dark:bg-slate-900/90 border border-amber-200/80 dark:border-amber-800/50 p-3.5 shadow-sm">
+          <div class="text-2xl mb-1.5">${f.icon}</div>
+          <div class="font-extrabold text-sm text-slate-900 dark:text-white mb-1">${f.title}</div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${f.text}</p>
+        </div>
+      `).join('');
+    }
+
+    // ==================== TAB 3: MATRICES & RECALL MODE ====================
+    let recallMode = false;
+    function renderMatrices() {
+      const renderRows = (rows, elId, boldFirst = true) => {
+        document.getElementById(elId).innerHTML = rows.map(r => `
+          <tr class="odd:bg-white even:bg-slate-50/70 dark:odd:bg-slate-900 dark:even:bg-slate-800/40">
+            ${r.map((cell, idx) => `
+              <td onclick="this.classList.toggle('revealed')" class="p-2.5 border border-slate-200 dark:border-slate-700 align-top ${idx === 0 && boldFirst ? 'font-extrabold text-slate-900 dark:text-white' : (recallMode ? 'blur-cell' : '')}">${cell}</td>
+            `).join('')}
+          </tr>
+        `).join('');
+      };
+      renderRows(MATRIX_1, 'matrix1Body');
+      renderRows(MATRIX_2, 'matrix2Body');
+      renderRows(MATRIX_3, 'matrix3Body');
+      renderRows(MATRIX_4, 'matrix4Body');
+    }
+
+    function toggleRecallMode() {
+      recallMode = !recallMode;
+      const btn = document.getElementById('recallToggleBtn');
+      btn.textContent = recallMode ? '👀 Đang Che (Chạm từng ô để xem) — Bấm để Hiện tất cả' : '🙈 Bật chế độ Che để tự ôn';
+      btn.className = recallMode
+        ? 'px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs sm:text-sm font-extrabold shadow cursor-pointer transition'
+        : 'px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-extrabold shadow cursor-pointer transition';
+      renderMatrices();
+    }
+
+    // ==================== TAB 4: TOP 10 TRAPS ====================
+    function renderTraps() {
+      document.getElementById('trapsGrid').innerHTML = TRAPS.map(t => `
+        <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm space-y-2.5">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-rose-600 text-white text-xs font-extrabold shrink-0">#${t.num}</span>
+            <h3 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">${t.title}</h3>
+          </div>
+          <div class="rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60 p-3 text-xs sm:text-sm text-rose-900 dark:text-rose-200">
+            ❌ <strong>Hay sai:</strong> ${t.wrong}
+          </div>
+          <div class="rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 p-3 text-xs sm:text-sm text-emerald-900 dark:text-emerald-200">
+            ✅ <strong>Đúng chuẩn 10đ:</strong> ${t.right}
+          </div>
+          <div class="text-xs font-bold text-amber-700 dark:text-amber-300">⚡ ${t.tip}</div>
+        </div>
+      `).join('');
+    }
+
+    // ==================== TAB 5: 15-QUESTION QUIZ ====================
+    let quizAnswers = new Array(QUIZ_DATA.length).fill(null);
+    function renderQuiz() {
+      const container = document.getElementById('quizContainer');
+      container.innerHTML = QUIZ_DATA.map((item, qIdx) => {
+        const chosen = quizAnswers[qIdx];
+        const answered = chosen !== null;
+        return `
+          <div class="rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 p-4">
+            <div class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white mb-3">
+              <span class="inline-block px-2 py-0.5 rounded-md bg-amber-500 text-white text-xs mr-1.5">Câu ${qIdx + 1}</span>
+              ${item.q}
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              ${item.opts.map((opt, oIdx) => {
+                let cls = 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:border-amber-400';
+                if (answered) {
+                  if (oIdx === item.ans) cls = 'bg-emerald-100 dark:bg-emerald-900/60 border-emerald-500 text-emerald-900 dark:text-emerald-100 font-bold';
+                  else if (oIdx === chosen) cls = 'bg-rose-100 dark:bg-rose-900/60 border-rose-500 text-rose-900 dark:text-rose-100';
+                  else cls = 'bg-white/60 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 opacity-65';
+                }
+                return `
+                  <button onclick="answerQuiz(${qIdx}, ${oIdx})" ${answered ? 'disabled' : ''} type="button"
+                    class="text-left px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm transition ${answered ? 'cursor-default' : 'cursor-pointer'} ${cls}">
+                    <strong>${String.fromCharCode(65 + oIdx)}.</strong> ${opt}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            ${answered ? `
+              <div class="mt-3 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm ${chosen === item.ans ? 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-200' : 'bg-rose-50 dark:bg-rose-950/50 text-rose-800 dark:text-rose-200'}">
+                ${chosen === item.ans ? '🎉 <strong>Chính xác!</strong>' : '😅 <strong>Chưa đúng rồi!</strong>'} ${item.exp}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+
+      const score = quizAnswers.filter((a, i) => a === QUIZ_DATA[i].ans).length;
+      const doneCount = quizAnswers.filter(a => a !== null).length;
+      document.getElementById('quizScoreBadge').textContent = `Điểm: ${score} / ${QUIZ_DATA.length}`;
+
+      const sumBox = document.getElementById('quizSummary');
+      if (doneCount === QUIZ_DATA.length) {
+        let rank = '🌱 Tân Binh Sử Học — Ôn lại Tab 4 (Top 10 Bẫy) rồi thi lại nhé!';
+        if (score >= 14) rank = '👑 TRẠNG NGUYÊN LỊCH SỬ 6 — Sẵn sàng rinh trọn điểm 10!';
+        else if (score >= 11) rank = '🕵️ THÁM TỬ SỬ HỌC — Rất chắc kiến thức, chỉ cần xem lại vài bẫy nhỏ!';
+        else if (score >= 8) rank = '⚔️ CHIẾN BINH LỊCH SỬ — Khá tốt, bật chế độ Che ở Tab 3 để luyện thêm nhé!';
+        sumBox.classList.remove('hidden');
+        sumBox.innerHTML = `<div class="text-2xl font-extrabold mb-1">Hoàn thành: ${score} / ${QUIZ_DATA.length} câu đúng!</div><div class="text-sm sm:text-base font-semibold">${rank}</div>`;
+      } else {
+        sumBox.classList.add('hidden');
+      }
+    }
+
+    function answerQuiz(qIdx, oIdx) {
+      if (quizAnswers[qIdx] !== null) return;
+      quizAnswers[qIdx] = oIdx;
+      renderQuiz();
+    }
+    function resetQuiz() {
+      quizAnswers = new Array(QUIZ_DATA.length).fill(null);
+      renderQuiz();
+    }
+
+    // ==================== TAB 6: 20 LESSONS TABLE ====================
+    function renderLessonsTable() {
+      const q = (document.getElementById('lessonSearch').value || '').toLowerCase().trim();
+      const ch = parseInt(document.getElementById('lessonChapterFilter').value, 10);
+      const filtered = LESSONS.filter(l => {
+        if (ch !== 0 && l.ch !== ch) return false;
+        if (q && !(l.name.toLowerCase().includes(q) || l.kw.toLowerCase().includes(q) || ('bài ' + l.id).includes(q))) return false;
+        return true;
+      });
+      document.getElementById('lessonCountBadge').textContent = `${filtered.length} / ${LESSONS.length} bài`;
+      document.getElementById('lessonsTableBody').innerHTML = filtered.map(l => `
+        <tr class="odd:bg-white even:bg-slate-50/70 dark:odd:bg-slate-900 dark:even:bg-slate-800/40">
+          <td class="p-2.5 border border-slate-200 dark:border-slate-700 font-extrabold text-amber-700 dark:text-amber-300">Bài ${l.id}</td>
+          <td class="p-2.5 border border-slate-200 dark:border-slate-700">
+            <div class="font-bold text-slate-900 dark:text-white">${l.name}</div>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400">Chương ${l.ch} • SGK tr. ${l.page}</div>
+          </td>
+          <td class="p-2.5 border border-slate-200 dark:border-slate-700 text-xs">${l.star}</td>
+          <td class="p-2.5 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 leading-relaxed">${l.kw}</td>
+          <td class="p-2.5 border border-slate-200 dark:border-slate-700 text-center">
+            <button onclick="speakLesson(${l.id})" data-tts-id="ls-${l.id}" type="button"
+              class="tts-btn px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold cursor-pointer transition">🔊 Nghe</button>
+          </td>
+        </tr>
+      `).join('') || `<tr><td colspan="5" class="p-6 text-center text-slate-500">Không tìm thấy bài nào khớp từ khoá "${q}".</td></tr>`;
+    }
+
+    // ==================== TTS SPEAKERS (via assets/common.js) ====================
+    function speakIntro() {
+      startTTS('intro', 'Giới thiệu Bản đồ Lịch sử 6',
+        'Chào các bạn lớp 6A03! Đây là Bản đồ Hệ thống Kiến thức và Bí kíp 10 điểm môn Lịch sử lớp 6, bộ sách Kết nối tri thức với cuộc sống. Môn Lịch sử 6 gồm 5 chương với 20 bài học, đi từ nguồn gốc loài người, 4 nền văn minh cổ đại phương Đông và Hy Lạp La Mã, tới Đông Nam Á và lịch sử Việt Nam từ nước Văn Lang cho đến chiến thắng Bạch Đằng năm 938. Hãy khám phá 6 quy luật vàng, ma trận so sánh, Top 10 bẫy đề thi và thử sức 15 câu trắc nghiệm để rinh trọn điểm 10 nhé!');
+    }
+    function speakChapter(id) {
+      const c = CHAPTERS.find(x => x.id === id);
+      if (!c) return;
+      startTTS('ch-' + id, c.short + ': ' + c.title,
+        `${c.short}: ${c.title}. Ý cốt lõi: ${c.core}. Các kiến thức phải nắm chắc gồm: ${c.mustKnow.join(' ')} Lưu ý chỗ hay nhầm nhất: ${c.trap}`);
+    }
+    function speakTimeline() {
+      const txt = TIMELINE.map(m => `Mốc ${m.label}: ${m.title}. ${m.tip}`).join(' ');
+      startTTS('timeline', '12 mốc thời gian vàng Lịch sử 6', txt);
+    }
+    function speakRules() {
+      const txt = RULES.map(r => `Quy luật ${r.num}: ${r.title}. ${r.desc}`).join(' ');
+      startTTS('rules', '6 Quy luật vàng Lịch sử 6', txt);
+    }
+    function speakTraps() {
+      const txt = TRAPS.map(t => `Bẫy số ${t.num}: ${t.title}. ${t.right} ${t.tip}`).join(' ');
+      startTTS('traps', 'Top 10 bẫy đề thi Lịch sử 6', txt);
+    }
+    function speakStrategy() {
+      startTTS('strategy', 'Công thức 4 bước đạt 10 điểm Lịch sử 6',
+        'Bí kíp 4 bước ăn trọn 10 điểm môn Lịch sử lớp 6. Bước 1, làm trắc nghiệm: gạch chân 3 từ khoá vàng là thời gian, đối tượng và từ bẫy như không đúng hay sớm nhất. Bước 2, tự luận kể sự kiện hay khởi nghĩa: nhớ khung 5 ý gồm thời gian, nguyên nhân, lãnh đạo và địa điểm, diễn biến chính, kết quả và ý nghĩa. Bước 3, câu so sánh hay giải thích vì sao: luôn nêu điểm giống trước rồi kẻ bảng điểm khác, và dùng 6 quy luật nhân quả ở Tab 2. Bước 4, câu vận dụng lấy điểm 9 đến 10: liên hệ ngay với di sản hoặc phong tục ngày nay như Giỗ Tổ mùng 10 tháng 3, bánh chưng bánh giầy, Chùa Trấn Quốc hay Thánh địa Mỹ Sơn.');
+    }
+    function speakLesson(id) {
+      const l = LESSONS.find(x => x.id === id);
+      if (!l) return;
+      startTTS('ls-' + id, `Bài ${l.id}: ${l.name}`, `Bài ${l.id}: ${l.name}, sách giáo khoa trang ${l.page}. Kiến thức cốt lõi cần nhớ: ${l.kw}`);
+    }
+
+    // ==================== INIT ====================
+    renderChaptersGrid();
+    renderTimeline();
+    updateTimeCalc();
+    renderRulesAndFacts();
+    renderMatrices();
+    renderTraps();
+    renderQuiz();
+    renderLessonsTable();
+  </script>
+</body>
+</html>
